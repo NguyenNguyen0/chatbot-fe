@@ -1,68 +1,119 @@
-:root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+@import "tailwindcss";
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+@theme {
+    --color-primary-50: oklch(0.97 0.01 0);
+    --color-primary-100: oklch(0.91 0.01 0);
+    --color-primary-200: oklch(0.82 0.01 0);
+    --color-primary-300: oklch(0.68 0.01 0);
+    --color-primary-400: oklch(0.55 0.01 0);
+    --color-primary-500: oklch(0.43 0.01 0);
+    --color-primary-600: oklch(0.29 0.01 0);
+    --color-primary-700: oklch(0.21 0.01 0);
+    --color-primary-800: oklch(0.13 0.01 0);
+    --color-primary-900: oklch(0.06 0.01 0);
+    --color-primary-950: oklch(0.02 0.01 0);
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+    --color-secondary-50: oklch(0.97 0.05 83);
+    --color-secondary-100: oklch(0.93 0.08 83);
+    --color-secondary-200: oklch(0.86 0.14 83);
+    --color-secondary-300: oklch(0.78 0.21 83);
+    --color-secondary-400: oklch(0.70 0.28 83);
+    --color-secondary-500: oklch(0.61 0.35 83);
+    --color-secondary-600: oklch(0.50 0.41 83);
+    --color-secondary-700: oklch(0.39 0.45 83);
+    --color-secondary-800: oklch(0.31 0.48 83);
+    --color-secondary-900: oklch(0.26 0.48 83);
+    --color-secondary-950: oklch(0.14 0.48 83);
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+@layer base {
+    svg {
+        fill: currentColor;
+    }
 }
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+@layer utilities {
+    .text-shadow-primary-100 {
+        text-shadow: 2px 0px 0px var(--color-primary-100);
+    }
+
+    .text-shadow-primary-200 {
+        text-shadow: 2px 0px 0px var(--color-primary-200);
+    }
+
+    .text-shadow-secondary-200 {
+        text-shadow: 2px 0px 0px var(--color-secondary-200);
+    }
+
+    .bg-gradient-primary {
+        @apply bg-gradient-to-r from-primary-600 via-primary-800 to-primary-700;
+    }
+
+    .bg-gradient-primary-500 {
+        @apply bg-gradient-to-r from-primary-500 to-primary-600;
+    }
+
+    .card-item {
+        @apply mx-7 bg-primary-600 border border-secondary-300 rounded-md p-8 shadow shadow-secondary-200 hover:shadow-2xl hover:translate-y-1 transition-transform duration-300;
+    }
+
+    .custom-scrollbar::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+    }
+
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+        background-color: #a1a1aa;
+        border-radius: 4px;
+    }
+
+    .custom-scrollbar::-webkit-scrollbar-track {
+        background-color: #27272a;
+        border-radius: 4px;
+    }
+
+    .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+        background-color: #71717a;
+    }
+
+    @keyframes gradient-move {
+        0% {
+            background-position: 0% 50%;
+        }
+
+        50% {
+            background-position: 100% 50%;
+        }
+
+        100% {
+            background-position: 0% 50%;
+        }
+    }
+
+    .animate-gradient {
+        background-size: 200% 200%;
+        animation: gradient-move 6s ease infinite;
+    }
+
+    .hover-animate-gradient {
+        background-size: 300% 100%;
+        transition: background 0.3s ease;
+        -o-transition: all .4s ease-in-out;
+        -webkit-transition: all .4s ease-in-out;
+        transition: all .4s ease-in-out;
+    }
+
+    .hover-animate-gradient:hover {
+        animation: gradient-move 2s infinite;
+        background-position: 100% 0;
+        -o-transition: all .4s ease-in-out;
+        -webkit-transition: all .4s ease-in-out;
+        transition: all .4s ease-in-out;
+    }
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+@layer components {
+    .btn {
+        @apply flex items-center justify-center px-3 py-1.5 rounded-full border-secondary-300 border font-bold hover:bg-primary-500 cursor-pointer;
+    }
 }
