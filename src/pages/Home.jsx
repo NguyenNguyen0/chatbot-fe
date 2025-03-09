@@ -1,69 +1,188 @@
-// import React from 'react'
-import Header from "../components/Header";
-import Background from "../components/Background";
-import Footer from "../components/Footer";
-import ChatBar from "../components/ChatBar";
-import { LightBulb, MagnifyingGlassIcon, User } from "../components/icons";
-import { IoMdArrowRoundForward } from "react-icons/io";
-
-import robotImage from "../assets/img/full-cyperpunk-robot.png";
-import '../assets/css/Home.css';
+import { useState } from "react";
+import Header from "../components/layout/Header";
+import Background from "../components/layout/Background";
+import Footer from "../components/layout/Footer";
+import { LightBulb, MagnifyingGlassIcon, User } from "../assets/icons";
+import { FaMicrophone, FaRobot, FaBrain, FaRegComments } from "react-icons/fa6";
+import ChatBar from "../components/common/ChatBar";
+import '../assets/styles/Home.css';
 
 function Home() {
+  const [demoMessage, setDemoMessage] = useState("");
+
   return (
     <Background>
       <Header />
 
-      <div className="bg-transparent flex flex-col items-center justify-center">
-        <section className="hero-section my-40 flex justify-between items-center container w-full h-[550px] px-4 z-0">
-          <div className="w-2/3">
-            {/* <h1 className="text-7xl text-secondary-300 font-bold mb-10">Trò chuyện thông minh với AI của bạn!</h1> */}
-            <h1 className="bg-gradient-to-tl from-orange-500 via-orange-400 to-yellow-200 bg-clip-text text-transparent text-7xl font-bold  mb-10 pb-2">Trò chuyện thông minh với AI của bạn!</h1>
-            <h2 className="text-5xl text-secondary-300 font-bold mb-10 text-shadow-primary-100">Trợ lý AI mạnh mẽ cho công việc và cuộc sống</h2>
-            <small className="text-2xl text-primary-50 text-shadow-secondary-200 mb-10">Tạo cuộc trò chuyện thông minh, hỗ trợ công việc, học tập và giải trí với AI của chúng tôi.</small>
-            <button to="/chat" className="mt-12 mr-5 px-4 pt-3 pb-3.5 flex items-center text-2xl text-secondary-700 font-bold rounded-[4px] bg-gradient-to-tl from-orange-500 via-orange-400 to-yellow-200 justify-self-start cursor-pointer animate-radial-gradient outline-2 outline-secondary-700 hover:opacity-100 hover:outline-secondary-200 hover:text-secondary-50 hover:-translate-y-1.5 hover:shadow-secondary-300 hover:shadow-[0_4px_8px] transition-transform">
-              <span>Bắt đầu ngay</span>
-              <IoMdArrowRoundForward className="mb-[-6px] w-7 h-7 ml-1" />
-            </button>
+      {/* Hero Section - Enhanced */}
+      <section className="px-6 md:px-12 pt-20 pb-32 text-center relative z-10">
+        <div className="animate-float inline-block mb-6">
+          <FaRobot className="w-16 h-16 text-secondary-400" />
+            </div>
+        <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6">
+          <div className="bg-gradient-to-r from-secondary-300 to-secondary-500 text-transparent bg-clip-text mb-4">
+            Smart Chat with Your AI!
           </div>
-
-          <div className="w-1/3">
-            {/* <img className="block w-full h-full" src={robotImage} alt="SMART AI" /> */}
+          <div className="bg-gradient-to-r from-secondary-400 to-secondary-600 text-transparent bg-clip-text">
+            Powerful AI Assistant for Work and Life
           </div>
-        </section>
+        </h1>
+        <p className="text-secondary-200 text-xl md:text-2xl max-w-3xl mx-auto mb-8">
+          Create Smart Chats, Support Work, Study and Entertainment with Our AI.
+            </p>
+        <a href="/auth" className="inline-block btn bg-gradient-to-r from-secondary-400 to-secondary-500 hover:from-secondary-500 hover:to-secondary-600 text-primary-800 px-12 py-4 text-lg">
+          Try It Now
+        </a>
+      </section>
 
-        <section className="my-40 container mx-auto px-4 md:px-0 flex flex-col justify-evenly items-center">
-          <h2 className="text-5xl mb-20 text-secondary-300 font-bold">Những gì chatbot của bạn có thể làm?</h2>
-          <div>
-            <ul className="list-none flex justify-evenly items-center">
-              <li className="card-item">
-                <LightBulb className="w-[44px] h-[44px] mx-auto" />
-                <h3 className="text-3xl mb-10 text-center text-secondary-300 my-8">Trả lời thông minh</h3>
-                <p className="text-secondary-100 text-center">AI có thể giải đáp thắc mắc, hỗ trợ học tập và làm việc</p>
-              </li>
-              <li className="card-item">
-                <MagnifyingGlassIcon className="w-[44px] h-[44px] mx-auto" />
-                <h3 className="text-3xl mb-10 text-center text-secondary-300 my-8">Tìm kiếm thông minh</h3>
-                <p className="text-secondary-100 text-center">Lấy thông tin nhanh chóng mà không cần rời khỏi trang</p>
-              </li>
-              <li className="card-item">
-                <User className="w-[44px] h-[44px] mx-auto" />
-                <h3 className="text-3xl mb-10 text-center text-secondary-300 my-8">Cá nhân hóa cuộc trò chuyện</h3>
-                <p className="text-secondary-100 text-center">Học hỏi từ lịch sử chat để phản hồi tốt hơn</p>
-              </li>
-            </ul>
+      {/* Features Section - Enhanced */}
+      <section className="px-6 py-20 md:px-12 bg-primary-800/50">
+        <div className="max-w-7xl mx-auto">
+          <h2 className="min-h-12 text-3xl md:text-4xl font-bold text-center mb-4 bg-gradient-to-r from-secondary-300 to-secondary-500 text-transparent bg-clip-text">
+            What Can Your Chatbot Do?
+          </h2>
+          <p className="text-secondary-200 text-center mb-16 text-lg">
+            Discover the power of AI-driven conversations
+          </p>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div className="card-item">
+              <div className="flex items-center justify-center mb-6">
+                <LightBulb className="w-12 h-12" colorTop="oklch(0.78 0.21 83)" colorBottom="oklch(0.61 0.35 83)" />
+              </div>
+              <h3 className="text-xl font-bold text-secondary-300 mb-4 text-center">
+                Smart Reply
+              </h3>
+              <p className="text-secondary-200 text-center">
+                AI can answer questions, support learning and working with intelligent responses.
+              </p>
+            </div>
+
+            <div className="card-item">
+              <div className="flex items-center justify-center mb-6">
+                <FaMicrophone className="w-12 h-12 text-secondary-400" />
+              </div>
+              <h3 className="text-xl font-bold text-secondary-300 mb-4 text-center">
+                Voice Recognition
+              </h3>
+              <p className="text-secondary-200 text-center">
+                Type or talk to AI easily with advanced voice recognition technology.
+              </p>
+            </div>
+
+            <div className="card-item">
+              <div className="flex items-center justify-center mb-6">
+                <MagnifyingGlassIcon className="w-12 h-12" colorTop="oklch(0.78 0.21 83)" colorBottom="oklch(0.61 0.35 83)" />
+              </div>
+              <h3 className="text-xl font-bold text-secondary-300 mb-4 text-center">
+                Smart Search
+              </h3>
+              <p className="text-secondary-200 text-center">
+                Get information quickly without leaving the page using our powerful search.
+              </p>
+            </div>
+
+            <div className="card-item">
+              <div className="flex items-center justify-center mb-6">
+                <FaBrain className="w-12 h-12 text-secondary-400" />
+              </div>
+              <h3 className="text-xl font-bold text-secondary-300 mb-4 text-center">
+                Personalized Chat
+              </h3>
+              <p className="text-secondary-200 text-center">
+                Learn from chat history to provide better, more personalized responses.
+              </p>
+            </div>
           </div>
-        </section>
+        </div>
+      </section>
 
+      {/* Demo Section */}
+      <section className="px-6 py-20 md:px-12">
+        <div className="max-w-4xl mx-auto">
+          <h2 className="min-h-12 text-3xl md:text-4xl font-bold text-center mb-16 bg-gradient-to-r from-secondary-300 to-secondary-500 text-transparent bg-clip-text">
+            Try It Out
+          </h2>
+          
+          <div className="bg-primary-800/50 rounded-2xl p-6 mb-8">
+            <div className="chat-demo-messages mb-4 h-64 overflow-y-auto custom-scrollbar">
+              <div className="flex items-start mb-4">
+                <FaRobot className="w-8 h-8 text-secondary-400 mr-3 mt-1" />
+                <div className="bg-primary-700 rounded-lg p-4 text-secondary-200">
+                  Hello! How can I assist you today?
+                </div>
+              </div>
+              {demoMessage && (
+                <>
+                  <div className="flex items-start mb-4 justify-end">
+                    <div className="bg-secondary-500/20 rounded-lg p-4 text-secondary-200">
+                      {demoMessage}
+                    </div>
+                    <User className="w-8 h-8 ml-3 mt-1" />
+                  </div>
+                  <div className="flex items-start mb-4">
+                    <FaRobot className="w-8 h-8 text-secondary-400 mr-3 mt-1" />
+                    <div className="bg-primary-700 rounded-lg p-4 text-secondary-200">
+                      This is a demo. Try the full version to experience real AI conversations!
+                    </div>
+                  </div>
+                </>
+              )}
+            </div>
+            <ChatBar 
+              placeholder="Type a message to try..."
+              value={demoMessage}
+              onChange={(e) => setDemoMessage(e.target.value)}
+              className="bg-primary-700"
+            />
+          </div>
+        </div>
+      </section>
 
-        <section className="my-40 container mx-auto px-4 md:px-0 flex flex-col justify-evenly items-center">
-          <ChatBar placeholder={"Hỏi bất cứ điều gì"} />
-        </section>
-      </div>
+      {/* Testimonials Section */}
+      <section className="px-6 py-20 md:px-12 bg-primary-800/50">
+        <div className="max-w-7xl mx-auto">
+          <h2 className="min-h-12 text-3xl md:text-4xl font-bold text-center mb-16 bg-gradient-to-r from-secondary-300 to-secondary-500 text-transparent bg-clip-text">
+            What Our Users Say
+          </h2>
 
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="bg-primary-700/50 rounded-xl p-8 border border-secondary-400/20">
+              <FaRegComments className="w-8 h-8 text-secondary-400 mb-4" />
+              <p className="text-secondary-200 mb-6 text-lg">
+                "This chatbot helps me get my work done 50% faster! I can't live without it!"
+              </p>
+              <p className="text-secondary-400 font-semibold">- Nguyen Van A</p>
+            </div>
+
+            <div className="bg-primary-700/50 rounded-xl p-8 border border-secondary-400/20">
+              <FaRegComments className="w-8 h-8 text-secondary-400 mb-4" />
+              <p className="text-secondary-200 mb-6 text-lg">
+                "I use the chatbot every day to learn English. It's amazing!"
+              </p>
+              <p className="text-secondary-400 font-semibold">- Tran Thi B</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Final CTA Section */}
+      <section className="px-6 py-20 md:px-12 text-center">
+        <div className="max-w-3xl mx-auto">
+          <h2 className="text-3xl md:text-4xl font-bold mb-6 bg-gradient-to-r from-secondary-300 to-secondary-500 text-transparent bg-clip-text">
+            Ready to experience smart AI?
+          </h2>
+          <p className="text-secondary-200 text-xl mb-8">
+            Join thousands of users who are already benefiting from AI-powered conversations.
+          </p>
+          <a href="/auth" className="inline-block btn bg-gradient-to-r from-secondary-400 to-secondary-500 hover:from-secondary-500 hover:to-secondary-600 text-primary-800 px-12 py-4 text-lg">
+            Get Started Now
+          </a>
+        </div>
+      </section>
       <Footer />
     </Background>
   );
 }
 
-export default Home
+export default Home;

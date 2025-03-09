@@ -1,0 +1,43 @@
+/* .app-header::after {
+    content: '';
+    display: block;
+    background-image: url('../svg/header_wave.svg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 250px;
+    width: 100%;
+    position: absolute;
+    bottom: -100px;
+    left: 0;
+    z-index: 1;
+    opacity: 0.8;
+    mask-image: linear-gradient(to bottom, black, transparent);
+    -webkit-mask-image: linear-gradient(to bottom, black, transparent);
+} */
+
+.app-header {
+    position: relative;
+    overflow: hidden;
+}
+
+.app-header::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(var(--color-secondary-300), 0.1) 0%, transparent 50%);
+    animation: rotate 30s linear infinite;
+    z-index: -1;
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}

@@ -9,33 +9,30 @@
     position: absolute;
     width: 100%;
     height: 100%;
-    background-image: url('../wave.svg');
-    background-size: 1000px 150px;
+    background-image: url('../svg/footer_wave.svg');
+    background-size: 1000px 100px;
 }
 
 #wave1 {
     z-index: 99;
-    top: 0px;
+    opacity: 1;
     animation: wave-move-right 7s infinite linear;
 }
 
 #wave2 {
     z-index: 98;
-    top: 10px;
     opacity: 0.5;
     animation: wave-move-left 7s infinite linear;
 }
 
 #wave3 {
     z-index: 97;
-    top: 15px;
     opacity: 0.2;
     animation: wave-move-right 6s infinite linear;
 }
 
 #wave4 {
     z-index: 96;
-    top: 20px;
     opacity: 0.7;
     animation: wave-move-left 6s infinite linear;
 }
@@ -44,18 +41,25 @@
     0% {
         background-position-x: -1000px;
     }
-
     100% {
-        background-positon-x: 0px;
+        background-position-x: 0px;
     }
 }
 
 @keyframes wave-move-right {
     0% {
+        background-position-x: 0px;
+    }
+    100% {
         background-position-x: 1000px;
     }
+}
 
-    100% {
-        background-positon-x: 0px;
+@media (max-width: 768px) {
+    .waves {
+        height: 60px;
+    }
+    .wave {
+        background-size: 600px 60px;
     }
 }
