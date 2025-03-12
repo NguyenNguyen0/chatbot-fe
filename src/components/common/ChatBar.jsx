@@ -4,20 +4,21 @@ import { BsPlusCircle } from "react-icons/bs";
 import { useState, useRef, useEffect } from 'react';
 
 
-function ChatBar({ onSend, placeholder, text, className, ...props }) {
+function ChatBar({ onSend, placeholder, className, ...props }) {
   const textAreaRef = useRef(null);
   const [message, setMessage] = useState('');
   
   const handleSubmit = (e) => {
     e.preventDefault();
     if (message.trim()) {
-      onSend(message);
       setMessage('');
+      onSend(message);
     }
   };
 
   const handleLoadFile = (e) => {
     e.preventDefault();
+    // TODO: Load file
   }
   
   const autoResize = () => {
@@ -31,7 +32,7 @@ function ChatBar({ onSend, placeholder, text, className, ...props }) {
 
   useEffect(() => {
     autoResize()
-  }, [text])
+  }, [message])
 
   return (
     <form
@@ -43,19 +44,18 @@ function ChatBar({ onSend, placeholder, text, className, ...props }) {
         <textarea
           ref={textAreaRef}
           rows={1}
+          value={message}
           onInput={autoResize}
           onChange={(e) => setMessage(e.target.value)}
           placeholder={placeholder}
-          className="custom-scrollbar outline-0 ml-1.5 h-8 pr-1 w-full max-h-[240px] resize-none overflow-y-auto bg-transparent text-primary-50 text-[1.2rem]"
+          className="custom-scrollbar outline-0 ml-1.5 mb-2 h-8 pr-1 w-full max-h-[240px] resize-none overflow-y-auto bg-transparent text-primary-50 text-[1.2rem]"
           onKeyDown={(e) => {
-            if (e.key === 'Enter' && !e.shiftKey) {
+            if (e.key === 'Enter' && e.shiftKey) {
               e.preventDefault();
               handleSubmit(e);
             }
           }}
-        >
-          {message}
-        </textarea>
+        />
 
         <div className='flex items-center justify-between w-full'>
         
@@ -67,11 +67,11 @@ function ChatBar({ onSend, placeholder, text, className, ...props }) {
         
           <button
             type='submit'
-            className={`p-3 text-secondary-400 hover:text-secondary-300 transition-colors ${!message.trim() ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'
+            className={`pr-3 text-secondary-400 hover:text-secondary-300 transition-colors ${!message.trim() ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'
               }`}
             disabled={!message.trim()}
           >
-            <BsArrowUpCircle className='text-primary-50 h-[30px] w-[30px] hover:text-secondary-300' />
+            <BsArrowUpCircle className='text-primary-50 h-[28px] w-[28px] hover:text-secondary-300' />
           </button>
         </div>
 
@@ -81,9 +81,9 @@ function ChatBar({ onSend, placeholder, text, className, ...props }) {
 }
 
 ChatBar.propTypes = {
+  onSend: propTypes.func,
   placeholder: propTypes.string,
   className: propTypes.string,
-  text: propTypes.string,
 }
 
 export default ChatBar

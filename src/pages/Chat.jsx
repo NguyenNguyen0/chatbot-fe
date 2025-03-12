@@ -36,6 +36,8 @@ function Chat() {
       };
       setMessages(prev => [...prev, botMessage]);
     }, 1000);
+
+
   };
 
   return (
@@ -49,14 +51,14 @@ function Chat() {
       />
 
       {/* Main Chat Area */}
-      <main className={`flex-1 flex flex-col transition-all relative ${isSidebarOpen ? 'ml-80' : 'ml-0'}`}>
+      <main className={`pb-10 flex-1 flex flex-col transition-all relative ${isSidebarOpen ? 'ml-80' : 'ml-0'}`}>
         <Logo className="absolute right-6 top-4" />
         
         {/* Messages */}
         <ChatMessages messages={messages} />
 
         {/* Chat Input */}
-        <div className="border-t border-primary-700 p-4 bg-primary-800 absolute bottom-0 left-[50%] -translate-x-[50%] ">
+        <div className="border-t mb-4 border-primary-700 bg-primary-800 absolute bottom-0 left-[50%] -translate-x-[50%] ">
           <ChatBar 
             onSend={handleSendMessage}
             placeholder="Send a message..."

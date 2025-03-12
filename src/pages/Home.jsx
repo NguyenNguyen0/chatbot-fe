@@ -169,7 +169,7 @@ function Home() {
       {/* Final CTA Section */}
       <section className="px-6 py-20 md:px-12 text-center">
         <div className="max-w-3xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6 bg-gradient-to-r from-secondary-300 to-secondary-500 text-transparent bg-clip-text">
+          <h2 className="min-h-12 text-3xl md:text-4xl font-bold mb-6 bg-gradient-to-r from-secondary-300 to-secondary-500 text-transparent bg-clip-text">
             Ready to experience smart AI?
           </h2>
           <p className="text-secondary-200 text-xl mb-8">

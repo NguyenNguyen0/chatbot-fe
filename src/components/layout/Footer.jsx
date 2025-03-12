@@ -12,7 +12,7 @@ function Footer() {
                 <div className="wave" id="wave4"></div>
             </div>
 
-            <div className='bg-primary-800 pb-12 pt-20'>
+            <div className='bg-primary-700 pb-12 pt-20'>
                 <div className="max-w-7xl mx-auto px-6 md:px-12">
                     <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
                         <div className="col-span-1">

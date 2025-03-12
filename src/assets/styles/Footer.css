@@ -16,19 +16,19 @@
 #wave1 {
     z-index: 99;
     opacity: 1;
-    animation: wave-move-right 7s infinite linear;
+    animation: wave-move-right 4s infinite linear;
 }
 
 #wave2 {
     z-index: 98;
     opacity: 0.5;
-    animation: wave-move-left 7s infinite linear;
+    animation: wave-move-left 6s infinite linear;
 }
 
 #wave3 {
     z-index: 97;
     opacity: 0.2;
-    animation: wave-move-right 6s infinite linear;
+    animation: wave-move-right 4s infinite linear;
 }
 
 #wave4 {

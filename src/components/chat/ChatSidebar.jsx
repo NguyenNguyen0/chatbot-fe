@@ -8,7 +8,7 @@ function ChatSidebar({ isOpen, onToggle, conversations, setConversations }) {
       title: 'New Conversation',
       active: true,
     };
-    setConversations(prev => 
+    setConversations(prev =>
       prev.map(conv => ({ ...conv, active: false }))
         .concat(newConversation)
     );
@@ -30,14 +30,32 @@ function ChatSidebar({ isOpen, onToggle, conversations, setConversations }) {
 
   return (
     <>
+      {/* Toggle Button */}
+      <button
+        onClick={onToggle}
+        className={`fixed top-6 z-30 bg-primary-800 p-2 rounded-lg border border-secondary-400/20 hover:bg-primary-700 transition-all cursor-pointer
+      ${isOpen ? 'left-[0.8%]' : 'left-[0.8%]'}`}
+      >
+        {isOpen ? (
+          <FaChevronLeft className="w-4 h-4 text-secondary-400" />
+        ) : (
+          <FaChevronRight className="w-4 h-4 text-secondary-400" />
+        )}
+      </button>
+
       {/* Sidebar */}
-      <aside className={`fixed top-0 left-0 h-full bg-primary-800 transition-all duration-300 z-20
+      <aside className={`fixed top-0 left-0 h-full bg-primary-700 transition-all duration-300 z-20
         ${isOpen ? 'w-80 translate-x-0' : 'w-80 -translate-x-full'}`}>
+
         <div className="flex flex-col h-full">
+          <div className='min-h-14 flex items-center justify-between border-b border-primary-700'>
+            {/* TODO: add some feature here */}
+          </div>
+
           {/* New Chat Button */}
           <button
             onClick={handleNewChat}
-            className="flex items-center gap-2 m-4 px-4 py-3 rounded-lg border border-secondary-400/20 hover:bg-primary-700 transition-colors"
+            className="flex items-center gap-2 m-4 px-4 py-3 rounded-lg border border-secondary-500/50 hover:bg-primary-600 transition-colors cursor-pointer"
           >
             <FaPlus className="text-secondary-400" />
             <span className="text-secondary-200">New Chat</span>
@@ -49,10 +67,10 @@ function ChatSidebar({ isOpen, onToggle, conversations, setConversations }) {
               <div
                 key={conversation.id}
                 onClick={() => handleSelectConversation(conversation.id)}
-                className={`flex items-center justify-between p-3 rounded-lg cursor-pointer mb-1 group
-                  ${conversation.active 
-                    ? 'bg-primary-700 text-secondary-300' 
-                    : 'text-secondary-200 hover:bg-primary-700/50'}`}
+                className={`flex items-center justify-between py-3 px-4 mx-2 border-secondary-400/20 border rounded-lg cursor-pointer mb-1 group
+                  ${conversation.active
+                    ? 'bg-primary-600 text-secondary-300'
+                    : 'text-secondary-200 hover:bg-primary-500/50'}`}
               >
                 <span className="truncate">{conversation.title}</span>
                 <button
@@ -66,19 +84,6 @@ function ChatSidebar({ isOpen, onToggle, conversations, setConversations }) {
           </div>
         </div>
       </aside>
-
-      {/* Toggle Button */}
-      <button
-        onClick={onToggle}
-        className={`fixed top-6 z-30 bg-primary-800 p-2 rounded-lg border border-secondary-400/20 hover:bg-primary-700 transition-all
-          ${isOpen ? 'left-80' : 'left-4'}`}
-      >
-        {isOpen ? (
-          <FaChevronLeft className="w-4 h-4 text-secondary-400" />
-        ) : (
-          <FaChevronRight className="w-4 h-4 text-secondary-400" />
-        )}
-      </button>
     </>
   );
 }
