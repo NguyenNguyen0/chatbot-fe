@@ -9,7 +9,7 @@ function useRenderIf(condition, renderIfTrue, renderIfFalse) {
         return condition || renderIfFalse;
     }
 
-    return condition ? renderIfTrue() : renderIfFalse();
+    return condition ? renderIfTrue : renderIfFalse;
 }
 
 useRenderIf.propTypes = {

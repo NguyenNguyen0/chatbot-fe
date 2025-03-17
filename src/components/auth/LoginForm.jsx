@@ -1,17 +1,38 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+
+import { useNavigate } from 'react-router-dom';
 import { FaGithub } from 'react-icons/fa6';
 import { FcGoogle } from 'react-icons/fc';
 
+import { login } from '../../services/authService.js';
+import { AuthContext } from '../../contexts/AuthContext.jsx';
+
 function LoginForm() {
+  const navigate = useNavigate();
+  const context = useContext(AuthContext);
   const [formData, setFormData] = useState({
-    email: '',
+    username: '',
     password: '',
   });
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle login logic here
-    console.log('Login:', formData);
+    try {
+      const data = await login(formData);
+
+      if (data) {
+        context.setTokenAndUser(data['access_token']);
+        navigate('/chat', {
+          state: {
+            isLogin: true,
+            username: formData.username,
+            message: `Welcome back ${formData.username}!`
+          }
+        });
+      }
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   const handleSocialLogin = (provider) => {
@@ -25,14 +46,14 @@ function LoginForm() {
       <div className="space-y-3">
         <button
           onClick={() => handleSocialLogin('github')}
-          className="w-full flex items-center justify-center gap-3 px-4 py-3 bg-[#24292F] hover:bg-[#24292F]/90 text-white rounded-lg transition-colors"
+          className="w-full flex items-center justify-center gap-3 px-4 py-3 bg-[#24292F] hover:bg-[#24292F]/90 text-white rounded-lg transition-colors cursor-pointer"
         >
           <FaGithub className="w-5 h-5" />
           Continue with GitHub
         </button>
         <button
           onClick={() => handleSocialLogin('google')}
-          className="w-full flex items-center justify-center gap-3 px-4 py-3 bg-white hover:bg-gray-100 text-gray-800 rounded-lg transition-colors"
+          className="w-full flex items-center justify-center gap-3 px-4 py-3 bg-white hover:bg-gray-100 text-gray-800 rounded-lg transition-colors cursor-pointer"
         >
           <FcGoogle className="w-5 h-5" />
           Continue with Google
@@ -52,16 +73,16 @@ function LoginForm() {
       {/* Login Form */}
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
-          <label htmlFor="email" className="block text-secondary-200 mb-2">
-            Email
+          <label htmlFor="username" className="block text-secondary-200 mb-2">
+            Username
           </label>
           <input
-            type="email"
-            id="email"
+            type="text"
+            id="username"
             className="w-full px-4 py-3 bg-primary-700 border border-secondary-400/20 rounded-lg focus:outline-none focus:border-secondary-400 text-secondary-200"
-            placeholder="Enter your email"
-            value={formData.email}
-            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+            placeholder="Enter your username"
+            value={formData.username}
+            onChange={(e) => setFormData({ ...formData, username: e.target.value })}
             required
           />
         </div>
@@ -99,7 +120,7 @@ function LoginForm() {
 
         <button
           type="submit"
-          className="w-full py-3 bg-gradient-to-r from-secondary-400 to-secondary-500 hover:from-secondary-500 hover:to-secondary-600 text-primary-800 rounded-lg font-semibold transition-all"
+          className="w-full py-3 bg-gradient-to-r from-secondary-400 to-secondary-500 hover:from-secondary-500 hover:to-secondary-600 text-primary-800 rounded-lg font-semibold transition-all cursor-pointer"
         >
           Sign in
         </button>

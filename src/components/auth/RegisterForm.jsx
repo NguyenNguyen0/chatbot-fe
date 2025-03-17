@@ -1,32 +1,52 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
+
+import { register } from '../../services';
+import { AuthContext } from '../../contexts/AuthContext';
 
 function RegisterForm() {
+  const navigate = useNavigate();
+  const context = useContext(AuthContext);
   const [formData, setFormData] = useState({
-    name: '',
+    username: '',
     email: '',
     password: '',
     confirmPassword: '',
   });
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle registration logic here
-    console.log('Register:', formData);
+    try {
+      const data = await register(formData);
+      if (data) {
+        const jwtToken = data['access_token'];
+        context.setTokenAndUser(jwtToken);
+        navigate('/chat', {
+          state: {
+            isNewUser: true,
+            username: formData.username,
+            message: `Welcome ${formData.username} to AI Chat App!`
+          }
+        });
+      }
+    } catch (err) {
+      console.log(err.response);
+    }
   };
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
       <div>
         <label htmlFor="name" className="block text-secondary-200 mb-2">
-          Full Name
+          User Name
         </label>
         <input
           type="text"
           id="name"
           className="w-full px-4 py-3 bg-primary-700 border border-secondary-400/20 rounded-lg focus:outline-none focus:border-secondary-400 text-secondary-200"
           placeholder="Enter your full name"
-          value={formData.name}
-          onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+          value={formData.username}
+          onChange={(e) => setFormData({ ...formData, username: e.target.value })}
           required
         />
       </div>
@@ -97,7 +117,7 @@ function RegisterForm() {
 
       <button
         type="submit"
-        className="w-full py-3 bg-gradient-to-r from-secondary-400 to-secondary-500 hover:from-secondary-500 hover:to-secondary-600 text-primary-800 rounded-lg font-semibold transition-all"
+        className="w-full py-3 bg-gradient-to-r from-secondary-400 to-secondary-500 hover:from-secondary-500 hover:to-secondary-600 text-primary-800 rounded-lg font-semibold transition-all cursor-pointer"
       >
         Create Account
       </button>
