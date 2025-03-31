@@ -13,7 +13,7 @@ function Auth() {
   return (
     <Background>
       <header className="bg-primary-800 py-3 px-5">
-        <Nav />
+        <Nav showNavigationLink={false} showLoginButton={false} />
       </header>
       <div className="min-h-screen flex items-center justify-center px-4">
         <AuthModal isLogin={isLogin} setIsLogin={setIsLogin} />
