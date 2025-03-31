@@ -148,26 +148,46 @@ function Home() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div className="bg-primary-700/50 rounded-xl p-8 border border-secondary-400/20">
+              <div className="flex items-center mb-6">
+                <img 
+                  src="https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" 
+                  alt="Nguyen Van A" 
+                  className="w-16 h-16 rounded-full object-cover border-2 border-secondary-400/30"
+                />
+                <div className="ml-4">
+                  <p className="text-secondary-400 font-semibold">Anand Viswanathan</p>
+                  <p className="text-secondary-200/70 text-sm">Marketing Manager</p>
+                </div>
+              </div>
               <FaRegComments className="w-8 h-8 text-secondary-400 mb-4" />
               <p className="text-secondary-200 mb-6 text-lg">
-                "This chatbot helps me get my work done 50% faster! I can't live without it!"
+                &quot;This chatbot helps me get my work done 50% faster! I can&apos;t live without it!&quot;
               </p>
-              <p className="text-secondary-400 font-semibold">- Nguyen Van A</p>
             </div>
 
             <div className="bg-primary-700/50 rounded-xl p-8 border border-secondary-400/20">
+              <div className="flex items-center mb-6">
+                <img 
+                  src="https://plus.unsplash.com/premium_photo-1664203067979-47448934fd97?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
+                  alt="Tran Thi B" 
+                  className="w-16 h-16 rounded-full object-cover border-2 border-secondary-400/30"
+                />
+                <div className="ml-4">
+                  <p className="text-secondary-400 font-semibold">Emma Blue</p>
+                  <p className="text-secondary-200/70 text-sm">English Student</p>
+                </div>
+              </div>
               <FaRegComments className="w-8 h-8 text-secondary-400 mb-4" />
               <p className="text-secondary-200 mb-6 text-lg">
-                "I use the chatbot every day to learn English. It's amazing!"
+                &quot;I use the chatbot every day to learn English. It&apos;s amazing!&quot;
               </p>
-              <p className="text-secondary-400 font-semibold">- Tran Thi B</p>
             </div>
           </div>
         </div>
       </section>
 
       {/* Final CTA Section */}
-      <section className="px-6 py-20 md:px-12 text-center">
+      <section className="my-20 px-6 py-20 md:px-12 text-center">
         <div className="max-w-3xl mx-auto">
           <h2 className="min-h-12 text-3xl md:text-4xl font-bold mb-6 bg-gradient-to-r from-secondary-300 to-secondary-500 text-transparent bg-clip-text">
             Ready to experience smart AI?
