@@ -1,5 +1,5 @@
 import { Route, Routes } from 'react-router-dom';
-import { Home, Auth, Chat, NotFound } from '../pages';
+import { Home, Auth, Chat, NotFound, Feature, About } from '../pages';
 
 function AppRoutes() {
     return (
@@ -9,6 +9,8 @@ function AppRoutes() {
             <Route path='/chat' element={<Chat />}>
                 <Route path=':section-id' element={<Chat />} />
             </Route>
+            <Route path="/features" element={<Feature />} />
+            <Route path="/about" element={<About />} />
             <Route path="/*" element={<NotFound />} />
         </Routes>
     );

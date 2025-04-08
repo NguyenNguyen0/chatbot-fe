@@ -12,7 +12,7 @@ function Auth() {
 
   return (
     <Background>
-      <header className="bg-primary-800 py-3 px-5">
+      <header className="bg-gradient-to-r from-primary-700 to-primary-600 shadow-xs py-3 px-5">
         <Nav showNavigationLink={false} showLoginButton={false} />
       </header>
       <div className="min-h-screen flex items-center justify-center px-4">
