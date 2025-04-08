@@ -1,7 +1,12 @@
 import { PropTypes } from 'prop-types';
+import { useContext } from 'react';
 import { FaPlus, FaChevronLeft, FaChevronRight, FaTrash } from 'react-icons/fa6';
+import { ChatContext } from '../../contexts/ChatContext';
 
-function ChatSidebar({ isOpen, onToggle, conversations, setConversations }) {
+function ChatSidebar({ isOpen, onToggle, onOpenDeleteDialog, className }) {
+  const { conversations, setConversations, selectConversation } = useContext(ChatContext);
+
+
   const handleNewChat = () => {
     const newConversation = {
       id: Date.now(),
@@ -9,23 +14,8 @@ function ChatSidebar({ isOpen, onToggle, conversations, setConversations }) {
       active: true,
     };
     setConversations(prev =>
-      prev.map(conv => ({ ...conv, active: false }))
-        .concat(newConversation)
+      [newConversation].concat(prev.map(conv => ({ ...conv, active: false })))
     );
-  };
-
-  const handleSelectConversation = (id) => {
-    setConversations(prev =>
-      prev.map(conv => ({
-        ...conv,
-        active: conv.id === id,
-      }))
-    );
-  };
-
-  const handleDeleteConversation = (id, e) => {
-    e.stopPropagation();
-    setConversations(prev => prev.filter(conv => conv.id !== id));
   };
 
   return (
@@ -45,7 +35,7 @@ function ChatSidebar({ isOpen, onToggle, conversations, setConversations }) {
 
       {/* Sidebar */}
       <aside className={`fixed top-0 left-0 h-full bg-primary-700 transition-all duration-300 z-20
-        ${isOpen ? 'w-80 translate-x-0' : 'w-80 -translate-x-full'}`}>
+        ${isOpen ? 'w-80 translate-x-0' : 'w-80 -translate-x-full'} ${className}`}>
 
         <div className="flex flex-col h-full">
           <div className='min-h-14 flex items-center justify-between border-b border-primary-700'>
@@ -65,17 +55,20 @@ function ChatSidebar({ isOpen, onToggle, conversations, setConversations }) {
           <div className="flex-1 overflow-y-auto custom-scrollbar px-2">
             {conversations.map((conversation) => (
               <div
-                key={conversation.id}
-                onClick={() => handleSelectConversation(conversation.id)}
+                key={conversation.chatId}
+                onClick={() => selectConversation(conversation.chatId)}
                 className={`flex items-center justify-between py-3 px-4 mx-2 border-secondary-400/20 border rounded-lg cursor-pointer mb-1 group
                   ${conversation.active
-                    ? 'bg-primary-600 text-secondary-300'
+                    ? 'bg-primary-600 text-secondary-400'
                     : 'text-secondary-200 hover:bg-primary-500/50'}`}
               >
                 <span className="truncate">{conversation.title}</span>
                 <button
-                  onClick={(e) => handleDeleteConversation(conversation.id, e)}
-                  className={`text-secondary-400 hover:text-secondary-300 opacity-0 group-hover:opacity-100 transition-opacity`}
+                  onClick={(e) => {
+                    e.stopPropagation(); // Prevent triggering conversation selection
+                    onOpenDeleteDialog(conversation.id);
+                  }}
+                  className={`text-secondary-400 hover:text-secondary-300 opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer`}
                 >
                   <FaTrash className="w-4 h-4" />
                 </button>
@@ -99,6 +92,8 @@ ChatSidebar.propTypes = {
     })
   ).isRequired,
   setConversations: PropTypes.func.isRequired,
+  onOpenDeleteDialog: PropTypes.func.isRequired,
+  className: PropTypes.string,
 };
 
 export default ChatSidebar;

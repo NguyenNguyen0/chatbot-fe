@@ -35,7 +35,7 @@ function Background({ children }) {
       });
 
       // Vẽ đường kết nối
-      ctx.strokeStyle = "rgba(255, 255, 255, 0.2)";
+      ctx.strokeStyle = "rgba(255, 255, 255, 0.4)";
       ctx.lineWidth = 0.5;
       for (let i = 0; i < numStars; i++) {
         for (let j = i + 1; j < numStars; j++) {

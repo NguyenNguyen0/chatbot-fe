@@ -1,9 +1,12 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useContext } from 'react';
 import { PropTypes } from 'prop-types';
 import { FaRobot } from 'react-icons/fa6';
-import { User } from '../../assets/icons';
+import { GoCopy } from "react-icons/go";
+import { TfiReload } from "react-icons/tfi";
+import { ChatContext } from '../../contexts/ChatContext';
 
-function ChatMessages({ messages }) {
+function ChatMessages() {
+  const { messages } = useContext(ChatContext);
   const messagesEndRef = useRef(null);
 
   const scrollToBottom = () => {
@@ -13,6 +16,23 @@ function ChatMessages({ messages }) {
   useEffect(() => {
     scrollToBottom();
   }, [messages]);
+
+  const handleCopyMessage = (content) => {
+    navigator.clipboard.writeText(content)
+      .then(() => {
+        // Optional: add some feedback that copying worked
+        console.log('Message copied to clipboard');
+      })
+      .catch(err => {
+        console.error('Failed to copy message: ', err);
+      });
+  };
+
+  const handleReloadMessage = (messageId) => {
+    // Implement regeneration logic here
+    console.log('Reload message:', messageId);
+    // This would typically call a function passed from the parent component
+  };
 
   return (
     <div className="flex-1 overflow-y-auto p-4 custom-scrollbar">
@@ -25,30 +45,46 @@ function ChatMessages({ messages }) {
           </div>
         </div>
       ) : (
-        <div className="max-w-3xl mx-auto space-y-6">
-          {messages.map((message) => (
+        <div className="max-w-3xl mx-auto space-y-6 mb-30">
+          {messages.map((message, index) => (
             <div
-              key={message.id}
-              className={`flex items-start gap-4 ${
-                message.sender === 'user' ? 'flex-row-reverse' : ''
-              }`}
-            >
-              {/* Avatar */}
-              {/* {message.sender === 'bot' ? (
-                <FaRobot className="w-8 h-8 text-secondary-400 mt-1" />
-              ) : (
-                <User className="w-8 h-8 mt-1" />
-              )} */}
-
-              {/* Message Content */}
-              <div
-                className={`flex-1 rounded-lg p-4 max-w-2xl ${
-                  message.sender === 'user'
-                    ? 'bg-secondary-500/20 text-secondary-200'
-                    : 'bg-primary-700 text-secondary-200'
+              key={index}
+              className={`flex items-start gap-5 group ${message.role === 'user' ? 'flex-row-reverse' : ''
                 }`}
+            >
+              {/* Message Content with utility buttons at bottom */}
+              <div
+                className={`flex-1 rounded-lg p-4 max-w-2xl relative ${message.role === 'user'
+                    ? 'bg-primary-500/20 text-secondary-200'
+                    : 'bg-transparent text-secondary-200'
+                  }`}
               >
-                {message.content}
+                <div>{message.content}</div>
+
+                {/* Utility buttons - hidden by default, shown on hover */}
+                <div
+                  className={`absolute -bottom-7 ${message.role === 'user' ? 'right-1' : 'left-2.5'} 
+                  opacity-0 group-hover:opacity-100 transition-opacity duration-200 
+                  flex gap-2 mt-2`}
+                >
+                  <button
+                    onClick={() => handleCopyMessage(message.content)}
+                    className="text-secondary-200/90 hover:text-secondary-300 p-1 rounded-md hover:bg-secondary-500/10 cursor-pointer"
+                    title="Copy message"
+                  >
+                    <GoCopy className="w-4 h-4" />
+                  </button>
+
+                  {message.role !== 'user' && (
+                    <button
+                      onClick={() => handleReloadMessage(message.chatId)}
+                      className="text-secondary-200/90 hover:text-secondary-300 p-1 rounded-md hover:bg-secondary-500/10 cursor-pointer"
+                      title="Regenerate response"
+                    >
+                      <TfiReload className="w-4 h-4" />
+                    </button>
+                  )}
+                </div>
               </div>
             </div>
           ))}

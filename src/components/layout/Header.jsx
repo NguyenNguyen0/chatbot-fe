@@ -1,10 +1,11 @@
+import propTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import Nav from './Nav';
 import '../../assets/styles/Header.css';
 
-function Header() {
+function Header({ className }) {
   return (
-    <header className="app-header relative px-6 py-8 md:px-12 bg-gradient-to-r from-primary-700 to-primary-600 shadow-2xl">
+    <header className={`"app-header relative px-6 py-8 md:px-12 bg-gradient-to-r from-primary-700 to-primary-600 shadow-2xl" ${className}`}>
       <Nav />
 
       {/* Hero Section */}
@@ -40,6 +41,10 @@ function Header() {
       </div>
     </header>
   );
+}
+
+Header.propTypes = {
+  className: propTypes.string,
 }
 
 export default Header;
