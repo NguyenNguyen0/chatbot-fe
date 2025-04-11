@@ -45,7 +45,7 @@ const Feature = () => {
             {features.map((feature, index) => (
               <div
                 key={index}
-                className="feature-card p-6 rounded-xl bg-white dark:bg-gray-800 shadow-lg hover:shadow-xl transition-shadow duration-300"
+                className="feature-card p-6 rounded-xl bg-white dark:bg-primary-800/60 shadow-lg hover:shadow-xl transition-shadow duration-300"
               >
                 <div className="feature-icon mb-4 text-secondary-600 dark:text-secondary-400">
                   {feature.icon}
@@ -88,7 +88,7 @@ const Feature = () => {
               </div>
               <div className="flex-1 feature-image-container">
                 <div className="bg-gradient-to-r from-secondary-300 to-secondary-600 rounded-lg p-1">
-                  <div className="bg-white dark:bg-gray-800 rounded-lg p-4">
+                  <div className="bg-white dark:bg-primary-800/60 rounded-lg p-4">
                     <div className="h-64 bg-gray-100 dark:bg-gray-700 rounded-lg animate-pulse">
                       {/* image here */}
                     </div>
@@ -123,7 +123,7 @@ const Feature = () => {
               </div>
               <div className="flex-1 feature-image-container">
                 <div className="bg-gradient-to-r from-secondary-600 to-secondary-300 rounded-lg p-1">
-                  <div className="bg-white dark:bg-gray-800 rounded-lg p-4">
+                  <div className="bg-white dark:bg-primary-800/60 rounded-lg p-4">
                     <div className="h-64 bg-gray-100 dark:bg-gray-700 rounded-lg animate-pulse">
                       {/* image here */}
                     </div>

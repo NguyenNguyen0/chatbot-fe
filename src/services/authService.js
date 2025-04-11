@@ -5,11 +5,11 @@ export const register = async (formData) => {
         username: formData.username,
         email: formData.email,
         password: formData.password,
-        confirm_password: formData.confirmPassword,
+        confirmPassword: formData.confirmPassword,
     });
     
     if (response.data.token) {
-        sessionStorage.setItem('jwt', response.data['access_token']);
+        sessionStorage.setItem('jwt', response.data.accessToken);
     }
 
     return response.data;
@@ -23,7 +23,7 @@ export const login = async (formData) => {
     });
     
     if (response.data.token) {
-        sessionStorage.setItem('jwt', response.data['access_token']);
+        sessionStorage.setItem('jwt', response.data.accessToken);
     }
 
     return response.data;

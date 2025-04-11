@@ -21,7 +21,7 @@ function LoginForm() {
       const data = await login(formData);
 
       if (data) {
-        context.setTokenAndUser(data['access_token']);
+        context.setTokenAndUser(data.accessToken);
         navigate('/chat', {
           state: {
             isLogin: true,

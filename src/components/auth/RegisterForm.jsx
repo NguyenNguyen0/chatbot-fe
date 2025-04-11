@@ -19,7 +19,7 @@ function RegisterForm() {
     try {
       const data = await register(formData);
       if (data) {
-        const jwtToken = data['access_token'];
+        const jwtToken = data.accessToken;
         context.setTokenAndUser(jwtToken);
         navigate('/chat', {
           state: {

@@ -53,7 +53,7 @@ export const getChatBotResponse = async (messages, chatId, model) => {
 
         // Create the request body with the correct structure
         const requestBody = {
-            chat_id: chatId,
+            chatId: chatId,
             messages: messages,
             model: model
         };
