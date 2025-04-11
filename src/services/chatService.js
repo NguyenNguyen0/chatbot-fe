@@ -71,3 +71,24 @@ export const getChatBotResponse = async (messages, chatId, model) => {
         throw error;
     }
 }
+
+export const deleteChat = async (chatId) => {
+    try {
+        const jwtToken = sessionStorage.getItem('jwt') ?? null;
+
+        if (!jwtToken) {
+            throw new Error('JWT token is missing');
+        }
+
+        const response = await api.delete(`/chat/${chatId}/`, {
+            headers: {
+                Authorization: `Bearer ${jwtToken}`,
+            },
+        });
+
+        return response.data;
+    } catch (error) {
+        console.error('Error deleting chat:', error);
+        throw error;
+    }
+}

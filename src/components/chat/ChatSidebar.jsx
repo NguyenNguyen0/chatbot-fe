@@ -1,21 +1,28 @@
 import { PropTypes } from 'prop-types';
+import { useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
 import { FaPlus, FaChevronLeft, FaChevronRight, FaTrash } from 'react-icons/fa6';
 import { ChatContext } from '../../contexts/ChatContext';
 
 function ChatSidebar({ isOpen, onToggle, onOpenDeleteDialog, className }) {
-  const { conversations, setConversations, selectConversation } = useContext(ChatContext);
-
+  const navigate = useNavigate();
+  const { conversations, selectConversation, setCurrentConversation, setMessages } = useContext(ChatContext);
 
   const handleNewChat = () => {
     const newConversation = {
-      id: Date.now(),
+      chatId: null,
+      model: 'llama3',
+      messages: [],
       title: 'New Conversation',
       active: true,
+      createdAt: new Date().toISOString(),
+      isNew: true,
     };
-    setConversations(prev =>
-      [newConversation].concat(prev.map(conv => ({ ...conv, active: false })))
-    );
+    
+    navigate('/chat');
+
+    setMessages([]);
+    setCurrentConversation(newConversation);
   };
 
   return (
@@ -53,9 +60,9 @@ function ChatSidebar({ isOpen, onToggle, onOpenDeleteDialog, className }) {
 
           {/* Conversations List */}
           <div className="flex-1 overflow-y-auto custom-scrollbar px-2">
-            {conversations.map((conversation) => (
+            {conversations.map((conversation, index) => (
               <div
-                key={conversation.chatId}
+                key={conversation.chatId ?? index}
                 onClick={() => selectConversation(conversation.chatId)}
                 className={`flex items-center justify-between py-3 px-4 mx-2 border-secondary-400/20 border rounded-lg cursor-pointer mb-1 group
                   ${conversation.active
@@ -66,7 +73,8 @@ function ChatSidebar({ isOpen, onToggle, onOpenDeleteDialog, className }) {
                 <button
                   onClick={(e) => {
                     e.stopPropagation(); // Prevent triggering conversation selection
-                    onOpenDeleteDialog(conversation.id);
+                    console.log("Deleting conversation with ID: " + conversation.chatId);
+                    onOpenDeleteDialog(conversation.chatId);
                   }}
                   className={`text-secondary-400 hover:text-secondary-300 opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer`}
                 >

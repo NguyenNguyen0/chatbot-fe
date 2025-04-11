@@ -100,7 +100,7 @@ ChatMessages.propTypes = {
     PropTypes.shape({
       id: PropTypes.number.isRequired,
       content: PropTypes.string.isRequired,
-      sender: PropTypes.oneOf(['user', 'bot']).isRequired,
+      sender: PropTypes.oneOf(['user', 'assistant']).isRequired,
       timestamp: PropTypes.instanceOf(Date).isRequired,
     })
   ).isRequired,

@@ -17,7 +17,7 @@ import '../assets/styles/Chat.css';
 
 
 function Chat() {
-  const { setConversations, messages, getChatResponse, currentConversation } = useContext(ChatContext);
+  const { setConversations, messages, getChatResponse, currentConversation, deleteConversation } = useContext(ChatContext);
   const { state } = useLocation();
   const { user } = useContext(AuthContext);
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
@@ -50,12 +50,12 @@ function Chat() {
     }
   }, [state])
 
-
   const handleDeleteConversation = (conversationId) => {
     setConversations(prevConversations =>
-      prevConversations.filter(conv => conv.id !== conversationId)
+      prevConversations.filter(conv => conv.chatId !== conversationId)
     );
 
+    deleteConversation(conversationId);
     // Close the dialog after deleting
     setDeleteDialog({ isOpen: false, conversationId: null });
   };
@@ -75,9 +75,7 @@ function Chat() {
 
   const handleSendMessage = (message) => {
     if (!message.trim()) return;
-
     getChatResponse(currentConversation, { role: 'user', content: message });
-
   };
 
   return (

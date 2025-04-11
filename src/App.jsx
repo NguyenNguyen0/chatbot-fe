@@ -6,11 +6,11 @@ import { ChatProvider } from './contexts/ChatContext'
 function App() {
   return (
     <AuthProvider>
-      <ChatProvider>
-        <BrowserRouter>
+      <BrowserRouter>
+        <ChatProvider>
           <AppRoutes />
-        </BrowserRouter>
-      </ChatProvider>
+        </ChatProvider>
+      </BrowserRouter>
     </AuthProvider>
   )
 }

@@ -1,12 +1,14 @@
 import propTypes from 'prop-types';
 import { createContext, useContext } from "react";
 import { useState, useEffect } from "react";
-import { getChatList, getChatSection, getChatBotResponse } from "../services";
+import { useNavigate } from "react-router-dom";
+import { getChatList, getChatSection, getChatBotResponse, deleteChat } from "../services";
 import { AuthContext } from "./AuthContext";
 
 const ChatContext = createContext();
 
 function ChatProvider({ children }) {
+    const navigate = useNavigate();
     const { user } = useContext(AuthContext);
     const [conversations, setConversations] = useState([]);
     const [currentConversation, setCurrentConversation] = useState(null);
@@ -25,8 +27,20 @@ function ChatProvider({ children }) {
             });
     }, [user]);
 
-    const deleteConversation = (conversationId) => {
-        setConversations(prev => prev.filter(conv => conv.chatId !== conversationId));
+    const deleteConversation = async (conversationId) => {
+        if (!conversationId) return;
+        
+        try {
+            await deleteChat(conversationId);
+            setConversations(prev => prev.filter(conv => conv.chatId !== conversationId));
+            if (currentConversation?.chatId === conversationId) {
+                navigate('/chat');
+                setCurrentConversation(null);
+                setMessages([]);
+            }
+        } catch (e) {
+            console.error(e.response?.data || e);
+        }
     };
 
     const selectConversation = (id) => {
@@ -36,6 +50,7 @@ function ChatProvider({ children }) {
             return;
         }
 
+        navigate(`/chat/${id}`);
         setConversations(prev =>
             prev.map(conv => ({
                 ...conv,
@@ -58,28 +73,52 @@ function ChatProvider({ children }) {
             });
     };
 
-    const getChatResponse = (conversation, newMessage) => {
+    const getChatResponse = async (conversation, newMessage) => {
         const updatedMessages = [...messages, newMessage];
         const { chatId, model } = conversation;
         
         setMessages(updatedMessages);
         console.log("Sending message:", updatedMessages);
 
-        getChatBotResponse(updatedMessages, chatId, model)
-            .then((data) => {
-                setMessages(prev => [...prev, {role: 'assistant', content: data.response}]);
-                console.log('Bot response:', data);
-            })
-            .catch((e) => {
-                console.error(e.response?.data || e);
-            });
-        
-        setConversations(prev =>
-            prev.map(conv => ({
-                ...conv,
-                active: conv.id === chatId,
-            }))
-        );
+        try {
+            const response = await getChatBotResponse(updatedMessages, chatId, model);
+            setMessages(prev => [...prev, { role: 'assistant', content: response.response }])
+            console.log('Bot response:', response);
+            
+            if (conversation?.isNew && !chatId) {
+                const newChatId = response.chatId || chatId;
+                const updatedConversation = {
+                    ...conversation,
+                    chatId: newChatId,
+                    model: model,
+                    messages: updatedMessages,
+                    title: (response.title ?? conversation.title),
+                    active: true,
+                    isNew: false,
+                };
+
+                setCurrentConversation(updatedConversation);
+                setConversations([updatedConversation, ...conversations]);
+                navigate(`/chat/${newChatId}`);
+            } else if (response.title) {
+                // Update title for existing chats if response contains a title
+                setCurrentConversation(prev => ({
+                    ...prev,
+                    title: response.title
+                }));
+
+                // Also update in the conversations list
+                setConversations(prev =>
+                    prev.map(conv =>
+                        conv.chatId === chatId
+                            ? { ...conv, title: response.title }
+                            : conv
+                    )
+                );
+            }
+        } catch (e) {
+            console.error(e.response?.data || e);
+        }
     }
 
     return (

@@ -6,9 +6,8 @@ function AppRoutes() {
         <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/auth" element={<Auth />} />
-            <Route path='/chat' element={<Chat />}>
-                <Route path=':section-id' element={<Chat />} />
-            </Route>
+            <Route path='/chat' element={<Chat />} />
+            <Route path='/chat/:chatId' element={<Chat />} />
             <Route path="/features" element={<Feature />} />
             <Route path="/about" element={<About />} />
             <Route path="/*" element={<NotFound />} />
