@@ -5,6 +5,10 @@ import { GoCopy } from "react-icons/go";
 import { TfiReload } from "react-icons/tfi";
 import { ChatContext } from '../../contexts/ChatContext';
 
+import Markdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
+
+
 function ChatMessages() {
   const { messages } = useContext(ChatContext);
   const messagesEndRef = useRef(null);
@@ -59,7 +63,7 @@ function ChatMessages() {
                     : 'bg-transparent text-secondary-200'
                   }`}
               >
-                <div>{message.content}</div>
+                <Markdown remarkPlugins={[remarkGfm]}>{message.content}</Markdown>
 
                 {/* Utility buttons - hidden by default, shown on hover */}
                 <div
