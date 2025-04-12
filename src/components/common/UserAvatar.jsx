@@ -13,7 +13,7 @@ const UserAvatar = ({ className }) => {
     <div className={`outline-0 ${className}`}>
       <button
         onClick={() => setIsModalOpen(true)}
-        className="w-10 h-10 rounded-full bg-gradient-to-r from-secondary-500 to-secondary-300 p-0.5 hover:scale-105 transition-transform duration-200 cursor-pointer"
+        className="w-12 h-12 rounded-full p-0.5 hover:scale-105 transition-transform duration-200 cursor-pointer"
       >
         <div className="w-full h-full rounded-full bg-white dark:bg-gray-900 flex items-center justify-center">
           {context.user.avatar ? (

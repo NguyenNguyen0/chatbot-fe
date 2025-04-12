@@ -49,7 +49,7 @@ function ChatMessages() {
           </div>
         </div>
       ) : (
-        <div className="max-w-3xl mx-auto space-y-6 mb-30">
+        <div className="max-w-4xl mx-auto space-y-6 mb-30">
           {messages.map((message, index) => (
             <div
               key={index}
@@ -59,11 +59,20 @@ function ChatMessages() {
               {/* Message Content with utility buttons at bottom */}
               <div
                 className={`flex-1 rounded-lg p-4 max-w-2xl relative ${message.role === 'user'
-                    ? 'bg-primary-500/20 text-secondary-200'
-                    : 'bg-transparent text-secondary-200'
+                    ? 'bg-primary-500/20 text-white'
+                    : 'max-w-3xl bg-transparent text-gray-100'
                   }`}
               >
-                <Markdown remarkPlugins={[remarkGfm]}>{message.content}</Markdown>
+                <Markdown
+                  remarkPlugins={[remarkGfm]}
+                  components={{
+                    p: ({ ...props }) => <p className="whitespace-pre-wrap break-words" {...props} />,
+                    code: ({ ...props }) => <code className="whitespace-pre-wrap break-all" {...props} />,
+                    pre: ({ ...props }) => <pre className="whitespace-pre-wrap overflow-auto" {...props} />
+                  }}
+                >
+                  {message.content}
+                </Markdown>
 
                 {/* Utility buttons - hidden by default, shown on hover */}
                 <div

@@ -13,7 +13,7 @@ const UserModal = ({ onClose }) => {
   const modalRef = useRef();
 
   const handleUserLogout = ()  => {
-    logout(sessionStorage.getItem('jwt'));
+    logout(sessionStorage.getItem('accessToken'), sessionStorage.getItem('refreshToken'));
     context.setUser(null);
     onClose();
     navigate('/auth');
@@ -31,10 +31,10 @@ const UserModal = ({ onClose }) => {
   }, [onClose]);
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-start justify-end pt-16 px-4">
+    <div className="fixed inset-0 bg-black/10 bg-opacity-50 z-50 flex items-start justify-end pt-16 px-4">
       <div
         ref={modalRef}
-        className="bg-white dark:bg-gray-800 rounded-lg shadow-xl w-full max-w-sm mr-2 mt-2 animate-slideIn"
+        className="bg-white dark:bg-primary-600 rounded-lg shadow-xl w-full max-w-sm mr-2 mt-2 animate-slideIn"
       >
         {/* User Info Section */}
         <div className="p-4 border-b border-gray-200 dark:border-gray-700">
