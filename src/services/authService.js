@@ -8,8 +8,9 @@ export const register = async (formData) => {
         confirmPassword: formData.confirmPassword,
     });
     
-    if (response.data.token) {
-        sessionStorage.setItem('jwt', response.data.accessToken);
+    if (response.data.accessToken || response.data.refreshToken) {
+        sessionStorage.setItem('refreshToken', response.data.refreshToken);
+        sessionStorage.setItem('accessToken', response.data.accessToken);
     }
 
     return response.data;
@@ -22,8 +23,9 @@ export const login = async (formData) => {
         password: formData.password,
     });
     
-    if (response.data.token) {
-        sessionStorage.setItem('jwt', response.data.accessToken);
+    if (response.data.accessToken || response.data.refreshToken) {
+        sessionStorage.setItem('refreshToken', response.data.refreshToken);
+        sessionStorage.setItem('accessToken', response.data.accessToken);
     }
 
     return response.data;
@@ -38,20 +40,19 @@ export const getUser = async (token) => {
     });
 
     if (response.data) {
-        sessionStorage.setItem('jwt', token);
+        sessionStorage.setItem('accessToken', token);
     }
 
     return response.data;
 };
 
-export const logout = async (token) => {
+export const logout = async (accessToken, refreshToken) => {
     const response = await api.post('/auth/logout', {
-        headers: {
-            Authorization: `Bearer ${token}`,
-        },
+        accessToken, refreshToken
     });
 
-    sessionStorage.removeItem('jwt');
+    sessionStorage.removeItem('accessToken');
+    sessionStorage.removeItem('refreshToken');
 
     return response.data;
 }

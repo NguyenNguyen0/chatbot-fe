@@ -19,8 +19,8 @@ function RegisterForm() {
     try {
       const data = await register(formData);
       if (data) {
-        const jwtToken = data.accessToken;
-        context.setTokenAndUser(jwtToken);
+        const accessToken = data.accessToken;
+        context.setTokenAndUser(accessToken);
         navigate('/chat', {
           state: {
             isNewUser: true,

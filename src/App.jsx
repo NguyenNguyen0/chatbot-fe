@@ -5,13 +5,13 @@ import { ChatProvider } from './contexts/ChatContext'
 
 function App() {
   return (
-    <AuthProvider>
-      <BrowserRouter>
+    <BrowserRouter>
+      <AuthProvider>
         <ChatProvider>
           <AppRoutes />
         </ChatProvider>
-      </BrowserRouter>
-    </AuthProvider>
+      </AuthProvider>
+    </BrowserRouter>
   )
 }
 

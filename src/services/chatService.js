@@ -3,15 +3,15 @@ import api from "../api/api";
 
 export const getChatList = async () => {
     try {
-        const jwtToken = sessionStorage.getItem('jwt') ?? null;
+        const accessToken = sessionStorage.getItem('accessToken') ?? null;
         
-        if (!jwtToken) {
+        if (!accessToken) {
             throw new Error('JWT token is missing');
         }
         
         const response = await api.get('/chat/', {
             headers: {
-                Authorization: `Bearer ${jwtToken}`,
+                Authorization: `Bearer ${accessToken}`,
             },
         });
 
@@ -24,15 +24,15 @@ export const getChatList = async () => {
 
 export const getChatSection = async (chatId) => {
     try {
-        const jwtToken = sessionStorage.getItem('jwt') ?? null;
+        const accessToken = sessionStorage.getItem('accessToken') ?? null;
         
-        if (!jwtToken) {
+        if (!accessToken) {
             throw new Error('JWT token is missing');
         }
         
         const response = await api.get(`/chat/${chatId}/`, {
             headers: {
-                Authorization: `Bearer ${jwtToken}`,
+                Authorization: `Bearer ${accessToken}`,
             },
         });
 
@@ -45,9 +45,9 @@ export const getChatSection = async (chatId) => {
 
 export const getChatBotResponse = async (messages, chatId, model) => {
     try {
-        const jwtToken = sessionStorage.getItem('jwt') ?? null;
+        const accessToken = sessionStorage.getItem('accessToken') ?? null;
 
-        if (!jwtToken) {
+        if (!accessToken) {
             throw new Error('JWT token is missing');
         }
 
@@ -60,7 +60,7 @@ export const getChatBotResponse = async (messages, chatId, model) => {
 
         const response = await api.post('/chat/', requestBody, {
             headers: {
-                Authorization: `Bearer ${jwtToken}`,
+                Authorization: `Bearer ${accessToken}`,
                 'Content-Type': 'application/json'
             },
         });
@@ -74,15 +74,15 @@ export const getChatBotResponse = async (messages, chatId, model) => {
 
 export const deleteChat = async (chatId) => {
     try {
-        const jwtToken = sessionStorage.getItem('jwt') ?? null;
+        const accessToken = sessionStorage.getItem('accessToken') ?? null;
 
-        if (!jwtToken) {
+        if (!accessToken) {
             throw new Error('JWT token is missing');
         }
 
         const response = await api.delete(`/chat/${chatId}/`, {
             headers: {
-                Authorization: `Bearer ${jwtToken}`,
+                Authorization: `Bearer ${accessToken}`,
             },
         });
 

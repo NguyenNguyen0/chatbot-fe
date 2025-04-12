@@ -16,6 +16,7 @@ function ChatProvider({ children }) {
 
     useEffect(() => {
         // Load chats when context mounts
+        if (!user) return;
         getChatList()
             .then((data) => {
                 setConversations(data.chats);
