@@ -1,0 +1,51 @@
+import PropTypes from 'prop-types';
+import { useState, useEffect } from 'react';
+import { GoCopy } from "react-icons/go";
+import { IoCheckmark } from "react-icons/io5";
+
+import UtilButton from './UtilButton';
+
+function CopyUtilButton({ content, ...props }) {
+    const [isCopied, setIsCopied] = useState(false);
+
+    // Reset copy state after timeout
+    useEffect(() => {
+        let timeout;
+        if (isCopied) {
+            timeout = setTimeout(() => {
+                setIsCopied(false);
+            }, 4000); // 4 seconds
+        }
+        return () => clearTimeout(timeout);
+    }, [isCopied]);
+
+    const handleCopyMessage = (content) => {
+        navigator.clipboard.writeText(content)
+            .then(() => {
+                console.log('Message copied to clipboard');
+                setIsCopied(true);
+            })
+            .catch(err => {
+                console.error('Failed to copy message: ', err);
+            });
+    };
+
+    return (
+        <UtilButton
+            onClick={() => handleCopyMessage(content)}
+            icon={isCopied ? (
+                <IoCheckmark className="w-4 h-4" />
+            ) : (
+                <GoCopy className="w-4 h-4" />
+            )}
+            title={isCopied ? "Copied!" : "Copy"}
+            {...props}
+        />
+    )
+}
+
+CopyUtilButton.propTypes = {
+    content: PropTypes.string.isRequired,
+};
+
+export default CopyUtilButton;

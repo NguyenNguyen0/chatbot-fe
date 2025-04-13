@@ -1,6 +1,6 @@
-import { createContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import propTypes from "prop-types";
+import { createContext, useEffect, useState } from "react";
+// import { useNavigate } from "react-router-dom";
 
 import { getUser } from "../services";
 
@@ -8,7 +8,7 @@ const AuthContext = createContext();
 
 function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const setTokenAndUser = async (token) => {
     getUser(token).then((data) => {
@@ -26,10 +26,7 @@ function AuthProvider({ children }) {
     const token = sessionStorage.getItem("accessToken");
     if (token) {
       setTokenAndUser(token);
-    } else {
-      navigate("/auth");
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
 

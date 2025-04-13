@@ -10,6 +10,7 @@ import ChatBar from '../components/common/ChatBar';
 import Logo from '../components/common/Logo';
 import UserAvatar from '../components/common/UserAvatar';
 import Dialog from '../components/common/Dialog';
+import ChatModelSelector from '../components/chat/ChatModelSelector';
 import { AuthContext } from '../contexts/AuthContext';
 import { ChatContext } from '../contexts/ChatContext';
 
@@ -94,26 +95,43 @@ function Chat() {
         transition={Slide}
       />
 
-      {user
-        ? <UserAvatar className={"absolute top-4 right-4 z-10"} />
-        : <Logo className="absolute right-6 top-4 z-10" />
-      }
-
       {/* Sidebar */}
-      <ChatSidebar
-        isOpen={isSidebarOpen}
-        onToggle={() => setIsSidebarOpen(!isSidebarOpen)}
-        onOpenDeleteDialog={handleOpenDeleteDialog}
-        className="shadow-primary-700/30 shadow"
-      />
+      {user && (
+        <ChatSidebar
+          isOpen={isSidebarOpen}
+          onToggle={() => setIsSidebarOpen(!isSidebarOpen)}
+          onOpenDeleteDialog={handleOpenDeleteDialog}
+          className="shadow-primary-700/30 shadow"
+        />
+      )}
 
       {/* Main Chat Area */}
       <main className={`pb-10 pt-8 flex-1 flex flex-col transition-all relative ${isSidebarOpen ? 'ml-80' : 'ml-0'}`}>
+        {/* Chat Header */}
+        <header className='-mt-8 pt-2 flex items-center justify-between bg-transparent'>
+          {/* Model AI Selector */}
+          <div className={`min-h-14 mt-2 z-10 ${isSidebarOpen ? 'ml-2' : 'ml-15'}`}>
+            {user && <ChatModelSelector />}
+          </div>
+
+          <div className='mr-4 z-10'>
+            {user
+              ? <UserAvatar />
+              : <Logo />
+            }
+          </div>
+        </header>
+
         {/* Messages */}
         <ChatMessages messages={messages} />
 
         {/* Chat Input */}
-        <div className="rounded-4xl mb-5 shadow-[2px_2px_4px_black] shadow-primary-700/30  bg-transparent absolute bottom-0 left-[50%] -translate-x-[50%] ">
+        <div
+          className={
+            "rounded-4xl mb-5 shadow-[2px_2px_4px_black] shadow-primary-700/30  bg-transparent absolute left-[50%] -translate-x-[50%] " + 
+            (messages?.length !== 0  ? "bottom-0" : "bottom-[40%] -translate-y-50%")
+        }
+        >
           <ChatBar
             onSend={handleSendMessage}
             placeholder="Send a message..."

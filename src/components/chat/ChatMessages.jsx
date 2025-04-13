@@ -1,13 +1,13 @@
 import { useEffect, useRef, useContext } from 'react';
 import { PropTypes } from 'prop-types';
-import { FaRobot } from 'react-icons/fa6';
-import { GoCopy } from "react-icons/go";
 import { TfiReload } from "react-icons/tfi";
 import { ChatContext } from '../../contexts/ChatContext';
-
+import { MdModeEdit } from "react-icons/md";
 import Markdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 
+import CopyUtilButton from './CopyUtilButton';
+import UtilButton from './UtilButton';
 
 function ChatMessages() {
   const { messages } = useContext(ChatContext);
@@ -21,16 +21,11 @@ function ChatMessages() {
     scrollToBottom();
   }, [messages]);
 
-  const handleCopyMessage = (content) => {
-    navigator.clipboard.writeText(content)
-      .then(() => {
-        // Optional: add some feedback that copying worked
-        console.log('Message copied to clipboard');
-      })
-      .catch(err => {
-        console.error('Failed to copy message: ', err);
-      });
-  };
+  const handleEditMessage = () => {
+    // Implement edit logic here
+    console.log('Edit message');
+    // This would typically call a function passed from the parent component
+  }
 
   const handleReloadMessage = (messageId) => {
     // Implement regeneration logic here
@@ -41,12 +36,8 @@ function ChatMessages() {
   return (
     <div className="flex-1 overflow-y-auto p-4 custom-scrollbar">
       {messages.length === 0 ? (
-        <div className="h-full flex items-center justify-center text-secondary-200">
-          <div className="text-center">
-            <FaRobot className="w-12 h-12 mx-auto mb-4 text-secondary-400" />
-            <p className="text-xl">Start a conversation!</p>
-            <p className="text-secondary-400 mt-2">Ask me anything...</p>
-          </div>
+        <div className="h-full flex items-center justify-center -mt-30 text-secondary-400">
+          <h1 className="text-center text-4xl font-bold">How Can I Help You?</h1>
         </div>
       ) : (
         <div className="max-w-4xl mx-auto space-y-6 mb-30">
@@ -80,22 +71,14 @@ function ChatMessages() {
                   opacity-0 group-hover:opacity-100 transition-opacity duration-200 
                   flex gap-2 mt-2`}
                 >
-                  <button
-                    onClick={() => handleCopyMessage(message.content)}
-                    className="text-secondary-200/90 hover:text-secondary-300 p-1 rounded-md hover:bg-secondary-500/10 cursor-pointer"
-                    title="Copy message"
-                  >
-                    <GoCopy className="w-4 h-4" />
-                  </button>
+                  <CopyUtilButton content={message.content} />
 
                   {message.role !== 'user' && (
-                    <button
-                      onClick={() => handleReloadMessage(message.chatId)}
-                      className="text-secondary-200/90 hover:text-secondary-300 p-1 rounded-md hover:bg-secondary-500/10 cursor-pointer"
-                      title="Regenerate response"
-                    >
-                      <TfiReload className="w-4 h-4" />
-                    </button>
+                    <UtilButton onClick={() => handleReloadMessage(message.chatId)} icon={<TfiReload className='w-4 h-4' />} title="Resend message" />
+                  )}
+
+                  {message.role === 'user' && (
+                    <UtilButton onClick={() => handleEditMessage()} icon={<MdModeEdit className='w-4 h-4' />} title="Edit message" />
                   )}
                 </div>
               </div>
