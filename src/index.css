@@ -30,6 +30,10 @@
     svg {
         fill: currentColor;
     }
+
+    body {
+        @apply bg-primary-600
+    }
 }
 
 @layer utilities {

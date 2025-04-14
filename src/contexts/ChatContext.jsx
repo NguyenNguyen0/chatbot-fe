@@ -13,6 +13,7 @@ function ChatProvider({ children }) {
     const [conversations, setConversations] = useState([]);
     const [currentConversation, setCurrentConversation] = useState(null);
     const [messages, setMessages] = useState([]);
+    const [model, setModel] = useState(null);
 
     useEffect(() => {
         // Load chats when context mounts
@@ -76,7 +77,7 @@ function ChatProvider({ children }) {
 
     const getChatResponse = async (conversation, newMessage) => {
         const updatedMessages = [...messages, newMessage];
-        const { chatId, model } = conversation;
+        const { chatId } = conversation;
         
         setMessages(updatedMessages);
         console.log("Sending message:", updatedMessages);
@@ -102,13 +103,11 @@ function ChatProvider({ children }) {
                 setConversations([updatedConversation, ...conversations]);
                 navigate(`/chat/${newChatId}`);
             } else if (response.title) {
-                // Update title for existing chats if response contains a title
                 setCurrentConversation(prev => ({
                     ...prev,
                     title: response.title
                 }));
 
-                // Also update in the conversations list
                 setConversations(prev =>
                     prev.map(conv =>
                         conv.chatId === chatId
@@ -130,6 +129,8 @@ function ChatProvider({ children }) {
             setCurrentConversation,
             messages,
             setMessages,
+            model,
+            setModel,
             deleteConversation,
             selectConversation,
             getChatResponse,

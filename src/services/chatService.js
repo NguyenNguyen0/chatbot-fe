@@ -92,3 +92,24 @@ export const deleteChat = async (chatId) => {
         throw error;
     }
 }
+
+export const getModels = async () => {
+    try {
+        const accessToken = sessionStorage.getItem('accessToken') ?? null;
+        
+        if (!accessToken) {
+            throw new Error('JWT token is missing');
+        }
+        
+        const response = await api.get('/chat/models/', {
+            headers: {
+                Authorization: `Bearer ${accessToken}`,
+            },
+        });
+
+        return response.data;
+    } catch (error) {
+        console.error('Error fetching models:', error);
+        throw error;
+    }
+}
