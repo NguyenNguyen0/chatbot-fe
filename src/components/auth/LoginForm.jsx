@@ -36,7 +36,7 @@ function LoginForm() {
   };
 
   const handleSocialLogin = (provider) => {
-    // Handle social login logic here
+    // TODO: Handle social login logic here
     console.log('Social login with:', provider);
   };
 

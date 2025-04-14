@@ -18,7 +18,7 @@ import '../assets/styles/Chat.css';
 
 
 function Chat() {
-  const { setConversations, messages, getChatResponse, currentConversation, deleteConversation } = useContext(ChatContext);
+  const { setConversations, messages, updateMessage, getChatResponse, currentConversation, deleteConversation } = useContext(ChatContext);
   const { state } = useLocation();
   const { user } = useContext(AuthContext);
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
@@ -76,7 +76,8 @@ function Chat() {
 
   const handleSendMessage = (message) => {
     if (!message.trim()) return;
-    getChatResponse(currentConversation, { role: 'user', content: message });
+    updateMessage(-1, message.trim());
+    getChatResponse(currentConversation, messages);
   };
 
   return (

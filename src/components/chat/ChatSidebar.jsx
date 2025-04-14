@@ -2,16 +2,20 @@ import { PropTypes } from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 import { useContext, useRef, useState, useEffect } from 'react';
 import { FaPlus, FaChevronLeft, FaChevronRight } from 'react-icons/fa6';
-import { MdEdit, MdDelete } from "react-icons/md";
 import { BsThreeDots } from "react-icons/bs";
 import { ChatContext } from '../../contexts/ChatContext';
+import DropdownMenu from './DropDownMenu';
+import { renameChat } from '../../services';
 
 function ChatSidebar({ isOpen, onToggle, onOpenDeleteDialog, className }) {
   const navigate = useNavigate();
-  const { conversations, selectConversation, setCurrentConversation, setMessages } = useContext(ChatContext);
+  const { conversations, selectConversation, setCurrentConversation, setConversations, setMessages } = useContext(ChatContext);
   const [openMenuId, setOpenMenuId] = useState(null);
   const [dropdownPosition, setDropdownPosition] = useState({ top: 0, left: 0 });
+  const [editingChatId, setEditingChatId] = useState(null);
+  const [editValue, setEditValue] = useState('');
   const dropdownRef = useRef(null);
+  const inputRef = useRef(null);
 
   useEffect(() => {
     function handleClickOutside(event) {
@@ -22,6 +26,14 @@ function ChatSidebar({ isOpen, onToggle, onOpenDeleteDialog, className }) {
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
+
+  // Focus input when editing starts
+  useEffect(() => {
+    if (editingChatId && inputRef.current) {
+      inputRef.current.focus();
+      inputRef.current.select();
+    }
+  }, [editingChatId]);
 
   const handleNewChat = () => {
     const newConversation = {
@@ -40,11 +52,46 @@ function ChatSidebar({ isOpen, onToggle, onOpenDeleteDialog, className }) {
     setCurrentConversation(newConversation);
   };
 
-  const onRenameConversation = (chatId) => {
-    console.log('Rename conversation:', chatId);
-    // TODO: Implement rename functionality
+  const startRenameConversation = (chatId) => {
+    const conversation = conversations.find(c => c.chatId === chatId);
+    if (conversation) {
+      setEditingChatId(chatId);
+      setEditValue(conversation.title);
+    }
+    setOpenMenuId(null);
+  };
 
-  }
+  const completeRename = () => {
+    if (!editingChatId || !editValue.trim()) {
+      setEditingChatId(null);
+      return;
+    }
+
+    renameChat(editingChatId, editValue.trim())
+      .then(() => {
+        setConversations((prevConversations) =>
+          prevConversations.map((conversation) =>
+            conversation.chatId === editingChatId
+              ? { ...conversation, title: editValue.trim() }
+              : conversation
+          )
+        );
+      })
+      .catch((error) => {
+        console.error('Error renaming chat:', error);
+      })
+      .finally(() => {
+        setEditingChatId(null);
+      });
+  };
+
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      completeRename();
+    } else if (e.key === 'Escape') {
+      setEditingChatId(null);
+    }
+  };
 
   const toggleMenu = (e, chatId) => {
     e.stopPropagation();
@@ -100,54 +147,46 @@ function ChatSidebar({ isOpen, onToggle, onOpenDeleteDialog, className }) {
             {conversations.map((conversation, index) => (
               <div
                 key={conversation.chatId ?? index}
-                onClick={() => selectConversation(conversation.chatId)}
+                onClick={() => editingChatId !== conversation.chatId && selectConversation(conversation.chatId)}
                 className={`flex items-center justify-between py-3 px-4 mx-2 border-secondary-400/20 border rounded-lg cursor-pointer mb-1 group
                   ${conversation.active
                     ? 'bg-primary-600 text-secondary-400'
                     : 'text-secondary-200 hover:bg-primary-500/50'}`}
               >
-                <span className="truncate pr-2">{conversation.title}</span>
+                
+                {editingChatId === conversation.chatId ? (
+                  <input
+                    ref={inputRef}
+                    type="text"
+                    value={editValue}
+                    onChange={(e) => setEditValue(e.target.value)}
+                    onBlur={completeRename}
+                    onKeyDown={handleKeyDown}
+                    className="bg-primary-500 text-secondary-200 px-2 py-0.5 rounded w-full outline-none"
+                    onClick={(e) => e.stopPropagation()}
+                  />
+                ) : (
+                  <span className="truncate pr-2">{conversation.title}</span>
+                )}
+                
                 <div className="relative flex items-center justify-center">
-                  <button
-                    onClick={(e) => toggleMenu(e, conversation.chatId)}
-                    className={`h-full w-full text-secondary-400 hover:text-secondary-300 opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer`}
-                  >
-                    <BsThreeDots className="w-5 h-5" />
-                  </button>
+                  {editingChatId !== conversation.chatId && (
+                    <button
+                      onClick={(e) => toggleMenu(e, conversation.chatId)}
+                      className={`h-full w-full text-secondary-400 hover:text-secondary-300 opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer`}
+                    >
+                      <BsThreeDots className="w-5 h-5" />
+                    </button>
+                  )}
 
                   {openMenuId === conversation.chatId && (
-                    <div
-                      ref={dropdownRef}
-                      style={{
-                        width: '12rem', // equivalent to w-48
-                        left: `${dropdownPosition.left}px`,
-                        top: `${dropdownPosition.top}px`,
-                      }}
-                      className="fixed z-[100] bg-primary-700 rounded-md shadow-lg py-1 border border-secondary-500/20"
-                    >
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          onRenameConversation(conversation.chatId);
-                          setOpenMenuId(null);
-                        }}
-                        className="flex items-center w-full px-4 py-2 text-left text-secondary-200 hover:bg-primary-600"
-                      >
-                        <MdEdit className="w-4 h-4 mr-2" />
-                        Rename
-                      </button>
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          onOpenDeleteDialog(conversation.chatId);
-                          setOpenMenuId(null);
-                        }}
-                        className="flex items-center w-full px-4 py-2 text-left text-secondary-200 hover:bg-primary-600"
-                      >
-                        <MdDelete className="w-4 h-4 mr-2" />
-                        Delete
-                      </button>
-                    </div>
+                    <DropdownMenu
+                      position={dropdownPosition}
+                      onClose={() => setOpenMenuId(null)}
+                      onRename={() => startRenameConversation(conversation.chatId)}
+                      onDelete={() => onOpenDeleteDialog(conversation.chatId)}
+                      dropdownRef={dropdownRef}
+                    />
                   )}
                 </div>
               </div>

@@ -4,8 +4,7 @@ import { getModels } from '../../services/chatService';
 import { ChatContext } from '../../contexts/ChatContext';
 
 function ChatModelSelector() {
-    const { setModel: setContextModel } = useContext(ChatContext);
-    const [currentModel, setCurrentModel] = useState(null);
+    const { setModel: setContextModel, model } = useContext(ChatContext);
     const [currentModels, setCurrentModels] = useState([]);
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const dropdownRef = useRef(null);
@@ -14,13 +13,13 @@ function ChatModelSelector() {
         getModels()
             .then(data => {
                 setCurrentModels(data.models);
-                setCurrentModel(data.models[0]?.name); // Set the first model as default
-                setContextModel(data.models[0]?.name); // Set the model in context
+                setContextModel(data.models.at(-1)?.name);
             })
             .catch(error => {
                 console.error('Error fetching models:', error);
             });
-    }, [setContextModel]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     useEffect(() => {
         function handleClickOutside(event) {
@@ -33,7 +32,6 @@ function ChatModelSelector() {
     }, []);
 
     const handleModelSelect = (modelName) => {
-        setCurrentModel(modelName);
         setContextModel(modelName);
         setIsDropdownOpen(false);
     }
@@ -46,7 +44,7 @@ function ChatModelSelector() {
                 className="flex items-center justify-between min-w-30 px-4 py-2 text-secondary-400 bg-transparent rounded-lg hover:bg-primary-500 transition-colors"
             >
                 <div className="flex items-center">
-                    <span className="mr-2 capitalize font-bold">{currentModel ?? 'Select Model'}</span>
+                    <span className="mr-2 capitalize font-bold">{model ?? 'Select Model'}</span>
                 </div>
                 <FaChevronDown className={`w-3 h-3 transition-transform text-secondary-200 ${isDropdownOpen ? 'rotate-180' : ''}`} />
             </button>
@@ -63,7 +61,7 @@ function ChatModelSelector() {
                                 className="flex flex-col px-4 py-2 hover:bg-primary-600 cursor-pointer"
                                 onClick={() => handleModelSelect(model.name)}
                             >
-                                <span className={`capitalize ${currentModel === model.name ? 'text-secondary-500' : 'text-secondary-300'}`}>
+                                <span className={`capitalize ${model === model.name ? 'text-secondary-500' : 'text-secondary-300'}`}>
                                     {model.name}
                                 </span>
                                 <span className='flex items-center justify-between gap-2 mt-1'>

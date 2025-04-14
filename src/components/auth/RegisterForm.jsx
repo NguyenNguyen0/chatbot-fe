@@ -30,7 +30,7 @@ function RegisterForm() {
         });
       }
     } catch (err) {
-      console.log(err.response);
+      console.error(err.response);
     }
   };
 

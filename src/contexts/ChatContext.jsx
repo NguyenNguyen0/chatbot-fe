@@ -21,7 +21,6 @@ function ChatProvider({ children }) {
         getChatList()
             .then((data) => {
                 setConversations(data.chats);
-                console.log('Conversations loaded:', data.chats);
             })
             .catch((e) => {
                 console.error(e.response?.data || e);
@@ -31,7 +30,7 @@ function ChatProvider({ children }) {
 
     const deleteConversation = async (conversationId) => {
         if (!conversationId) return;
-        
+
         try {
             await deleteChat(conversationId);
             setConversations(prev => prev.filter(conv => conv.chatId !== conversationId));
@@ -62,12 +61,10 @@ function ChatProvider({ children }) {
 
         const selectedConversation = conversations.find(conv => conv.chatId === id);
         setCurrentConversation(selectedConversation);
-        
+
         getChatSection(id)
             .then((data) => {
                 setMessages(data.messages);
-                console.log('Messages loaded:', data);
-                console.log("Current Conversation: " + JSON.stringify(selectedConversation));
             })
             .catch((e) => {
                 console.error(e.response?.data || e);
@@ -75,25 +72,21 @@ function ChatProvider({ children }) {
             });
     };
 
-    const getChatResponse = async (conversation, newMessage) => {
-        const updatedMessages = [...messages, newMessage];
+    const getChatResponse = async (conversation, messages) => {
+        setMessages(messages);
         const { chatId } = conversation;
-        
-        setMessages(updatedMessages);
-        console.log("Sending message:", updatedMessages);
 
         try {
-            const response = await getChatBotResponse(updatedMessages, chatId, model);
+            const response = await getChatBotResponse(messages, chatId, model);
             setMessages(prev => [...prev, { role: 'assistant', content: response.response }])
-            console.log('Bot response:', response);
-            
+
             if (conversation?.isNew && !chatId) {
                 const newChatId = response.chatId || chatId;
                 const updatedConversation = {
                     ...conversation,
                     chatId: newChatId,
                     model: model,
-                    messages: updatedMessages,
+                    messages: messages,
                     title: (response.title ?? conversation.title),
                     active: true,
                     isNew: false,
@@ -121,6 +114,15 @@ function ChatProvider({ children }) {
         }
     }
 
+    const updateMessages = (newMessages) => {
+        return new Promise(resolve => {
+            setMessages(() => {
+                resolve(newMessages);
+                return newMessages;
+            });
+        });
+    }
+
     return (
         <ChatContext.Provider value={{
             conversations,
@@ -131,6 +133,7 @@ function ChatProvider({ children }) {
             setMessages,
             model,
             setModel,
+            updateMessages,
             deleteConversation,
             selectConversation,
             getChatResponse,

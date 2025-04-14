@@ -22,7 +22,6 @@ function CopyUtilButton({ content, ...props }) {
     const handleCopyMessage = (content) => {
         navigator.clipboard.writeText(content)
             .then(() => {
-                console.log('Message copied to clipboard');
                 setIsCopied(true);
             })
             .catch(err => {

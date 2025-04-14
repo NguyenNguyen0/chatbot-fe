@@ -12,11 +12,10 @@ function AuthProvider({ children }) {
 
   const setTokenAndUser = async (token) => {
     getUser(token).then((data) => {
-      console.log(data);
       setUser(data);
       sessionStorage.setItem("accessToken", token);
     }).catch((e) => {
-      console.log(e.response.data);
+      console.error(e.response.data);
       setUser(null);
       sessionStorage.removeItem("accessToken");
     });

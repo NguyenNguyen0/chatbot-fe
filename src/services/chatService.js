@@ -113,3 +113,26 @@ export const getModels = async () => {
         throw error;
     }
 }
+
+
+export const renameChat = async (chatId, chatTitle) => {
+    try {
+        const accessToken = sessionStorage.getItem('accessToken') ?? null;
+
+        if (!accessToken) {
+            throw new Error('JWT token is missing');
+        }
+
+        const response = await api.patch(`/chat/${chatId}/`, chatTitle, {
+            headers: {
+                Authorization: `Bearer ${accessToken}`,
+                'Content-Type': 'text/plain'
+            },
+        });
+
+        return response.data;
+    } catch (error) {
+        console.error('Error renaming chat:', error);
+        throw error;
+    }
+}
