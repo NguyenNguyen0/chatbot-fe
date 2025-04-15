@@ -63,23 +63,23 @@ function LoginForm() {
       {/* Divider */}
       <div className="relative">
         <div className="absolute inset-0 flex items-center">
-          <div className="w-full border-t border-secondary-400/20"></div>
+          <div className="w-full border-t border-primary-400/20"></div>
         </div>
         <div className="relative flex justify-center text-sm">
-          <span className="px-2 bg-primary-800 text-secondary-200">Or continue with</span>
+          <span className="px-2 bg-black-800 text-white">Or continue with</span>
         </div>
       </div>
 
       {/* Login Form */}
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
-          <label htmlFor="username" className="block text-secondary-200 mb-2">
+          <label htmlFor="username" className="block text-white mb-2">
             Username
           </label>
           <input
             type="text"
             id="username"
-            className="w-full px-4 py-3 bg-primary-700 border border-secondary-400/20 rounded-lg focus:outline-none focus:border-secondary-400 text-secondary-200"
+            className="w-full px-4 py-3 bg-black-700 border border-primary-400/20 rounded-lg focus:outline-none focus:border-primary-400 text-white"
             placeholder="Enter your username"
             value={formData.username}
             onChange={(e) => setFormData({ ...formData, username: e.target.value })}
@@ -88,13 +88,13 @@ function LoginForm() {
         </div>
 
         <div>
-          <label htmlFor="password" className="block text-secondary-200 mb-2">
+          <label htmlFor="password" className="block text-white mb-2">
             Password
           </label>
           <input
             type="password"
             id="password"
-            className="w-full px-4 py-3 bg-primary-700 border border-secondary-400/20 rounded-lg focus:outline-none focus:border-secondary-400 text-secondary-200"
+            className="w-full px-4 py-3 bg-black-700 border border-primary-400/20 rounded-lg focus:outline-none focus:border-primary-400 text-white"
             placeholder="Enter your password"
             value={formData.password}
             onChange={(e) => setFormData({ ...formData, password: e.target.value })}
@@ -107,20 +107,20 @@ function LoginForm() {
             <input
               type="checkbox"
               id="remember"
-              className="w-4 h-4 bg-primary-700 border-secondary-400/20 rounded focus:ring-secondary-400"
+              className="w-4 h-4 bg-black-700 border-primary-400/20 rounded focus:ring-primary-400"
             />
-            <label htmlFor="remember" className="ml-2 text-sm text-secondary-200">
+            <label htmlFor="remember" className="ml-2 text-sm text-white">
               Remember me
             </label>
           </div>
-          <a href="#" className="text-sm text-secondary-400 hover:text-secondary-300">
+          <a href="#" className="text-sm text-slate-200 hover:text-primary-300">
             Forgot password?
           </a>
         </div>
 
         <button
           type="submit"
-          className="w-full py-3 bg-gradient-to-r from-secondary-400 to-secondary-500 hover:from-secondary-500 hover:to-secondary-600 text-primary-800 rounded-lg font-semibold transition-all cursor-pointer"
+          className="w-full py-3 bg-gradient-to-r from-primary-400 to-primary-500 hover:from-primary-500 hover:to-primary-600 text-black-800 rounded-lg font-semibold transition-all cursor-pointer"
         >
           Sign in
         </button>

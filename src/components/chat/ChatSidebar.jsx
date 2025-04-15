@@ -38,7 +38,7 @@ function ChatSidebar({ isOpen, onToggle, onOpenDeleteDialog, className }) {
   const handleNewChat = () => {
     const newConversation = {
       chatId: null,
-      model: 'llama3',
+      model: null,
       messages: [],
       title: 'New Conversation',
       active: true,
@@ -115,31 +115,31 @@ function ChatSidebar({ isOpen, onToggle, onOpenDeleteDialog, className }) {
       {/* Toggle Button */}
       <button
         onClick={onToggle}
-        className={`fixed top-6 z-30 bg-primary-800 p-2 rounded-lg border border-secondary-400/20 hover:bg-primary-700 transition-all cursor-pointer ${isOpen ? 'left-[0.8%]' : 'left-[0.8%]'}`}
+        className={`fixed top-6 z-30 bg-black-700 p-2 rounded-lg border hover:bg-black-600 transition-all cursor-pointer ${isOpen ? 'left-[0.8%]' : 'left-[0.8%]'}`}
       >
         {isOpen ? (
-          <FaChevronLeft className="w-4 h-4 text-secondary-400" />
+          <FaChevronLeft className="w-4 h-4 text-primary-400" />
         ) : (
-          <FaChevronRight className="w-4 h-4 text-secondary-400" />
+          <FaChevronRight className="w-4 h-4 text-primary-400" />
         )}
       </button>
 
       {/* Sidebar */}
-      <aside className={`fixed top-0 left-0 h-full bg-primary-700 transition-all duration-300 z-20
+      <aside className={`fixed top-0 left-0 h-full bg-black-700 transition-all duration-300 z-20
         ${isOpen ? 'w-80 translate-x-0' : 'w-80 -translate-x-full'} ${className}`}>
 
         <div className="flex flex-col h-full">
-          <div className='min-h-14 flex items-center justify-between border-b border-primary-700'>
+          <div className='min-h-14 flex items-center justify-between border-b border-black-700'>
             {/* TODO: add some feature here */}
           </div>
 
           {/* New Chat Button */}
           <button
             onClick={handleNewChat}
-            className="flex items-center gap-2 m-4 px-4 py-3 rounded-lg border border-secondary-500/50 hover:bg-primary-600 transition-colors cursor-pointer"
+            className="flex items-center gap-2 m-4 px-4 py-3 rounded-lg border border-primary-600 hover:bg-black-600 transition-colors cursor-pointer"
           >
-            <FaPlus className="text-secondary-400" />
-            <span className="text-secondary-200">New Chat</span>
+            <FaPlus className="text-primary-200" />
+            <span className="text-white">New Chat</span>
           </button>
 
           {/* Conversations List */}
@@ -148,10 +148,10 @@ function ChatSidebar({ isOpen, onToggle, onOpenDeleteDialog, className }) {
               <div
                 key={conversation.chatId ?? index}
                 onClick={() => editingChatId !== conversation.chatId && selectConversation(conversation.chatId)}
-                className={`flex items-center justify-between py-3 px-4 mx-2 border-secondary-400/20 border rounded-lg cursor-pointer mb-1 group
+                className={`flex items-center justify-between py-3 px-4 mx-2 border-slate-400/30 border rounded-lg cursor-pointer mb-1 group
                   ${conversation.active
-                    ? 'bg-primary-600 text-secondary-400'
-                    : 'text-secondary-200 hover:bg-primary-500/50'}`}
+                  ? 'bg-black-600 text-white border-primary-400'
+                    : 'text-slate-300 hover:bg-black-500/50'}`}
               >
                 
                 {editingChatId === conversation.chatId ? (
@@ -162,7 +162,7 @@ function ChatSidebar({ isOpen, onToggle, onOpenDeleteDialog, className }) {
                     onChange={(e) => setEditValue(e.target.value)}
                     onBlur={completeRename}
                     onKeyDown={handleKeyDown}
-                    className="bg-primary-500 text-secondary-200 px-2 py-0.5 rounded w-full outline-none"
+                    className="bg-black-500 text-white pl-1 pr-2 py-0.5 rounded w-full outline-none"
                     onClick={(e) => e.stopPropagation()}
                   />
                 ) : (
@@ -173,7 +173,7 @@ function ChatSidebar({ isOpen, onToggle, onOpenDeleteDialog, className }) {
                   {editingChatId !== conversation.chatId && (
                     <button
                       onClick={(e) => toggleMenu(e, conversation.chatId)}
-                      className={`h-full w-full text-secondary-400 hover:text-secondary-300 opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer`}
+                      className={`h-full w-full text-white hover:text-primary-400 opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer`}
                     >
                       <BsThreeDots className="w-5 h-5" />
                     </button>

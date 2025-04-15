@@ -12,7 +12,7 @@ function Dialog({ isOpen, onClose, onConfirm, message, title }) {
             />
 
             {/* Dialog Content */}
-            <div className="relative bg-white dark:bg-primary-600 rounded-lg p-6 max-w-sm w-full mx-4">
+            <div className="relative bg-white dark:bg-black-600 rounded-lg p-6 max-w-sm w-full mx-4">
                 <h3 className="text-lg font-semibold mb-2 dark:text-white">
                     {title}
                 </h3>

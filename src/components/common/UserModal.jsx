@@ -34,12 +34,12 @@ const UserModal = ({ onClose }) => {
     <div className="fixed inset-0 bg-black/10 bg-opacity-50 z-50 flex items-start justify-end pt-16 px-4">
       <div
         ref={modalRef}
-        className="bg-white dark:bg-primary-600 rounded-lg shadow-xl w-full max-w-sm mr-2 mt-2 animate-slideIn"
+        className="bg-white dark:bg-black-600 rounded-lg shadow-xl w-full max-w-sm mr-2 mt-2 animate-slideIn"
       >
         {/* User Info Section */}
         <div className="p-4 border-b border-gray-200 dark:border-gray-700">
           <div className="flex items-center space-x-4">
-            <div className="w-16 h-16 rounded-full bg-gradient-to-r from-secondary-500 to-secondary-300 p-0.5">
+            <div className="w-16 h-16 rounded-full bg-gradient-to-r from-primary-500 to-primary-300 p-0.5">
               <div className="w-full h-full rounded-full bg-white dark:bg-gray-900 flex items-center justify-center">
                 {!user.avatar 
                   ? (<User className="w-8 h-8 text-gray-700 dark:text-gray-200" />)

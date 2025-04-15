@@ -45,7 +45,7 @@ function ChatMessages() {
     if (editContent.trim() === '') return;
 
     let updatedMessages = messages.slice(0, index);
-    updateMessages.push({ role: 'user', content: editContent });
+    updatedMessages.push({ role: 'user', content: editContent });
     updatedMessages = await updateMessages(updatedMessages);
 
     setEditingMessageIndex(null);
@@ -63,7 +63,7 @@ function ChatMessages() {
   return (
     <div className="flex-1 overflow-y-auto p-4 custom-scrollbar">
       {messages.length === 0 ? (
-        <div className="h-full flex items-center justify-center -mt-30 text-secondary-400">
+        <div className="h-full flex items-center justify-center -mt-30 text-primary-400">
           <h1 className="text-center text-4xl font-bold">How Can I Help You?</h1>
         </div>
       ) : (
@@ -77,7 +77,7 @@ function ChatMessages() {
               {/* Message Content with utility buttons at bottom */}
               <div
                 className={`flex-1 rounded-lg p-4 max-w-2xl relative ${message.role === 'user'
-                  ? 'bg-primary-500/20 text-white'
+                  ? 'bg-black-500/20 text-white'
                   : 'max-w-3xl bg-transparent text-gray-100'
                   }`}
               >
@@ -89,18 +89,18 @@ function ChatMessages() {
                         ref={textareaRef}
                         value={editContent}
                         onChange={(e) => setEditContent(e.target.value)}
-                        className="w-full bg-primary-600 text-white p-2 rounded-md border border-secondary-400/30 focus:outline-none focus:border-secondary-400/70 min-h-[100px]"
+                        className="w-full bg-black-600 text-white p-2 rounded-md border border-primary-400/30 focus:outline-none focus:border-white/20 min-h-[100px]"
                       />
                       <div className="flex justify-end gap-2 mt-1">
                         <button
                           onClick={handleCancelEdit}
-                          className="px-3 py-1 rounded-md bg-primary-700 hover:bg-primary-600 text-secondary-200 transition-colors text-sm"
+                          className="px-3 py-1 rounded-md bg-black-700 hover:bg-black-600 text-white transition-colors text-sm"
                         >
                           Cancel
                         </button>
                         <button
                           onClick={() => handleSubmitEdit(index)}
-                          className="px-3 py-1 rounded-md bg-secondary-600 hover:bg-secondary-500 text-white transition-colors text-sm"
+                          className="px-3 py-1 rounded-md bg-primary-600 hover:bg-primary-500 text-white transition-colors text-sm"
                         >
                           Save
                         </button>

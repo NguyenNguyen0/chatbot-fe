@@ -28,7 +28,7 @@
     left: -50%;
     width: 200%;
     height: 200%;
-    background: radial-gradient(circle, rgba(var(--color-secondary-300), 0.1) 0%, transparent 50%);
+    background: radial-gradient(circle, rgba(var(--color-primary-300), 0.1) 0%, transparent 50%);
     animation: rotate 30s linear infinite;
     z-index: -1;
 }

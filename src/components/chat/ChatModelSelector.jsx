@@ -4,7 +4,7 @@ import { getModels } from '../../services/chatService';
 import { ChatContext } from '../../contexts/ChatContext';
 
 function ChatModelSelector() {
-    const { setModel: setContextModel, model } = useContext(ChatContext);
+    const { setModel: setContextModel, model: contextModel } = useContext(ChatContext);
     const [currentModels, setCurrentModels] = useState([]);
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const dropdownRef = useRef(null);
@@ -41,34 +41,28 @@ function ChatModelSelector() {
             {/* Model Selector Button */}
             <button
                 onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                className="flex items-center justify-between min-w-30 px-4 py-2 text-secondary-400 bg-transparent rounded-lg hover:bg-primary-500 transition-colors"
+                className="flex items-center justify-between min-w-30 px-4 py-2 text-primary-400 bg-transparent rounded-lg hover:bg-black-500 transition-colors"
             >
                 <div className="flex items-center">
-                    <span className="mr-2 capitalize font-bold">{model ?? 'Select Model'}</span>
+                    <span className="mr-2 capitalize font-bold">{contextModel ?? 'Select Model'}</span>
                 </div>
-                <FaChevronDown className={`w-3 h-3 transition-transform text-secondary-200 ${isDropdownOpen ? 'rotate-180' : ''}`} />
+                <FaChevronDown className={`w-3 h-3 mt-0.5 transition-transform text-slate-300 ${isDropdownOpen ? 'rotate-180' : ''}`} />
             </button>
 
             {/* Dropdown Menu with Integrated Info */}
             {isDropdownOpen && (
-                <div className="absolute z-30 mt-1 w-66 bg-primary-700 border border-secondary-500/20 rounded-md shadow-lg">
+                <div className="absolute z-30 mt-1 w-66 bg-black-700 border border-primary-500/20 rounded-md shadow-lg">
                     {currentModels.map((model, index) => (
                         <div
                             key={index}
-                            className="border-b border-secondary-500/10 last:border-0"
+                            className="border-b border-primary-500/10 last:border-0"
                         >
                             <div
-                                className="flex flex-col px-4 py-2 hover:bg-primary-600 cursor-pointer"
+                                className="flex flex-col px-4 py-2 hover:bg-black-600 cursor-pointer"
                                 onClick={() => handleModelSelect(model.name)}
                             >
-                                <span className={`capitalize ${model === model.name ? 'text-secondary-500' : 'text-secondary-300'}`}>
+                                <span className={`capitalize ${contextModel === model.name ? 'text-primary-400' : 'text-slate-200'}`}>
                                     {model.name}
-                                </span>
-                                <span className='flex items-center justify-between gap-2 mt-1'>
-                                    {/* <span>
-                                        <FaInfoCircle className='text-secondary-300 w-4 h-4' />
-                                    </span> */}
-                                    {/* <p className='text-secondary-200 text-xs'>{model?.description}</p> */}
                                 </span>
                             </div>
                         </div>

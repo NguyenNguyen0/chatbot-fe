@@ -16,7 +16,7 @@ function DropdownMenu({
         left: `${position.left}px`,
         top: `${position.top}px`,
       }}
-      className="fixed z-[100] bg-primary-700 rounded-md shadow-lg py-1 border border-secondary-500/20"
+      className="fixed z-[100] bg-black-700 rounded-md shadow-lg py-1 border border-primary-500/20"
     >
       <button
         onClick={(e) => {
@@ -24,7 +24,7 @@ function DropdownMenu({
           onRename();
           onClose();
         }}
-        className="flex items-center w-full px-4 py-2 text-left text-secondary-200 hover:bg-primary-600"
+        className="flex items-center w-full px-4 py-2 text-left text-white hover:bg-black-600"
       >
         <MdEdit className="w-4 h-4 mr-2" />
         Rename
@@ -35,7 +35,7 @@ function DropdownMenu({
           onDelete();
           onClose();
         }}
-        className="flex items-center w-full px-4 py-2 text-left text-secondary-200 hover:bg-primary-600"
+        className="flex items-center w-full px-4 py-2 text-left text-white hover:bg-black-600"
       >
         <MdDelete className="w-4 h-4 mr-2" />
         Delete

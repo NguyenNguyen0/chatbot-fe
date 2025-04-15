@@ -1,7 +1,7 @@
 import propTypes from 'prop-types';
 
 
-function MagnifyingGlassIcon({ colorTop = "oklch(0.61 0.35 83)", colorBottom ="oklch(0.86 0.14 83)", ...props }) {
+function MagnifyingGlassIcon({ colorTop = "oklch(0.78 0.21 290)", colorBottom ="oklch(0.50 0.41 290)", ...props }) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"

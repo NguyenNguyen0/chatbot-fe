@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
-import { LightBulb, User, MagnifyingGlassIcon } from '../assets/icons';
+import { FaMagnifyingGlassChart, FaUser } from "react-icons/fa6";
+import { IoBulbOutline } from "react-icons/io5";
 import Background from '../components/layout/Background';
 import Nav from '../components/layout/Nav';
 import Footer from '../components/layout/Footer';
@@ -7,17 +8,17 @@ import Footer from '../components/layout/Footer';
 const About = () => {
     const benefits = [
         {
-            icon: <LightBulb className="w-8 h-8" />,
+            icon: <IoBulbOutline className="w-8 h-8" />,
             title: "Intelligent Conversations",
             description: "Our AI is trained to understand context and provide meaningful responses that feel natural and helpful."
         },
         {
-            icon: <MagnifyingGlassIcon className="w-8 h-8" />,
+            icon: <FaMagnifyingGlassChart className="w-8 h-8" />,
             title: "24/7 Availability",
             description: "Get instant responses any time of day, ensuring continuous support for your queries."
         },
         {
-            icon: <User className="w-8 h-8" />,
+            icon: <FaUser className="w-8 h-8" />,
             title: "Personalized Experience",
             description: "The more you interact, the better our AI understands your preferences and needs."
         }
@@ -31,14 +32,14 @@ const About = () => {
     ];
     return (
         <Background>
-            <header className="bg-gradient-to-r from-primary-700 to-primary-600 shadow-xs py-3 px-5">
+            <header className="bg-gradient-to-r from-black-700 to-black-600 shadow-xs py-3 px-5">
                 <Nav />
             </header>
             <div className="min-h-screen bg-transparent my-20">
                 {/* Hero Section */}
                 <section className="container mx-auto px-4 py-16">
                     <div className="text-center max-w-3xl mx-auto">
-                        <h1 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-secondary-300 to-secondary-600 bg-clip-text text-transparent">
+                        <h1 className="text-4xl md:text-5xl leading-[1.4] font-bold mb-6 bg-gradient-to-r from-primary-300 to-primary-600 bg-clip-text text-transparent">
                             Revolutionizing Conversations with AI
                         </h1>
                         <p className="text-lg text-gray-600 dark:text-gray-300 mb-8">
@@ -47,13 +48,13 @@ const About = () => {
                         <div className="flex justify-center gap-4">
                             <Link
                                 to="/features"
-                                className="px-6 py-3 bg-secondary-500 text-white rounded-lg hover:bg-secondary-600 transition-colors"
+                                className="px-6 py-3 bg-primary-500 text-white rounded-lg hover:bg-primary-600 transition-colors"
                             >
                                 Explore Features
                             </Link>
                             <Link
                                 to="/chat"
-                                className="px-6 py-3 border border-secondary-500 text-secondary-500 rounded-lg hover:bg-secondary-50 dark:hover:bg-gray-700 transition-colors"
+                                className="px-6 py-3 border border-primary-500 text-primary-500 rounded-lg hover:bg-primary-50 dark:hover:bg-gray-700 transition-colors"
                             >
                                 Try Now
                             </Link>
@@ -65,7 +66,7 @@ const About = () => {
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
                         {stats.map((stat, index) => (
                             <div key={index} className="text-center">
-                                <div className="text-3xl md:text-4xl font-bold text-secondary-500 mb-2">
+                                <div className="text-3xl md:text-4xl font-bold text-primary-500 mb-2">
                                     {stat.number}
                                 </div>
                                 <div className="text-gray-600 dark:text-gray-300">
@@ -84,9 +85,9 @@ const About = () => {
                         {benefits.map((benefit, index) => (
                             <div
                                 key={index}
-                                className="p-6 bg-white dark:bg-primary-600 rounded-xl shadow-lg hover:shadow-xl transition-shadow"
+                                className="p-6 bg-white dark:bg-black-600 rounded-xl shadow-lg hover:shadow-xl transition-shadow"
                             >
-                                <div className="text-secondary-500 mb-4">{benefit.icon}</div>
+                                <div className="text-primary-500 mb-4">{benefit.icon}</div>
                                 <h3 className="text-xl font-semibold mb-3 dark:text-white">
                                     {benefit.title}
                                 </h3>
@@ -138,7 +139,7 @@ const About = () => {
                 </section>
                 {/* Contact Section */}
                 <section className="container mx-auto px-4 py-16">
-                    <div className="bg-gradient-to-r from-secondary-500/80 to-secondary-300/80 rounded-2xl p-8 md:p-12 text-white text-center">
+                    <div className="bg-gradient-to-r from-primary-500/80 to-primary-300/80 rounded-2xl p-8 md:p-12 text-white text-center">
                         <h2 className="text-3xl font-bold mb-4">
                             Ready to Get Started?
                         </h2>
@@ -148,13 +149,13 @@ const About = () => {
                         <div className="flex flex-col md:flex-row gap-4 justify-center">
                             <Link
                                 to="/chat"
-                                className="px-8 py-3 bg-white text-secondary-500 rounded-lg hover:bg-opacity-90 transition-colors"
+                                className="px-8 py-3 bg-white text-primary-500 rounded-lg hover:bg-opacity-90 transition-colors"
                             >
                                 Start Chatting
                             </Link>
                             <Link
                                 to="/features"
-                                className="px-8 py-3 border-2 border-white text-white rounded-lg hover:bg-white hover:text-secondary-500 transition-colors"
+                                className="px-8 py-3 border-2 border-white text-white rounded-lg hover:bg-white hover:text-primary-500 transition-colors"
                             >
                                 Learn More
                             </Link>
@@ -172,7 +173,7 @@ const About = () => {
                         </p>
                         <a
                             href="mailto:support@example.com"
-                            className="text-secondary-500 hover:text-secondary-600 font-semibold"
+                            className="text-primary-500 hover:text-primary-600 font-semibold"
                         >
                             support@example.com
                         </a>

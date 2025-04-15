@@ -18,7 +18,7 @@ import '../assets/styles/Chat.css';
 
 
 function Chat() {
-  const { setConversations, messages, updateMessage, getChatResponse, currentConversation, deleteConversation } = useContext(ChatContext);
+  const { setConversations, messages, updateMessages, getChatResponse, currentConversation, deleteConversation } = useContext(ChatContext);
   const { state } = useLocation();
   const { user } = useContext(AuthContext);
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
@@ -74,14 +74,15 @@ function Chat() {
     setDeleteDialog({ isOpen: false, conversationId: null });
   };
 
-  const handleSendMessage = (message) => {
+  const handleSendMessage = async (message) => {
     if (!message.trim()) return;
-    updateMessage(-1, message.trim());
-    getChatResponse(currentConversation, messages);
+    const newMessages = [...messages, { role: 'user', content: message }];
+    await updateMessages(newMessages);
+    await getChatResponse(currentConversation, newMessages);
   };
 
   return (
-    <div className="flex h-screen relative bg-gradient-to-r from-primary-600 via-primary-700 to-primary-600">
+    <div className="flex h-screen relative bg-gradient-to-r from-black-600 via-black-700 to-black-600">
       <ToastContainer
         position="top-center"
         autoClose={3000}
@@ -102,7 +103,7 @@ function Chat() {
           isOpen={isSidebarOpen}
           onToggle={() => setIsSidebarOpen(!isSidebarOpen)}
           onOpenDeleteDialog={handleOpenDeleteDialog}
-          className="shadow-primary-700/30 shadow"
+          className="shadow-black-700/30 shadow"
         />
       )}
 
@@ -129,7 +130,7 @@ function Chat() {
         {/* Chat Input */}
         <div
           className={
-            "rounded-4xl mb-5 shadow-[2px_2px_4px_black] shadow-primary-700/30  bg-transparent absolute left-[50%] -translate-x-[50%] " + 
+            "rounded-4xl mb-5 shadow-[2px_2px_4px_black] shadow-black-700/30  bg-transparent absolute left-[50%] -translate-x-[50%] " + 
             (messages?.length !== 0  ? "bottom-0" : "bottom-[40%] -translate-y-50%")
         }
         >

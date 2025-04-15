@@ -74,9 +74,26 @@ function ChatProvider({ children }) {
 
     const getChatResponse = async (conversation, messages) => {
         setMessages(messages);
+        if (!conversation) {
+            const newConversation = {
+                chatId: null,
+                model: model,
+                messages: [],
+                title: 'New Conversation',
+                active: true,
+                createdAt: new Date().toISOString(),
+                isNew: true,
+            };
+            setCurrentConversation(newConversation);
+            conversation = newConversation;
+        }
+
         const { chatId } = conversation;
 
         try {
+            console.log('Current conversation:', conversation);
+            console.log('Messages:', messages);
+            
             const response = await getChatBotResponse(messages, chatId, model);
             setMessages(prev => [...prev, { role: 'assistant', content: response.response }])
 

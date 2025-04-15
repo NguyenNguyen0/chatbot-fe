@@ -4,14 +4,14 @@ import RegisterForm from './RegisterForm';
 
 function AuthModal({ isLogin, setIsLogin }) {
   return (
-    <div className="auth-modal bg-primary-800 rounded-2xl p-8 w-full max-w-md border border-secondary-400/20">
+    <div className="auth-modal bg-black-800 rounded-2xl p-8 w-full max-w-md border border-primary-400/20">
       {/* Tab Switcher */}
       <div className="flex mb-8">
         <button
           className={`flex-1 py-3 text-lg font-semibold transition-colors ${
             isLogin
-              ? 'text-secondary-300 border-b-2 border-secondary-400'
-              : 'text-secondary-200 hover:text-secondary-300'
+              ? 'text-primary-400 border-b-2 border-primary-500'
+              : 'text-primary-100 hover:text-primary-300'
           }`}
           onClick={() => setIsLogin(true)}
         >
@@ -20,8 +20,8 @@ function AuthModal({ isLogin, setIsLogin }) {
         <button
           className={`flex-1 py-3 text-lg font-semibold transition-colors ${
             !isLogin
-              ? 'text-secondary-300 border-b-2 border-secondary-400'
-              : 'text-secondary-200 hover:text-secondary-300'
+              ? 'text-primary-400 border-b-2 border-primary-500'
+              : 'text-primary-100 hover:text-primary-300'
           }`}
           onClick={() => setIsLogin(false)}
         >

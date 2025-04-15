@@ -24,7 +24,7 @@ function ChatBar({ onSend, placeholder, className, ...props }) {
   const autoResize = () => {
     const textarea = textAreaRef.current;
     if (textarea) {
-      textarea.style.height = "auto"; // Reset chiều cao để lấy scrollHeight chính xác
+      textarea.style.height = "auto";
       const maxHeight = 10 * 24; // Giới hạn 10 dòng (mỗi dòng khoảng 24px)
       textarea.style.height = Math.min(textarea.scrollHeight, maxHeight) + "px";
     }
@@ -36,7 +36,7 @@ function ChatBar({ onSend, placeholder, className, ...props }) {
 
   return (
     <form
-      className={`py-4 px-5 min-w-[600px] flex-col justify-center items-center rounded-4xl bg-primary-600 shadow shadow-secondary-400 ${className}`}
+      className={`py-4 px-5 min-w-[600px] flex-col justify-center items-center rounded-4xl bg-black-600 shadow shadow-primary-400 ${className}`}
       onSubmit={handleSubmit}
       {...props}
     >
@@ -48,7 +48,7 @@ function ChatBar({ onSend, placeholder, className, ...props }) {
           onInput={autoResize}
           onChange={(e) => setMessage(e.target.value)}
           placeholder={placeholder}
-          className="custom-scrollbar outline-0 ml-1.5 mb-2 h-8 pr-1 w-full max-h-[240px] resize-none overflow-y-auto bg-transparent text-primary-50 text-[1.2rem]"
+          className="custom-scrollbar outline-0 ml-1.5 mb-2 h-8 pr-1 w-full max-h-[240px] resize-none overflow-y-auto bg-transparent text-black-50 text-[1.2rem]"
           onKeyDown={(e) => {
             if (e.key === 'Enter' && e.shiftKey) {
               e.preventDefault();
@@ -61,17 +61,17 @@ function ChatBar({ onSend, placeholder, className, ...props }) {
         
           <div className='flex items-center mr-1'>
             <button className='cursor-pointer' onClick={handleLoadFile}>
-              <BsPlusCircle className='text-primary-50 h-[28px] w-[28px] mb-[-2px] hover:text-secondary-300' />
+              <BsPlusCircle className='text-black-50 h-[28px] w-[28px] mb-[-2px] hover:text-primary-300' />
             </button>
           </div>
         
           <button
             type='submit'
-            className={`pr-3 text-secondary-400 hover:text-secondary-300 transition-colors ${!message.trim() ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'
+            className={`pr-3 text-primary-400 hover:text-primary-300 transition-colors ${!message.trim() ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'
               }`}
             disabled={!message.trim()}
           >
-            <BsArrowUpCircle className='text-primary-50 h-[28px] w-[28px] hover:text-secondary-300' />
+            <BsArrowUpCircle className='text-black-50 h-[28px] w-[28px] hover:text-primary-300' />
           </button>
         </div>
 
