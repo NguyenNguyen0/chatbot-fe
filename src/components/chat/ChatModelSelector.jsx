@@ -41,7 +41,7 @@ function ChatModelSelector() {
             {/* Model Selector Button */}
             <button
                 onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                className="flex items-center justify-between min-w-30 px-4 py-2 text-primary-400 bg-transparent rounded-lg hover:bg-black-500 transition-colors"
+                className="flex items-center justify-between min-w-30 px-4 py-2 text-white bg-transparent rounded-lg hover:bg-black-500 transition-colors"
             >
                 <div className="flex items-center">
                     <span className="mr-2 capitalize font-bold">{contextModel ?? 'Select Model'}</span>

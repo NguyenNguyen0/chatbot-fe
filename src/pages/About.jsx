@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
-import { FaMagnifyingGlassChart, FaUser } from "react-icons/fa6";
+import { LiaUser } from "react-icons/lia";
+import { HiMagnifyingGlass } from "react-icons/hi2";
 import { IoBulbOutline } from "react-icons/io5";
 import Background from '../components/layout/Background';
 import Nav from '../components/layout/Nav';
@@ -13,12 +14,12 @@ const About = () => {
             description: "Our AI is trained to understand context and provide meaningful responses that feel natural and helpful."
         },
         {
-            icon: <FaMagnifyingGlassChart className="w-8 h-8" />,
+            icon: <HiMagnifyingGlass className="w-8 h-8" />,
             title: "24/7 Availability",
             description: "Get instant responses any time of day, ensuring continuous support for your queries."
         },
         {
-            icon: <FaUser className="w-8 h-8" />,
+            icon: <LiaUser className="w-8 h-8" />,
             title: "Personalized Experience",
             description: "The more you interact, the better our AI understands your preferences and needs."
         }
@@ -47,16 +48,16 @@ const About = () => {
                         </p>
                         <div className="flex justify-center gap-4">
                             <Link
-                                to="/features"
-                                className="px-6 py-3 bg-primary-500 text-white rounded-lg hover:bg-primary-600 transition-colors"
+                                to="/chat"
+                                className="btn btn-primary btn-lg"
                             >
-                                Explore Features
+                                Start Chatting
                             </Link>
                             <Link
-                                to="/chat"
-                                className="px-6 py-3 border border-primary-500 text-primary-500 rounded-lg hover:bg-primary-50 dark:hover:bg-gray-700 transition-colors"
+                                to="/features"
+                                className="btn btn-outline btn-lg"
                             >
-                                Try Now
+                                Learn More
                             </Link>
                         </div>
                     </div>
@@ -149,7 +150,7 @@ const About = () => {
                         <div className="flex flex-col md:flex-row gap-4 justify-center">
                             <Link
                                 to="/chat"
-                                className="px-8 py-3 bg-white text-primary-500 rounded-lg hover:bg-opacity-90 transition-colors"
+                                className="px-8 py-3 bg-white text-primary-500 rounded-lg hover:bg-transparent hover:text-white hover:border-white border-2 transition-colors"
                             >
                                 Start Chatting
                             </Link>

@@ -28,10 +28,10 @@ function Home() {
             Powerful AI Assistant for Work and Life
           </div>
         </h1>
-        <p className="text-white text-xl md:text-2xl max-w-3xl mx-auto mb-8">
+        <p className="text-white text-lg md:text-xl max-w-3xl mx-auto mb-8">
           Create Smart Chats, Support Work, Study and Entertainment with Our AI.
             </p>
-        <a href="/auth" className="inline-block btn bg-gradient-to-r from-primary-400 to-primary-500 hover:from-primary-500 hover:to-primary-600 text-black-800 px-12 py-4 text-lg">
+        <a href="/auth" className="btn btn-primary btn-lg inline-block">
           Try It Now
         </a>
       </section>
@@ -196,7 +196,7 @@ function Home() {
           <p className="text-white text-xl mb-8">
             Join thousands of users who are already benefiting from AI-powered conversations.
           </p>
-          <a href="/auth" className="inline-block btn bg-gradient-to-r from-primary-400 to-primary-500 hover:from-primary-500 hover:to-primary-600 text-black-800 px-12 py-4 text-lg">
+          <a href="/auth" className="btn btn-primary btn-lg inline-block">
             Get Started Now
           </a>
         </div>

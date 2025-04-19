@@ -115,12 +115,12 @@ function ChatSidebar({ isOpen, onToggle, onOpenDeleteDialog, className }) {
       {/* Toggle Button */}
       <button
         onClick={onToggle}
-        className={`fixed top-6 z-30 bg-black-700 p-2 rounded-lg border hover:bg-black-600 transition-all cursor-pointer ${isOpen ? 'left-[0.8%]' : 'left-[0.8%]'}`}
+        className={`fixed top-6 z-30 bg-black-700 p-2 rounded-lg border border-primary-500/50 hover:bg-black-600 transition-all cursor-pointer ${isOpen ? 'left-[0.8%]' : 'left-[0.8%]'}`}
       >
         {isOpen ? (
-          <FaChevronLeft className="w-4 h-4 text-primary-400" />
+          <FaChevronLeft className="w-4 h-4 text-primary-200" />
         ) : (
-          <FaChevronRight className="w-4 h-4 text-primary-400" />
+          <FaChevronRight className="w-4 h-4 text-primary-200" />
         )}
       </button>
 
@@ -136,7 +136,7 @@ function ChatSidebar({ isOpen, onToggle, onOpenDeleteDialog, className }) {
           {/* New Chat Button */}
           <button
             onClick={handleNewChat}
-            className="flex items-center gap-2 m-4 px-4 py-3 rounded-lg border border-primary-600 hover:bg-black-600 transition-colors cursor-pointer"
+            className="flex items-center gap-2 m-4 px-4 py-3 rounded-lg border border-primary-500/50 hover:bg-black-600 transition-colors cursor-pointer"
           >
             <FaPlus className="text-primary-200" />
             <span className="text-white">New Chat</span>

@@ -63,7 +63,7 @@ function ChatMessages() {
   return (
     <div className="flex-1 overflow-y-auto p-4 custom-scrollbar">
       {messages.length === 0 ? (
-        <div className="h-full flex items-center justify-center -mt-30 text-primary-400">
+        <div className="h-full flex items-center justify-center -mt-30 text-slate-300">
           <h1 className="text-center text-4xl font-bold">How Can I Help You?</h1>
         </div>
       ) : (
@@ -94,13 +94,13 @@ function ChatMessages() {
                       <div className="flex justify-end gap-2 mt-1">
                         <button
                           onClick={handleCancelEdit}
-                          className="px-3 py-1 rounded-md bg-black-700 hover:bg-black-600 text-white transition-colors text-sm"
+                          className="btn btn-sm bg-black-700 hover:bg-black-600 text-white"
                         >
                           Cancel
                         </button>
                         <button
                           onClick={() => handleSubmitEdit(index)}
-                          className="px-3 py-1 rounded-md bg-primary-600 hover:bg-primary-500 text-white transition-colors text-sm"
+                          className="btn btn-sm btn-primary"
                         >
                           Save
                         </button>

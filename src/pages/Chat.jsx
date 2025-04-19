@@ -108,11 +108,11 @@ function Chat() {
       )}
 
       {/* Main Chat Area */}
-      <main className={`pb-10 pt-8 flex-1 flex flex-col transition-all relative ${isSidebarOpen ? 'ml-80' : 'ml-0'}`}>
+      <main className={`pb-10 pt-8 flex-1 flex flex-col transition-all relative ${user && isSidebarOpen ? 'ml-80' : 'ml-0'}`}>
         {/* Chat Header */}
         <header className='-mt-8 pt-2 flex items-center justify-between bg-transparent'>
           {/* Model AI Selector */}
-          <div className={`min-h-14 mt-2 z-10 ${isSidebarOpen ? 'ml-2' : 'ml-15'}`}>
+          <div className={`min-h-14 mt-2 z-10 ${user && isSidebarOpen ? 'ml-2' : 'ml-15'}`}>
             {user && <ChatModelSelector />}
           </div>
 

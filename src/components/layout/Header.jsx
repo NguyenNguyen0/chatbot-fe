@@ -25,15 +25,15 @@ function Header({ className }) {
         </p>
 
         <div className="flex flex-col md:flex-row gap-4 justify-center">
-          <Link 
-            to="/chat" 
-            className="btn bg-gradient-to-r from-primary-400 to-primary-500 hover:from-primary-500 hover:to-primary-600 text-black-800 px-8 py-3"
+          <Link
+            to="/chat"
+            className="btn btn-primary btn-lg"
           >
             Start Chatting
           </Link>
-          <Link 
-            to="/features" 
-            className="btn border-primary-400 text-primary-300 hover:bg-primary-400/10 px-8 py-3"
+          <Link
+            to="/features"
+            className="btn btn-outline btn-lg"
           >
             Learn More
           </Link>

@@ -1,4 +1,5 @@
-import { FaMagnifyingGlassChart, FaUser } from "react-icons/fa6";
+import { LiaUser } from "react-icons/lia";
+import { HiMagnifyingGlass } from "react-icons/hi2";
 import { IoBulbOutline } from "react-icons/io5";
 import Background from '../components/layout/Background';
 import Nav from '../components/layout/Nav';
@@ -13,12 +14,12 @@ const Feature = () => {
       description: "Experience natural conversations with our advanced AI that understands context and provides intelligent responses."
     },
     {
-      icon: <FaMagnifyingGlassChart className="w-12 h-12" />,
+      icon: <HiMagnifyingGlass className="w-12 h-12" />,
       title: "Smart Search & History",
       description: "Easily search through your chat history and find previous conversations with our powerful search functionality."
     },
     {
-      icon: <FaUser className="w-12 h-12" />,
+      icon: <LiaUser className="w-12 h-12" />,
       title: "Personalized Experience",
       description: "Get tailored responses based on your preferences and conversation history."
     }

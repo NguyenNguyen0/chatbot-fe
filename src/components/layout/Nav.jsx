@@ -24,12 +24,22 @@ function Nav({ showNavigationLink = true, showLoginButton = true, className }) {
             )}
 
             {/* Auth Button */}
-            {showLoginButton && (<Link
-                to="/auth?type=login"
-                className="flex items-center gap-2 px-4 py-2 rounded-full border border-primary-400 hover:bg-primary-400/10 transition-all"
-            >
-                <span className="text-primary-300 font-bold">Sign In</span>
-            </Link>)}
+            {showLoginButton && (
+                <span className="hidden md:flex items-center gap-2">
+                    <Link
+                        to="/auth?type=login"
+                        className="btn btn-outline"
+                    >
+                        <span className="text-primary-300">Login</span>
+                    </Link>
+                    <Link
+                        to="/auth?type=register"
+                        className="btn btn-primary"
+                    >
+                        <span className="text-white">Register</span>
+                    </Link>
+                </span>
+            )}
         </nav>
     )
 }

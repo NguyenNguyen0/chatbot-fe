@@ -117,7 +117,7 @@ function RegisterForm() {
 
       <button
         type="submit"
-        className="w-full py-3 bg-gradient-to-r from-primary-400 to-primary-500 hover:from-primary-500 hover:to-primary-600 text-black-800 rounded-lg font-semibold transition-all cursor-pointer"
+        className="btn btn-primary w-full"
       >
         Create Account
       </button>
