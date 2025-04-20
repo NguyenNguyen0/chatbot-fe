@@ -82,7 +82,7 @@ function Chat() {
   };
 
   return (
-    <div className="flex h-screen relative bg-gradient-to-r from-black-600 via-black-700 to-black-600">
+    <div className="flex h-screen relative bg-slate-100 dark:bg-gradient-to-r dark:from-black-600 dark:via-black-700 dark:to-black-600">
       <ToastContainer
         position="top-center"
         autoClose={3000}

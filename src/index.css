@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
     --color-black-50: oklch(0.97 0.01 0);
@@ -32,7 +33,7 @@
     }
 
     body {
-        @apply bg-black-600
+        @apply bg-white dark:bg-black-600
     }
 }
 
@@ -58,7 +59,7 @@
     }
 
     .card-item {
-        @apply mx-7 bg-black-600 border border-primary-300 rounded-md p-8 shadow shadow-primary-200 hover:shadow-2xl hover:translate-y-1 transition-transform duration-300;
+        @apply mx-7 dark:bg-black-600 border border-primary-300 rounded-md p-8 shadow shadow-primary-200 hover:shadow-2xl hover:translate-y-1 transition-transform duration-300;
     }
 
     .custom-scrollbar::-webkit-scrollbar {
@@ -143,7 +144,7 @@
     }
 
     .btn-outline {
-        @apply border border-primary-400 text-primary-300 hover:bg-primary-400/10;
+        @apply border border-primary-500 text-primary-500 dark:text-primary-400 hover:bg-primary-400/10;
     }
 
     .btn-danger {
@@ -157,55 +158,5 @@
 
     .btn-sm {
         @apply text-sm px-3 py-1;
-    }
-
-    .prose-custom {
-        @apply text-gray-100 space-y-4;
-
-        /* Separate */
-        hr {
-            @apply border-t-2 border-gray-700 my-10;
-        }
-
-        /* Paragraphs */
-        p {
-            @apply my-2;
-        }
-
-        /* Headings */
-        h1,
-        h2,
-        h3,
-        h4 {
-            @apply font-semibold text-white my-3;
-        }
-
-        /* Lists */
-        ul,
-        ol {
-            @apply ml-5 list-disc space-y-1;
-        }
-
-        /* Table */
-        table {
-            @apply w-full text-left border-collapse mt-4;
-        }
-
-        th {
-            @apply bg-gray-700 text-gray-200 font-semibold px-4 py-2 border border-gray-600;
-        }
-
-        td {
-            @apply border border-gray-700 px-4 py-2 text-gray-100;
-        }
-
-        tr {
-            @apply even:bg-gray-800;
-        }
-
-        /* Blockquote */
-        blockquote {
-            @apply border-l-4 border-primary-500 pl-4 italic text-gray-300 bg-gray-800 p-4 rounded-md;
-        }
     }
 }

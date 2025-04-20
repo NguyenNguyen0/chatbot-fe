@@ -1,11 +1,14 @@
 import propTypes from 'prop-types';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import { darcula, materialLight } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import { GoCopy } from 'react-icons/go';
 import { IoCheckmark } from 'react-icons/io5';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+
+import { ThemeContext } from '../../contexts/ThemeContext';
 
 function CodeBlock({ className = '', children, ...props }) {
+    const { theme } = useContext(ThemeContext);
     const [copiedCode, setCopiedCode] = useState(null);
     const codeString = String(children).trim();
     const language = className?.replace('language-', '') || 'javascript';
@@ -18,12 +21,12 @@ function CodeBlock({ className = '', children, ...props }) {
     };
 
     return (
-        <span className="relative block my-4 border border-gray-700 rounded-md overflow-hidden bg-gray-900 text-white shadow-md">
-            <span className='relative -mb-2 py-2 bg-gray-800 text-white p-2 shadow-md rounded-t-md shadow-black-500/20 w-full inline-block'>
-                <span className="font-mono text-sm ">{language}</span>
+        <span className="relative block my-4 border border-gray-700 rounded-md overflow-hidden shadow-md">
+            <span className='relative -mb-2 py-2 bg-slate-300 text-black-700 dark:bg-gray-800 dark:text-white p-2 shadow-md rounded-t-md rounded-b-md shadow-black-500/30 dark:shadow-black-500/20 w-full inline-block z-1'>
+                <span className="font-mono text-sm">{language}</span>
                 <button
                     onClick={() => handleCopyCode(codeString)}
-                    className="absolute top-2 right-2 bg-gray-700 hover:bg-gray-600 text-white p-1.5 rounded-md transition-colors"
+                    className="absolute top-2 right-2 hover:bg-gray-400 dark:bg-gray-700 dark:hover:bg-gray-600 dark:text-white p-1.5 rounded-md transition-colors"
                     title={isCopied ? "Copied!" : "Copy to clipboard"}
                 >
                     {isCopied ? <IoCheckmark className="w-4 h-4" /> : <GoCopy className="w-4 h-4" />}
@@ -34,13 +37,12 @@ function CodeBlock({ className = '', children, ...props }) {
             <SyntaxHighlighter
                 className='custom-scrollbar'
                 language={language}
-                style={oneDark}
+                style={(theme === 'dark' ? darcula : materialLight)}
                 customStyle={{
                     padding: '1rem',
                     margin: '',
                     borderRadius: '0.5rem',
-                    fontSize: '0.875rem',
-                    backgroundColor: '#282c34',
+                    fontSize: '0.875rem'
                 }}
                 codeTagProps={{
                     style: { backgroundColor: 'transparent' },

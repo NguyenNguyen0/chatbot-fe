@@ -5,13 +5,13 @@ import '../../assets/styles/Header.css';
 
 function Header({ className }) {
   return (
-    <header className={`"app-header relative px-6 py-8 md:px-12 bg-gradient-to-r from-black-700 to-black-600 shadow-2xl" ${className}`}>
+    <header className={`"app-header relative px-6 py-8 md:px-12 bg-gradient-to-r from-primary-200 to-primary-300  dark:from-black-700 dark:to-black-600 shadow-2xl" ${className}`}>
       <Nav />
 
       {/* Hero Section */}
       <div className="mt-20 md:mt-32 mb-32 text-center">
         <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6">
-          <span className="bg-gradient-to-r from-primary-300 to-primary-500 text-transparent bg-clip-text">
+          <span className="bg-gradient-to-r from-primary-400 to-primary-500 text-transparent bg-clip-text">
             Your AI Assistant for
           </span>
           <br />

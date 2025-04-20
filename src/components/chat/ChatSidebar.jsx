@@ -115,31 +115,31 @@ function ChatSidebar({ isOpen, onToggle, onOpenDeleteDialog, className }) {
       {/* Toggle Button */}
       <button
         onClick={onToggle}
-        className={`fixed top-6 z-30 bg-black-700 p-2 rounded-lg border border-slate-400/30 hover:bg-black-600 transition-all cursor-pointer ${isOpen ? 'left-[0.8%]' : 'left-[0.8%]'}`}
+        className={`fixed top-6 z-30 p-2 rounded-lg border bg-slate-100 border-slate-400/30 hover:bg-black-200 dark:bg-black-700 dark:border-slate-400/30 dark:hover:bg-black-600 transition-all cursor-pointer ${isOpen ? 'left-[0.8%]' : 'left-[0.8%]'}`}
       >
         {isOpen ? (
-          <FaChevronLeft className="w-4 h-4 text-white" />
+          <FaChevronLeft className="w-4 h-4 text-black-600 dark:text-white" />
         ) : (
-          <FaChevronRight className="w-4 h-4 text-white" />
+          <FaChevronRight className="w-4 h-4 text-black-600 dark:text-white" />
         )}
       </button>
 
       {/* Sidebar */}
-      <aside className={`fixed top-0 left-0 h-full bg-black-700 transition-all duration-300 z-20
+      <aside className={`fixed top-0 left-0 h-full bg-slate-100 dark:bg-black-700 transition-all duration-300 z-20
         ${isOpen ? 'w-80 translate-x-0' : 'w-80 -translate-x-full'} ${className}`}>
 
         <div className="flex flex-col h-full">
-          <div className='min-h-14 flex items-center justify-between border-b border-black-700'>
+          <div className='min-h-14 flex items-center justify-between'>
             {/* TODO: add some feature here */}
           </div>
 
           {/* New Chat Button */}
           <button
             onClick={handleNewChat}
-            className="flex items-center gap-2 m-4 px-4 py-3 rounded-lg border border-primary-500/50 hover:bg-black-600 transition-colors cursor-pointer"
+            className="flex items-center gap-2 m-4 px-4 py-3 rounded-lg border hover:bg-black-200 border-primary-500/50 dark:hover:bg-black-600 transition-colors cursor-pointer"
           >
             <FaPlus className="text-primary-200" />
-            <span className="text-white">New Chat</span>
+            <span className="text-black-600 dark:text-white">New Chat</span>
           </button>
 
           {/* Conversations List */}
@@ -150,8 +150,8 @@ function ChatSidebar({ isOpen, onToggle, onOpenDeleteDialog, className }) {
                 onClick={() => editingChatId !== conversation.chatId && selectConversation(conversation.chatId)}
                 className={`flex items-center justify-between py-3 px-4 mx-2 border-slate-400/30 border rounded-lg cursor-pointer mb-1 group
                   ${conversation.active
-                  ? 'bg-black-600 text-white border-primary-400'
-                    : 'text-slate-200 hover:bg-black-500/50'}`}
+                  ? 'text-black-600 bg-slate-300 dark:bg-black-600 dark:text-white border-primary-400'
+                  : 'text-black-600 dark:text-slate-200 hover:bg-black-500/50'}`}
               >
                 
                 {editingChatId === conversation.chatId ? (
@@ -173,7 +173,7 @@ function ChatSidebar({ isOpen, onToggle, onOpenDeleteDialog, className }) {
                   {editingChatId !== conversation.chatId && (
                     <button
                       onClick={(e) => toggleMenu(e, conversation.chatId)}
-                      className={`h-full w-full text-slate-400 hover:text-white opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer`}
+                      className={`h-full w-full text-slate-500 dark:text-slate-400 dark:hover:text-white opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer`}
                     >
                       <BsThreeDots className="w-5 h-5" />
                     </button>

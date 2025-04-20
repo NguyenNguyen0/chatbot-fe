@@ -33,17 +33,17 @@ const About = () => {
     ];
     return (
         <Background>
-            <header className="bg-gradient-to-r from-black-700 to-black-600 shadow-xs py-3 px-5">
+            <header className="bg-gradient-to-r from-primary-200 to-primary-300 dark:from-black-700 dark:to-black-600 shadow-xs py-3 px-5">
                 <Nav />
             </header>
             <div className="min-h-screen bg-transparent my-20">
                 {/* Hero Section */}
                 <section className="container mx-auto px-4 py-16">
                     <div className="text-center max-w-3xl mx-auto">
-                        <h1 className="text-4xl md:text-5xl leading-[1.4] font-bold mb-6 bg-gradient-to-r from-primary-300 to-primary-600 bg-clip-text text-transparent">
+                        <h1 className="text-4xl md:text-6xl lg:text-7xl leading-[1.4] font-bold mb-6 bg-gradient-to-r from-primary-300 to-primary-600 bg-clip-text text-transparent">
                             Revolutionizing Conversations with AI
                         </h1>
-                        <p className="text-lg text-gray-600 dark:text-gray-300 mb-8">
+                        <p className="text-xl text-gray-800 dark:text-gray-300 mb-8">
                             We&apos;re on a mission to make AI-powered conversations more natural, helpful, and accessible to everyone.
                         </p>
                         <div className="flex justify-center gap-4">
@@ -55,7 +55,7 @@ const About = () => {
                             </Link>
                             <Link
                                 to="/features"
-                                className="btn btn-outline btn-lg"
+                                className="btn btn-outline btn-lg text-primary-500 dark:text-primary-400"
                             >
                                 Learn More
                             </Link>
@@ -67,10 +67,10 @@ const About = () => {
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
                         {stats.map((stat, index) => (
                             <div key={index} className="text-center">
-                                <div className="text-3xl md:text-4xl font-bold text-primary-500 mb-2">
+                                <div className="text-4xl md:text-4xl font-bold text-primary-500 mb-2">
                                     {stat.number}
                                 </div>
-                                <div className="text-gray-600 dark:text-gray-300">
+                                <div className="text-2xl text-gray-800 dark:text-gray-300">
                                     {stat.label}
                                 </div>
                             </div>
@@ -86,13 +86,13 @@ const About = () => {
                         {benefits.map((benefit, index) => (
                             <div
                                 key={index}
-                                className="p-6 bg-white dark:bg-black-600 rounded-xl shadow-lg hover:shadow-xl transition-shadow"
+                                className="p-6 backdrop-blur-3xl bg-white/40 dark:bg-black-600/40 rounded-xl shadow-lg hover:shadow-xl transition-shadow"
                             >
                                 <div className="text-primary-500 mb-4">{benefit.icon}</div>
-                                <h3 className="text-xl font-semibold mb-3 dark:text-white">
+                                <h3 className="text-2xl font-semibold mb-3 dark:text-white">
                                     {benefit.title}
                                 </h3>
-                                <p className="text-gray-600 dark:text-gray-300">
+                                <p className="text-xl text-gray-600 dark:text-gray-300">
                                     {benefit.description}
                                 </p>
                             </div>
@@ -123,14 +123,14 @@ const About = () => {
                             }
                         ].map((item, index) => (
                             <div key={index} className="relative">
-                                <div className="text-6xl font-bold text-gray-100 dark:text-gray-700">
+                                <div className="text-8xl font-bold text-gray-100 dark:text-gray-700">
                                     {item.step}
                                 </div>
                                 <div className="mt-[-20px] ml-4">
-                                    <h3 className="text-xl font-semibold mb-2 dark:text-white">
+                                    <h3 className="text-2xl font-semibold mb-2 dark:text-white">
                                         {item.title}
                                     </h3>
-                                    <p className="text-gray-600 dark:text-gray-300">
+                                    <p className="text-xl text-gray-600 dark:text-gray-300">
                                         {item.description}
                                     </p>
                                 </div>
@@ -140,7 +140,7 @@ const About = () => {
                 </section>
                 {/* Contact Section */}
                 <section className="container mx-auto px-4 py-16">
-                    <div className="bg-gradient-to-r from-primary-500/80 to-primary-300/80 rounded-2xl p-8 md:p-12 text-white text-center">
+                    <div className="bg-gradient-to-r from-primary-500/70 to-primary-300/70 rounded-2xl p-8 md:p-12 text-white text-center">
                         <h2 className="text-3xl font-bold mb-4">
                             Ready to Get Started?
                         </h2>

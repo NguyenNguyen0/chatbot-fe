@@ -27,7 +27,7 @@ const Feature = () => {
 
   return (
     <Background>
-      <header className="bg-gradient-to-r from-black-700 to-black-600 shadow-xs py-3 px-5">
+      <header className="bg-gradient-to-r from-primary-200 to-primary-300 dark:from-black-700 dark:to-black-600 shadow-xs py-3 px-5">
         <Nav />
       </header>
       <div className="min-h-screen bg-transparent my-20">

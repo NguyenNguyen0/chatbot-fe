@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Logo from '../common/Logo';
+import ThemeSwitcher from '../common/ThemeSwitcher';
 
 function Nav({ showNavigationLink = true, showLoginButton = true, className }) {
     return (
@@ -23,23 +24,27 @@ function Nav({ showNavigationLink = true, showLoginButton = true, className }) {
                 </div>
             )}
 
-            {/* Auth Button */}
-            {showLoginButton && (
-                <span className="hidden md:flex items-center gap-2">
-                    <Link
-                        to="/auth?type=login"
-                        className="btn btn-outline"
-                    >
-                        <span className="text-primary-300">Login</span>
-                    </Link>
-                    <Link
-                        to="/auth?type=register"
-                        className="btn btn-primary"
-                    >
-                        <span className="text-white">Register</span>
-                    </Link>
-                </span>
-            )}
+            {/* Button Group */}
+            <span className="hidden md:flex items-center gap-2">
+                <ThemeSwitcher />
+
+                {showLoginButton && (
+                    <>
+                        <Link
+                            to="/auth?type=login"
+                            className="btn btn-outline"
+                        >
+                            <span>Login</span>
+                        </Link>
+                        <Link
+                            to="/auth?type=register"
+                            className="btn btn-primary"
+                        >
+                            <span className="text-white">Register</span>
+                        </Link>
+                    </>
+                )}
+            </span>
         </nav>
     )
 }

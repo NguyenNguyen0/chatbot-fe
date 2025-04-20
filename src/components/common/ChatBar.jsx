@@ -36,7 +36,7 @@ function ChatBar({ onSend, placeholder, className, ...props }) {
 
   return (
     <form
-      className={`py-4 px-5 min-w-[600px] flex-col justify-center items-center rounded-4xl bg-black-600 shadow shadow-primary-400 ${className}`}
+      className={`py-4 px-5 min-w-[600px] flex-col justify-center items-center rounded-4xl bg-slate-100 dark:bg-black-600 shadow shadow-primary-200 ${className}`}
       onSubmit={handleSubmit}
       {...props}
     >
@@ -48,7 +48,7 @@ function ChatBar({ onSend, placeholder, className, ...props }) {
           onInput={autoResize}
           onChange={(e) => setMessage(e.target.value)}
           placeholder={placeholder}
-          className="custom-scrollbar outline-0 ml-1.5 mb-2 h-8 pr-1 w-full max-h-[240px] resize-none overflow-y-auto bg-transparent text-black-50 text-[1.2rem]"
+          className="custom-scrollbar outline-0 ml-1.5 mb-2 h-8 pr-1 w-full max-h-[240px] resize-none overflow-y-auto bg-transparent text-black-400 dark:text-black-50 text-[1.2rem]"
           onKeyDown={(e) => {
             if (e.key === 'Enter' && e.shiftKey) {
               e.preventDefault();
@@ -61,7 +61,7 @@ function ChatBar({ onSend, placeholder, className, ...props }) {
         
           <div className='flex items-center mr-1'>
             <button className='cursor-pointer' onClick={handleLoadFile}>
-              <BsPlusCircle className='text-black-100 h-[28px] w-[28px] mb-[-2px] hover:text-white' />
+              <BsPlusCircle className='text-black-500 dark:text-black-100 h-[28px] w-[28px] mb-[-2px]  hover:text-black-400 dark:hover:text-white' />
             </button>
           </div>
         
@@ -71,7 +71,7 @@ function ChatBar({ onSend, placeholder, className, ...props }) {
               }`}
             disabled={!message.trim()}
           >
-            <BsArrowUpCircle className='text-black-100 h-[28px] w-[28px] hover:text-white' />
+            <BsArrowUpCircle className='text-black-500 dark:text-black-100 h-[28px] w-[28px] hover:text-black-400 dark:hover:text-white' />
           </button>
         </div>
 

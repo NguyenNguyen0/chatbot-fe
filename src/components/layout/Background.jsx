@@ -71,7 +71,7 @@ function Background({ children }) {
   }, []);
 
   return (
-    <div className="relative h-full w-full bg-gradient-to-r from-black-600 via-black-700 to-black-600">
+    <div className="relative h-full w-full bg-gradient-to-r from-slate-200 via-primary-200 to-slate-200 dark:from-black-600 dark:via-black-700 dark:to-black-600">
       {/* Starry Layout */}
       <canvas ref={canvasRef} className="fixed top-0 left-0 w-full h-full" />
       

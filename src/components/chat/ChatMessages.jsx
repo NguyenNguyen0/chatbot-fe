@@ -62,7 +62,7 @@ function ChatMessages() {
   return (
     <div className="flex-1 overflow-y-auto p-4 custom-scrollbar">
       {messages.length === 0 ? (
-        <div className="h-full flex items-center justify-center -mt-30 text-white">
+        <div className="h-full flex items-center justify-center -mt-30 text-black-500 dark:text-white">
           <h1 className="text-center text-4xl font-bold">How Can I Help You?</h1>
         </div>
       ) : (
@@ -76,8 +76,8 @@ function ChatMessages() {
               {/* Message Content with utility buttons at bottom */}
               <div
                 className={`flex-1 rounded-lg p-4 max-w-2xl relative ${message.role === 'user'
-                  ? 'bg-black-500/20 text-white'
-                  : 'max-w-4xl bg-transparent text-gray-100'
+                  ? ' bg-slate-200 text-slate-700 dark:bg-black-600/20 dark:text-white'
+                  : 'max-w-4xl bg-transparent text-slate-700 dark:text-gray-100'
                   }`}
               >
 
@@ -88,7 +88,7 @@ function ChatMessages() {
                         ref={textareaRef}
                         value={editContent}
                         onChange={(e) => setEditContent(e.target.value)}
-                        className="w-full bg-black-600 text-white p-2 rounded-md border border-primary-400/30 focus:outline-none focus:border-white/20 min-h-[100px]"
+                        className="w-full bg-slate-300 text-slate-700 dark:bg-black-600 dark:text-white p-2 rounded-md border border-primary-400/30 focus:outline-none focus:border-white/20 min-h-[100px]"
                       />
                       <div className="flex justify-end gap-2 mt-1">
                         <button
