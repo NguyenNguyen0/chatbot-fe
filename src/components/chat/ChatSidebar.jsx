@@ -115,12 +115,12 @@ function ChatSidebar({ isOpen, onToggle, onOpenDeleteDialog, className }) {
       {/* Toggle Button */}
       <button
         onClick={onToggle}
-        className={`fixed top-6 z-30 bg-black-700 p-2 rounded-lg border border-primary-500/50 hover:bg-black-600 transition-all cursor-pointer ${isOpen ? 'left-[0.8%]' : 'left-[0.8%]'}`}
+        className={`fixed top-6 z-30 bg-black-700 p-2 rounded-lg border border-slate-400/30 hover:bg-black-600 transition-all cursor-pointer ${isOpen ? 'left-[0.8%]' : 'left-[0.8%]'}`}
       >
         {isOpen ? (
-          <FaChevronLeft className="w-4 h-4 text-primary-200" />
+          <FaChevronLeft className="w-4 h-4 text-white" />
         ) : (
-          <FaChevronRight className="w-4 h-4 text-primary-200" />
+          <FaChevronRight className="w-4 h-4 text-white" />
         )}
       </button>
 
@@ -151,7 +151,7 @@ function ChatSidebar({ isOpen, onToggle, onOpenDeleteDialog, className }) {
                 className={`flex items-center justify-between py-3 px-4 mx-2 border-slate-400/30 border rounded-lg cursor-pointer mb-1 group
                   ${conversation.active
                   ? 'bg-black-600 text-white border-primary-400'
-                    : 'text-slate-300 hover:bg-black-500/50'}`}
+                    : 'text-slate-200 hover:bg-black-500/50'}`}
               >
                 
                 {editingChatId === conversation.chatId ? (
@@ -173,7 +173,7 @@ function ChatSidebar({ isOpen, onToggle, onOpenDeleteDialog, className }) {
                   {editingChatId !== conversation.chatId && (
                     <button
                       onClick={(e) => toggleMenu(e, conversation.chatId)}
-                      className={`h-full w-full text-white hover:text-primary-400 opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer`}
+                      className={`h-full w-full text-slate-400 hover:text-white opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer`}
                     >
                       <BsThreeDots className="w-5 h-5" />
                     </button>

@@ -4,7 +4,7 @@ function UtilButton({ onClick, icon: Icon, title, ...props }) {
     return (
         <button
             onClick={() => onClick()}
-            className="text-slate-200 hover:text-primary-300 p-1 rounded-md hover:bg-primary-500/10 cursor-pointer"
+            className="text-slate-200 hover:text-white p-1 rounded-md hover:bg-black-300/30 cursor-pointer"
             title={title}
             {...props}
         >

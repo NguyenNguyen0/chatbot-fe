@@ -51,17 +51,17 @@ function ChatModelSelector() {
 
             {/* Dropdown Menu with Integrated Info */}
             {isDropdownOpen && (
-                <div className="absolute z-30 mt-1 w-66 bg-black-700 border border-primary-500/20 rounded-md shadow-lg">
+                <div className="absolute z-30 mt-1 w-66 bg-black-700 border border-slate-500/20 rounded-md shadow-lg">
                     {currentModels.map((model, index) => (
                         <div
                             key={index}
                             className="border-b border-primary-500/10 last:border-0"
                         >
                             <div
-                                className="flex flex-col px-4 py-2 hover:bg-black-600 cursor-pointer"
+                                className={`flex flex-col px-4 py-4 hover:bg-black-600 cursor-pointer capitalize ${contextModel === model.name ? 'font-bold text-white bg-black-600' : 'text-slate-200'}`}
                                 onClick={() => handleModelSelect(model.name)}
                             >
-                                <span className={`capitalize ${contextModel === model.name ? 'text-primary-400' : 'text-slate-200'}`}>
+                                <span>
                                     {model.name}
                                 </span>
                             </div>

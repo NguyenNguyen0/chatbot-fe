@@ -16,7 +16,7 @@ function DropdownMenu({
         left: `${position.left}px`,
         top: `${position.top}px`,
       }}
-      className="fixed z-[100] bg-black-700 rounded-md shadow-lg py-1 border border-primary-500/20"
+      className="fixed z-[100] bg-black-700 rounded-md shadow-lg border border-slate-500/20"
     >
       <button
         onClick={(e) => {

@@ -61,17 +61,17 @@ function ChatBar({ onSend, placeholder, className, ...props }) {
         
           <div className='flex items-center mr-1'>
             <button className='cursor-pointer' onClick={handleLoadFile}>
-              <BsPlusCircle className='text-black-50 h-[28px] w-[28px] mb-[-2px] hover:text-primary-300' />
+              <BsPlusCircle className='text-black-100 h-[28px] w-[28px] mb-[-2px] hover:text-white' />
             </button>
           </div>
         
           <button
             type='submit'
-            className={`pr-3 text-primary-400 hover:text-primary-300 transition-colors ${!message.trim() ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'
+            className={`pr-3 transition-colors ${!message.trim() ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'
               }`}
             disabled={!message.trim()}
           >
-            <BsArrowUpCircle className='text-black-50 h-[28px] w-[28px] hover:text-primary-300' />
+            <BsArrowUpCircle className='text-black-100 h-[28px] w-[28px] hover:text-white' />
           </button>
         </div>
 
