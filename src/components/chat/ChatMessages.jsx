@@ -3,11 +3,10 @@ import { PropTypes } from 'prop-types';
 import { TfiReload } from "react-icons/tfi";
 import { ChatContext } from '../../contexts/ChatContext';
 import { MdModeEdit } from "react-icons/md";
-import Markdown from 'react-markdown';
-import remarkGfm from 'remark-gfm';
 
 import CopyUtilButton from './CopyUtilButton';
 import UtilButton from './UtilButton';
+import MarkdownRenderer from '../common/MarkdownRenderer';
 
 function ChatMessages() {
   const { messages, updateMessages, currentConversation, getChatResponse } = useContext(ChatContext);
@@ -67,7 +66,7 @@ function ChatMessages() {
           <h1 className="text-center text-4xl font-bold">How Can I Help You?</h1>
         </div>
       ) : (
-        <div className="max-w-4xl mx-auto space-y-6 mb-30">
+        <div className="max-w-5xl mx-auto space-y-6 mb-30">
           {messages.map((message, index) => (
             <div
               key={index}
@@ -78,7 +77,7 @@ function ChatMessages() {
               <div
                 className={`flex-1 rounded-lg p-4 max-w-2xl relative ${message.role === 'user'
                   ? 'bg-black-500/20 text-white'
-                  : 'max-w-3xl bg-transparent text-gray-100'
+                  : 'max-w-4xl bg-transparent text-gray-100'
                   }`}
               >
 
@@ -112,16 +111,7 @@ function ChatMessages() {
                     </div>
                   )
                 ) : (
-                  <Markdown
-                    remarkPlugins={[remarkGfm]}
-                    components={{
-                      p: ({ ...props }) => <p className="whitespace-pre-wrap break-words" {...props} />,
-                      code: ({ ...props }) => <code className="whitespace-pre-wrap break-all" {...props} />,
-                      pre: ({ ...props }) => <pre className="whitespace-pre-wrap overflow-auto" {...props} />
-                    }}
-                  >
-                    {message.content}
-                  </Markdown>
+                  <MarkdownRenderer content={message.content} />
                 )}
 
                 {/* Utility buttons - hidden by default, shown on hover */}

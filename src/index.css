@@ -158,4 +158,54 @@
     .btn-sm {
         @apply text-sm px-3 py-1;
     }
+
+    .prose-custom {
+        @apply text-gray-100 space-y-4;
+
+        /* Separate */
+        hr {
+            @apply border-t-2 border-gray-700 my-10;
+        }
+
+        /* Paragraphs */
+        p {
+            @apply my-2;
+        }
+
+        /* Headings */
+        h1,
+        h2,
+        h3,
+        h4 {
+            @apply font-semibold text-white my-3;
+        }
+
+        /* Lists */
+        ul,
+        ol {
+            @apply ml-5 list-disc space-y-1;
+        }
+
+        /* Table */
+        table {
+            @apply w-full text-left border-collapse mt-4;
+        }
+
+        th {
+            @apply bg-gray-700 text-gray-200 font-semibold px-4 py-2 border border-gray-600;
+        }
+
+        td {
+            @apply border border-gray-700 px-4 py-2 text-gray-100;
+        }
+
+        tr {
+            @apply even:bg-gray-800;
+        }
+
+        /* Blockquote */
+        blockquote {
+            @apply border-l-4 border-primary-500 pl-4 italic text-gray-300 bg-gray-800 p-4 rounded-md;
+        }
+    }
 }
