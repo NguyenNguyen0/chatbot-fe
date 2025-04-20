@@ -2,9 +2,12 @@ import { useState } from "react";
 import Header from "../components/layout/Header";
 import Background from "../components/layout/Background";
 import Footer from "../components/layout/Footer";
-import { FaMagnifyingGlassChart, FaUser } from "react-icons/fa6";
+import { FaUser } from "react-icons/fa6";
 import { IoBulbOutline } from "react-icons/io5";
-import { FaMicrophone, FaRobot, FaBrain, FaRegComments } from "react-icons/fa6";
+import { FaRobot, FaRegComments } from "react-icons/fa6";
+import { PiBrainLight } from "react-icons/pi";
+import { HiMagnifyingGlass } from "react-icons/hi2";
+import { PiMicrophone } from "react-icons/pi";
 import ChatBar from "../components/common/ChatBar";
 import '../assets/styles/Home.css';
 
@@ -61,7 +64,7 @@ function Home() {
 
             <div className="card-item">
               <div className="flex items-center justify-center mb-6">
-                <FaMicrophone className="w-12 h-12 text-primary-500" />
+                <PiMicrophone className="w-12 h-12 text-primary-500" />
               </div>
               <h3 className="text-xl font-bold text-white mb-4 text-center">
                 Voice Recognition
@@ -73,7 +76,7 @@ function Home() {
 
             <div className="card-item">
               <div className="flex items-center justify-center mb-6">
-                <FaMagnifyingGlassChart className="w-12 h-12 text-primary-500" />
+                <HiMagnifyingGlass className="w-12 h-12 text-primary-500" />
               </div>
               <h3 className="text-xl font-bold text-white mb-4 text-center">
                 Smart Search
@@ -85,7 +88,7 @@ function Home() {
 
             <div className="card-item">
               <div className="flex items-center justify-center mb-6">
-                <FaBrain className="w-12 h-12 text-primary-500" />
+                <PiBrainLight className="w-12 h-12 text-primary-500" />
               </div>
               <h3 className="text-xl font-bold text-white mb-4 text-center">
                 Personalized Chat
