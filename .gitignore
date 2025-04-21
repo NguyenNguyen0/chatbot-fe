@@ -25,3 +25,12 @@ dist-ssr
 
 # IDE
 .vscode/
+
+
+# Local env files
+.env
+.env.*
+.env.local
+.env.development
+.env.test
+.env.production
