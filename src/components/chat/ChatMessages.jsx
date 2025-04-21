@@ -66,7 +66,7 @@ function ChatMessages() {
           <h1 className="text-center text-4xl font-bold">How Can I Help You?</h1>
         </div>
       ) : (
-        <div className="max-w-5xl mx-auto space-y-6 mb-30">
+        <div className="max-w-4xl mx-auto space-y-6 mb-30">
           {messages.map((message, index) => (
             <div
               key={index}

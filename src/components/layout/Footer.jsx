@@ -7,7 +7,11 @@ import FooterWave from '../ui/FooterWave';
 import '../../assets/styles/Footer.css';
 
 function Footer() {
-    const { theme } = useContext(ThemeContext)
+    let { theme } = useContext(ThemeContext)
+
+    if (theme === 'system') {
+        theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+    }
 
     return (
         <footer className='position-relative'>

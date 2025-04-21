@@ -70,8 +70,8 @@ function Chat() {
   const handleSendMessage = async (message) => {
     if (!message.trim()) return;
     const newMessages = [...messages, { role: 'user', content: message }];
-    await updateMessages(newMessages);
-    await sendMessage(currentConversation, newMessages);
+    updateMessages(newMessages);
+    sendMessage(currentConversation, newMessages);
   };
 
   return (
