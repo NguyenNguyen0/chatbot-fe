@@ -1,10 +1,10 @@
-import { useState, useRef, useEffect, useContext } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { FaChevronDown } from 'react-icons/fa';
 import { getModels } from '../../services/chatService';
-import { ChatContext } from '../../contexts/ChatContext';
+import { useChat } from '../../hooks/useChat';
 
 function ChatModelSelector() {
-    const { setModel: setContextModel, model: contextModel } = useContext(ChatContext);
+    const { changeModel: setContextModel, model: contextModel } = useChat();
     const [currentModels, setCurrentModels] = useState([]);
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const dropdownRef = useRef(null);

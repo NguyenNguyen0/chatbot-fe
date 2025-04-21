@@ -1,3 +1,4 @@
 import useRenderIf from "./useRenderIf";
+import useChat from "./useChat";
 
-export { useRenderIf };
+export { useRenderIf, useChat };

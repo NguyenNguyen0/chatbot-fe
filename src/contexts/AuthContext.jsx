@@ -1,6 +1,5 @@
 import propTypes from "prop-types";
 import { createContext, useEffect, useState } from "react";
-// import { useNavigate } from "react-router-dom";
 
 import { getUser } from "../services";
 
@@ -8,7 +7,6 @@ const AuthContext = createContext();
 
 function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
-  // const navigate = useNavigate();
 
   const setTokenAndUser = async (token) => {
     getUser(token).then((data) => {

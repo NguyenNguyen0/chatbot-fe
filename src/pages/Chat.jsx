@@ -12,13 +12,13 @@ import UserAvatar from '../components/common/UserAvatar';
 import Dialog from '../components/common/Dialog';
 import ChatModelSelector from '../components/chat/ChatModelSelector';
 import { AuthContext } from '../contexts/AuthContext';
-import { ChatContext } from '../contexts/ChatContext';
+import { useChat } from '../hooks/useChat';
 
 import '../assets/styles/Chat.css';
 
 
 function Chat() {
-  const { setConversations, messages, updateMessages, getChatResponse, currentConversation, deleteConversation } = useContext(ChatContext);
+  const { currentConversation, messages, updateMessages, sendMessage, removeConversation } = useChat();
   const { state } = useLocation();
   const { user } = useContext(AuthContext);
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
@@ -52,16 +52,10 @@ function Chat() {
   }, [state])
 
   const handleDeleteConversation = (conversationId) => {
-    setConversations(prevConversations =>
-      prevConversations.filter(conv => conv.chatId !== conversationId)
-    );
-
-    deleteConversation(conversationId);
-    // Close the dialog after deleting
+    removeConversation(conversationId);
     setDeleteDialog({ isOpen: false, conversationId: null });
   };
 
-  // Handle opening the delete dialog
   const handleOpenDeleteDialog = (conversationId) => {
     setDeleteDialog({
       isOpen: true,
@@ -69,7 +63,6 @@ function Chat() {
     });
   };
 
-  // Handle closing the delete dialog
   const handleCloseDeleteDialog = () => {
     setDeleteDialog({ isOpen: false, conversationId: null });
   };
@@ -78,7 +71,7 @@ function Chat() {
     if (!message.trim()) return;
     const newMessages = [...messages, { role: 'user', content: message }];
     await updateMessages(newMessages);
-    await getChatResponse(currentConversation, newMessages);
+    await sendMessage(currentConversation, newMessages);
   };
 
   return (

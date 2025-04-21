@@ -1,20 +1,21 @@
 import { BrowserRouter } from 'react-router-dom'
 import { AppRoutes } from './routes'
 import { AuthProvider } from './contexts/AuthContext'
-import { ChatProvider } from './contexts/ChatContext'
 import { ThemeProvider } from './contexts/ThemeContext'
+import { Provider } from 'react-redux'
+import { store } from './app/store.js'
 
 function App() {
   return (
-    <ThemeProvider>
-      <BrowserRouter>
-        <AuthProvider>
-          <ChatProvider>
-            <AppRoutes />
-          </ChatProvider>
-        </AuthProvider>
-      </BrowserRouter>
-    </ThemeProvider>
+    <Provider store={store}>
+      <ThemeProvider>
+        <BrowserRouter>
+          <AuthProvider>
+              <AppRoutes />
+          </AuthProvider>
+        </BrowserRouter>
+      </ThemeProvider>
+    </Provider>
   )
 }
 

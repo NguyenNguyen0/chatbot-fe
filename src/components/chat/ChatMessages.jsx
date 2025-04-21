@@ -1,15 +1,15 @@
-import { useEffect, useRef, useContext, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { PropTypes } from 'prop-types';
 import { TfiReload } from "react-icons/tfi";
-import { ChatContext } from '../../contexts/ChatContext';
 import { MdModeEdit } from "react-icons/md";
 
 import CopyUtilButton from './CopyUtilButton';
 import UtilButton from './UtilButton';
 import MarkdownRenderer from '../common/MarkdownRenderer';
+import { useChat } from '../../hooks/useChat';
 
 function ChatMessages() {
-  const { messages, updateMessages, currentConversation, getChatResponse } = useContext(ChatContext);
+  const { messages, currentConversation, updateMessages, sendMessage } = useChat();
   const messagesEndRef = useRef(null);
   const [editingMessageIndex, setEditingMessageIndex] = useState(null);
   const [editContent, setEditContent] = useState('');
@@ -45,18 +45,18 @@ function ChatMessages() {
 
     let updatedMessages = messages.slice(0, index);
     updatedMessages.push({ role: 'user', content: editContent });
-    updatedMessages = await updateMessages(updatedMessages);
-
+    
     setEditingMessageIndex(null);
     setEditContent('');
-
-    getChatResponse(currentConversation, updatedMessages);
+    
+    updateMessages(updatedMessages);
+    sendMessage(currentConversation, updatedMessages);
   };
 
   const handleReloadMessage = async (index) => {
     let updatedMessages = messages.slice(0, index);
-    updatedMessages = await updateMessages(updatedMessages);
-    getChatResponse(currentConversation, updatedMessages);
+    updateMessages(updatedMessages);
+    sendMessage(currentConversation, updatedMessages);
   };
 
   return (

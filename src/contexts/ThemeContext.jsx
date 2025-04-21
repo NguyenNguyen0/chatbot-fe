@@ -20,7 +20,6 @@ const ThemeProvider = ({ children }) => {
         return prefersDark ? 'dark' : 'light'
     })
 
-    // Watch for system theme changes
     useEffect(() => {
         const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
 
@@ -28,26 +27,21 @@ const ThemeProvider = ({ children }) => {
             const newSystemTheme = e.matches ? 'dark' : 'light'
             setSystemTheme(newSystemTheme)
 
-            // If the current theme is 'system', update the actual applied theme
             if (theme === 'system') {
                 document.documentElement.classList.remove('light', 'dark')
                 document.documentElement.classList.add(newSystemTheme)
             }
         }
 
-        // Add listener
         mediaQuery.addEventListener('change', handleChange)
 
-        // Clean up
         return () => mediaQuery.removeEventListener('change', handleChange)
     }, [theme])
 
-    // Apply theme changes
     useEffect(() => {
         const root = window.document.documentElement
         root.classList.remove('light', 'dark')
 
-        // If theme is 'system', apply the system preference
         if (theme === 'system') {
             const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
             root.classList.add(prefersDark ? 'dark' : 'light')
@@ -58,7 +52,6 @@ const ThemeProvider = ({ children }) => {
         localStorage.setItem('theme', theme)
     }, [theme])
 
-    // Enhanced setTheme that handles system preference
     const handleSetTheme = (newTheme) => {
         setTheme(newTheme)
     }

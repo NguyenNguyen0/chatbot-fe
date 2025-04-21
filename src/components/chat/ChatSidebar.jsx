@@ -1,21 +1,26 @@
 import { PropTypes } from 'prop-types';
 import { useNavigate } from 'react-router-dom';
-import { useContext, useRef, useState, useEffect } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { FaPlus, FaChevronLeft, FaChevronRight } from 'react-icons/fa6';
 import { BsThreeDots } from "react-icons/bs";
-import { ChatContext } from '../../contexts/ChatContext';
 import DropdownMenu from './DropDownMenu';
 import { renameChat } from '../../services';
 
+import { useChat } from '../../hooks/useChat';
+
 function ChatSidebar({ isOpen, onToggle, onOpenDeleteDialog, className }) {
   const navigate = useNavigate();
-  const { conversations, selectConversation, setCurrentConversation, setConversations, setMessages } = useContext(ChatContext);
+  const { conversations, selectChat, loadConversations, setCurrentConversation, renameConversation, updateMessages } = useChat();
   const [openMenuId, setOpenMenuId] = useState(null);
   const [dropdownPosition, setDropdownPosition] = useState({ top: 0, left: 0 });
   const [editingChatId, setEditingChatId] = useState(null);
   const [editValue, setEditValue] = useState('');
   const dropdownRef = useRef(null);
   const inputRef = useRef(null);
+
+  useEffect(() => {
+    loadConversations();
+  }, [loadConversations])
 
   useEffect(() => {
     function handleClickOutside(event) {
@@ -48,7 +53,7 @@ function ChatSidebar({ isOpen, onToggle, onOpenDeleteDialog, className }) {
 
     navigate('/chat');
 
-    setMessages([]);
+    updateMessages([]);
     setCurrentConversation(newConversation);
   };
 
@@ -69,13 +74,7 @@ function ChatSidebar({ isOpen, onToggle, onOpenDeleteDialog, className }) {
 
     renameChat(editingChatId, editValue.trim())
       .then(() => {
-        setConversations((prevConversations) =>
-          prevConversations.map((conversation) =>
-            conversation.chatId === editingChatId
-              ? { ...conversation, title: editValue.trim() }
-              : conversation
-          )
-        );
+        renameConversation(editingChatId, editValue.trim());
       })
       .catch((error) => {
         console.error('Error renaming chat:', error);
@@ -101,11 +100,10 @@ function ChatSidebar({ isOpen, onToggle, onOpenDeleteDialog, className }) {
     } else {
       setOpenMenuId(chatId);
 
-      // Calculate position relative to the clicked button
       const rect = e.currentTarget.getBoundingClientRect();
       setDropdownPosition({
         top: rect.bottom + window.scrollY,
-        left: rect.right + window.scrollX + 5, // Add a small gap
+        left: rect.right + window.scrollX + 5,
       });
     }
   };
@@ -147,7 +145,7 @@ function ChatSidebar({ isOpen, onToggle, onOpenDeleteDialog, className }) {
             {conversations.map((conversation, index) => (
               <div
                 key={conversation.chatId ?? index}
-                onClick={() => editingChatId !== conversation.chatId && selectConversation(conversation.chatId)}
+                onClick={() => editingChatId !== conversation.chatId && selectChat(conversation.chatId)}
                 className={`flex items-center justify-between py-3 px-4 mx-2 border-slate-400/30 border rounded-lg cursor-pointer mb-1 group
                   ${conversation.active
                   ? 'text-black-600 bg-slate-300 dark:bg-black-600 dark:text-white border-primary-400'
