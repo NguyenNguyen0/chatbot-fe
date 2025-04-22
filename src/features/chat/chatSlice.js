@@ -14,7 +14,8 @@ export const fetchChatSection = createAsyncThunk('chat/fetchChatSection', async 
 export const fetchChatResponse = createAsyncThunk(
     'chat/fetchChatResponse',
     async ({ conversation, messages, model }) => {
-        const response = await getChatBotResponse(messages, conversation?.chatId, model);
+        const chatId = conversation?.chatId || null;
+        const response = await getChatBotResponse(messages, chatId, model);
         return { response, conversation, messages };
     }
 );
@@ -24,9 +25,19 @@ export const deleteChatById = createAsyncThunk('chat/deleteChat', async (chatId)
     return chatId;
 });
 
+const newChat = {
+    chatId: null,
+    model: null,
+    messages: [],
+    title: 'New Conversation',
+    active: true,
+    createdAt: new Date().toISOString(),
+    isNew: true,
+};
+
 const initialState = {
     conversations: [],
-    currentConversation: null,
+    currentConversation: newChat,
     messages: [],
     model: null,
 };
@@ -50,7 +61,7 @@ const chatSlice = createSlice({
             state.currentConversation = state.conversations.find(conv => conv.chatId === chatId) || null;
         },
         clearConversation(state) {
-            state.currentConversation = null;
+            state.currentConversation = newChat;
             state.messages = [];
         },
         renameConversation(state, action) {
@@ -87,7 +98,7 @@ const chatSlice = createSlice({
                     state.currentConversation = newConv;
                     state.conversations.unshift(newConv);
                 } else {
-                    if (response.title) {
+                    if (response.title && response.chatId) {
                         state.currentConversation.title = response.title;
                         state.conversations = state.conversations.map(conv =>
                             conv.chatId === conversation.chatId ? { ...conv, title: response.title } : conv

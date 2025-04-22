@@ -10,7 +10,7 @@ import { useChat } from '../../hooks/useChat';
 
 function ChatSidebar({ isOpen, onToggle, onOpenDeleteDialog, className }) {
   const navigate = useNavigate();
-  const { conversations, selectChat, loadConversations, setCurrentConversation, renameConversation, updateMessages } = useChat();
+  const { conversations, selectChat, loadConversations, renameConversation, clearConversation } = useChat();
   const [openMenuId, setOpenMenuId] = useState(null);
   const [dropdownPosition, setDropdownPosition] = useState({ top: 0, left: 0 });
   const [editingChatId, setEditingChatId] = useState(null);
@@ -41,20 +41,8 @@ function ChatSidebar({ isOpen, onToggle, onOpenDeleteDialog, className }) {
   }, [editingChatId]);
 
   const handleNewChat = () => {
-    const newConversation = {
-      chatId: null,
-      model: null,
-      messages: [],
-      title: 'New Conversation',
-      active: true,
-      createdAt: new Date().toISOString(),
-      isNew: true,
-    };
-
     navigate('/chat');
-
-    updateMessages([]);
-    setCurrentConversation(newConversation);
+    clearConversation();
   };
 
   const startRenameConversation = (chatId) => {

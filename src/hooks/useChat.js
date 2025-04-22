@@ -70,5 +70,6 @@ export const useChat = () => {
         renameConversation: renameConversationHandler,
         updateMessages: updateMessageList,
         changeModel,
+        clearConversation
     };
 };

@@ -46,24 +46,21 @@ export const getChatSection = async (chatId) => {
 export const getChatBotResponse = async (messages, chatId, model) => {
     try {
         const accessToken = sessionStorage.getItem('accessToken') ?? null;
-
-        if (!accessToken) {
-            throw new Error('JWT token is missing');
-        }
-
-        // Create the request body with the correct structure
+        
         const requestBody = {
             chatId: chatId,
             messages: messages,
             model: model
         };
 
-        const response = await api.post('/chat/', requestBody, {
-            headers: {
-                Authorization: `Bearer ${accessToken}`,
-                'Content-Type': 'application/json'
-            },
-        });
+        const headers = accessToken ? {
+            Authorization: `Bearer ${accessToken}`,
+            'Content-Type': 'application/json'
+        } : {
+            'Content-Type': 'application/json'
+        };
+
+        const response = await api.post('/chat/', requestBody, { headers });
 
         return response.data;
     } catch (error) {
