@@ -1,15 +1,14 @@
-import { useState, useContext } from 'react';
+import { useState } from 'react';
 
 import { useNavigate } from 'react-router-dom';
 import { FaGithub } from 'react-icons/fa6';
 import { FcGoogle } from 'react-icons/fc';
 
-import { login } from '../../services/authService.js';
-import { AuthContext } from '../../contexts/AuthContext.jsx';
+import { useAuth } from '../../hooks/useAuth.js';
 
 function LoginForm() {
+  const { login } = useAuth();
   const navigate = useNavigate();
-  const context = useContext(AuthContext);
   const [formData, setFormData] = useState({
     username: '',
     password: '',
@@ -18,10 +17,7 @@ function LoginForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const data = await login(formData);
-
-      if (data) {
-        context.setTokenAndUser(data.accessToken);
+      if (await login(formData)) {
         navigate('/chat', {
           state: {
             isLogin: true,

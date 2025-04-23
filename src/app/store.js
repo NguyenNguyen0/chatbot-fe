@@ -1,6 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
-import chatReducer from '../features/chat/chatSlice';
 import logger from 'redux-logger';
+import chatReducer from '../features/chat/chatSlice';
+import authReducer from '../features/auth/authSlice';
 
 const middlewares = []
 if (import.meta.env.VITE_MODE === 'development') {
@@ -10,6 +11,7 @@ if (import.meta.env.VITE_MODE === 'development') {
 export const store = configureStore({
     reducer: {
         chat: chatReducer,
+        auth: authReducer,
     },
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware().concat(middlewares)

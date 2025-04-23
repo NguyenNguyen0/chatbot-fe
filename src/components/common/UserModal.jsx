@@ -1,24 +1,21 @@
+import propTypes from 'prop-types';
 import { useRef, useEffect, useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import propTypes from 'prop-types';
 import { IoClose } from "react-icons/io5";
 
 import { User } from '../../assets/icons';
-import { AuthContext } from '../../contexts/AuthContext';
 import { ThemeContext } from '../../contexts/ThemeContext';
-import { logout } from '../../services';
+import { useAuth } from '../../hooks/useAuth';
 
 const UserModal = ({ onClose }) => {
   const navigate = useNavigate();
-  const authContext = useContext(AuthContext);
   const { theme, setTheme } = useContext(ThemeContext);
-  const user = authContext.user;
+  const { user, logout } = useAuth();
   const modalRef = useRef();
   const [activeSection, setActiveSection] = useState('profile');
 
   const handleUserLogout = () => {
     logout(sessionStorage.getItem('accessToken'), sessionStorage.getItem('refreshToken'));
-    authContext.setUser(null);
     onClose();
     navigate('/auth');
   }

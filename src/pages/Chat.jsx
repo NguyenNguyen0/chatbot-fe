@@ -1,4 +1,4 @@
-import { useState, useContext, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
 import "react-toastify/dist/ReactToastify.css";
@@ -11,8 +11,8 @@ import Logo from '../components/common/Logo';
 import UserAvatar from '../components/common/UserAvatar';
 import Dialog from '../components/common/Dialog';
 import ChatModelSelector from '../components/chat/ChatModelSelector';
-import { AuthContext } from '../contexts/AuthContext';
 import { useChat } from '../hooks/useChat';
+import { useAuth } from '../hooks/useAuth';
 
 import '../assets/styles/Chat.css';
 
@@ -20,7 +20,7 @@ import '../assets/styles/Chat.css';
 function Chat() {
   const { currentConversation, messages, updateMessages, sendMessage, removeConversation } = useChat();
   const { state } = useLocation();
-  const { user } = useContext(AuthContext);
+  const { user, initializeAuth } = useAuth();
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
 
   // Add delete dialog state to Chat component
@@ -28,6 +28,10 @@ function Chat() {
     isOpen: false,
     conversationId: null
   });
+
+  useEffect(() => {
+    initializeAuth()
+  }, [initializeAuth]);
 
   useEffect(() => {
     if (state?.isNewUser) {
@@ -111,7 +115,7 @@ function Chat() {
 
           <div className='mr-4 z-10'>
             {user
-              ? <UserAvatar />
+              ? <UserAvatar avatar={user.avatar} name={user.name} />
               : <Logo />
             }
           </div>

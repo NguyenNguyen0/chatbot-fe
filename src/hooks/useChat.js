@@ -8,7 +8,7 @@ import {
     setModel,
     updateMessages,
     selectConversation,
-    clearConversation,
+    clearConversation as handleClearConversation,
     renameConversation
 } from '../features/chat/chatSlice';
 
@@ -28,7 +28,7 @@ export const useChat = () => {
 
     const selectChat = useCallback((chatId) => {
         if (!chatId) {
-            dispatch(clearConversation());
+            dispatch(handleClearConversation());
         } else {
             dispatch(selectConversation(chatId));
             dispatch(fetchChatSection(chatId));
@@ -55,6 +55,10 @@ export const useChat = () => {
 
     const changeModel = useCallback((modelName) => {
         dispatch(setModel(modelName));
+    }, [dispatch]);
+
+    const clearConversation = useCallback(() => {
+        dispatch(handleClearConversation());
     }, [dispatch]);
 
     return {

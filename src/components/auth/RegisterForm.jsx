@@ -1,12 +1,11 @@
-import { useState, useContext } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { register } from '../../services';
-import { AuthContext } from '../../contexts/AuthContext';
+import { useAuth } from '../../hooks/useAuth';
 
 function RegisterForm() {
   const navigate = useNavigate();
-  const context = useContext(AuthContext);
+  const { register } = useAuth();
   const [formData, setFormData] = useState({
     username: '',
     email: '',
@@ -19,8 +18,6 @@ function RegisterForm() {
     try {
       const data = await register(formData);
       if (data) {
-        const accessToken = data.accessToken;
-        context.setTokenAndUser(accessToken);
         navigate('/chat', {
           state: {
             isNewUser: true,
