@@ -111,7 +111,7 @@ function ChatSidebar({ isOpen, onToggle, onOpenDeleteDialog, className }) {
       </button>
 
       {/* Sidebar */}
-      <aside className={`fixed top-0 left-0 h-full bg-slate-100 dark:bg-black-700 transition-all duration-300 z-20
+      <aside className={`fixed top-0 left-0 h-full bg-slate-100 dark:bg-black-700 transition-all duration-300 z-10
         ${isOpen ? 'w-80 translate-x-0' : 'w-80 -translate-x-full'} ${className}`}>
 
         <div className="flex flex-col h-full">

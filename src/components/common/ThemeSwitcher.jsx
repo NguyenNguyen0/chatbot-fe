@@ -53,7 +53,7 @@ const ThemeSwitcher = () => {
     return (
         <button
             onClick={handleThemeToggle}
-            className="p-2 rounded-full text-slate-300 dark:text-slate-100 hover:bg-white dark:hover:bg-gray-500 transition-colors duration-200 cursor-pointer"
+            className="p-2 rounded-full text-slate-100 hover:bg-white hover:text-gray-600 dark:hover:text-white dark:hover:bg-gray-500 transition-colors duration-200 cursor-pointer"
             title={getTooltipText()}
             aria-label={getTooltipText()}
         >

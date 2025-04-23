@@ -130,7 +130,7 @@ function Chat() {
           <ChatBar
             onSend={handleSendMessage}
             placeholder="Send a message..."
-            className="w-full min-w-[800px] max-w-4xl shadow-none"
+            className="w-[100%] max-w-4xl shadow-none z-10"
           />
         </div>
       </main>

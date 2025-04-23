@@ -6,14 +6,16 @@ import { MdModeEdit } from "react-icons/md";
 import CopyUtilButton from './CopyUtilButton';
 import UtilButton from './UtilButton';
 import MarkdownRenderer from '../common/MarkdownRenderer';
+import ScrollDownButton from './ScrollDownButton';
 import { useChat } from '../../hooks/useChat';
 
 function ChatMessages() {
   const { messages, currentConversation, updateMessages, sendMessage } = useChat();
-  const messagesEndRef = useRef(null);
   const [editingMessageIndex, setEditingMessageIndex] = useState(null);
   const [editContent, setEditContent] = useState('');
+  const messagesEndRef = useRef(null);
   const textareaRef = useRef(null);
+  const containerRef = useRef(null);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -45,10 +47,10 @@ function ChatMessages() {
 
     let updatedMessages = messages.slice(0, index);
     updatedMessages.push({ role: 'user', content: editContent });
-    
+
     setEditingMessageIndex(null);
     setEditContent('');
-    
+
     updateMessages(updatedMessages);
     sendMessage(currentConversation, updatedMessages);
   };
@@ -60,85 +62,83 @@ function ChatMessages() {
   };
 
   return (
-    <div className="flex-1 overflow-y-auto p-4 custom-scrollbar">
-      {messages.length === 0 ? (
-        <div className="h-full flex items-center justify-center -mt-30 text-black-500 dark:text-white">
-          <h1 className="text-center text-4xl font-bold">How Can I Help You?</h1>
-        </div>
-      ) : (
-        <div className="max-w-4xl mx-auto space-y-6 mb-30">
-          {messages.map((message, index) => (
-            <div
-              key={index}
-              className={`flex items-start gap-5 group ${message.role === 'user' ? 'flex-row-reverse' : ''
-                }`}
-            >
-              {/* Message Content with utility buttons at bottom */}
+    <>
+      <div className="flex-1 overflow-y-auto p-4 custom-scrollbar" ref={containerRef}>
+        {messages.length === 0 ? (
+          <div className="h-full flex items-center justify-center -mt-30 text-black-500 dark:text-white">
+            <h1 className="text-center text-4xl font-bold">How Can I Help You?</h1>
+          </div>
+        ) : (
+          <div className="max-w-4xl mx-auto space-y-6 mb-50">
+            {messages.map((message, index) => (
               <div
-                className={`flex-1 rounded-lg p-4 max-w-2xl relative ${message.role === 'user'
-                  ? ' bg-slate-200 text-slate-700 dark:bg-black-600/20 dark:text-white'
-                  : 'max-w-4xl bg-transparent text-slate-700 dark:text-gray-100'
-                  }`}
+                key={index}
+                className={`flex items-start gap-5 group ${message.role === 'user' ? 'flex-row-reverse' : ''}`}
               >
-
-                {message.role === 'user' ? (
-                  editingMessageIndex === index ? (
-                    <div className="flex flex-col gap-3">
-                      <textarea
-                        ref={textareaRef}
-                        value={editContent}
-                        onChange={(e) => setEditContent(e.target.value)}
-                        className="w-full bg-slate-300 text-slate-700 dark:bg-black-600 dark:text-white p-2 rounded-md border border-primary-400/30 focus:outline-none focus:border-white/20 min-h-[100px]"
-                      />
-                      <div className="flex justify-end gap-2 mt-1">
-                        <button
-                          onClick={handleCancelEdit}
-                          className="btn btn-sm bg-black-700 hover:bg-black-600 text-white"
-                        >
-                          Cancel
-                        </button>
-                        <button
-                          onClick={() => handleSubmitEdit(index)}
-                          className="btn btn-sm btn-primary"
-                        >
-                          Save
-                        </button>
+                {/* Message Content with utility buttons at bottom */}
+                <div
+                  className={`flex-1 rounded-lg p-4 max-w-2xl relative ${message.role === 'user'
+                    ? ' bg-slate-200 text-slate-700 dark:bg-black-600 dark:text-white'
+                    : 'max-w-4xl bg-transparent text-slate-700 dark:text-gray-100'
+                    }`}
+                >
+                  {message.role === 'user' ? (
+                    editingMessageIndex === index ? (
+                      <div className="flex flex-col gap-3">
+                        <textarea
+                          ref={textareaRef}
+                          value={editContent}
+                          onChange={(e) => setEditContent(e.target.value)}
+                          className="w-full bg-slate-300 text-slate-700 dark:bg-black-600 dark:text-white p-2 rounded-md border border-primary-400/30 focus:outline-none focus:border-white/20 min-h-[100px]"
+                        />
+                        <div className="flex justify-end gap-2 mt-1">
+                          <button
+                            onClick={handleCancelEdit}
+                            className="btn btn-sm bg-black-700 hover:bg-black-600 text-white"
+                          >
+                            Cancel
+                          </button>
+                          <button
+                            onClick={() => handleSubmitEdit(index)}
+                            className="btn btn-sm btn-primary"
+                          >
+                            Save
+                          </button>
+                        </div>
                       </div>
-                    </div>
+                    ) : (
+                      <div>
+                        {message.content}
+                      </div>
+                    )
                   ) : (
-                    <div>
-                      {message.content}
+                    <MarkdownRenderer content={message.content} />
+                  )}
+                  {/* Utility buttons - hidden by default, shown on hover */}
+                  {editingMessageIndex !== index && (
+                    <div
+                      className={`absolute -bottom-7 ${message.role === 'user' ? 'right-1' : 'left-2.5'}
+                      opacity-0 group-hover:opacity-100 transition-opacity duration-200
+                      flex gap-2 mt-2`}
+                    >
+                      <CopyUtilButton content={message.content} />
+                      {message.role === 'assistant' && (
+                        <UtilButton onClick={() => handleReloadMessage(index)} icon={<TfiReload className='w-4 h-4' />} title="Resend message" />
+                      )}
+                      {message.role === 'user' && (
+                        <UtilButton onClick={() => handleEditMessage(index)} icon={<MdModeEdit className='w-4 h-4' />} title="Edit message" />
+                      )}
                     </div>
-                  )
-                ) : (
-                  <MarkdownRenderer content={message.content} />
-                )}
-
-                {/* Utility buttons - hidden by default, shown on hover */}
-                {editingMessageIndex !== index && (
-                  <div
-                    className={`absolute -bottom-7 ${message.role === 'user' ? 'right-1' : 'left-2.5'} 
-                    opacity-0 group-hover:opacity-100 transition-opacity duration-200 
-                    flex gap-2 mt-2`}
-                  >
-                    <CopyUtilButton content={message.content} />
-
-                    {message.role === 'assistant' && (
-                      <UtilButton onClick={() => handleReloadMessage(index)} icon={<TfiReload className='w-4 h-4' />} title="Resend message" />
-                    )}
-
-                    {message.role === 'user' && (
-                      <UtilButton onClick={() => handleEditMessage(index)} icon={<MdModeEdit className='w-4 h-4' />} title="Edit message" />
-                    )}
-                  </div>
-                )}
+                  )}
+                </div>
               </div>
-            </div>
-          ))}
-          <div ref={messagesEndRef} />
-        </div>
-      )}
-    </div>
+            ))}
+            <div ref={messagesEndRef} />
+          </div>
+        )}
+      </div>
+      <ScrollDownButton containerRef={containerRef} threshold={200} />
+    </>
   );
 }
 

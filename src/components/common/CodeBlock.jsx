@@ -22,7 +22,7 @@ function CodeBlock({ className = '', children, ...props }) {
 
     return (
         <span className="relative block my-4 border border-gray-700 rounded-md overflow-hidden shadow-md">
-            <span className='relative -mb-2 py-2 bg-slate-300 text-black-700 dark:bg-gray-800 dark:text-white p-2 shadow-md rounded-t-md rounded-b-md shadow-black-500/30 dark:shadow-black-500/20 w-full inline-block z-1'>
+            <span className='relative -mb-2 py-2 bg-slate-300 text-black-700 dark:bg-gray-800 dark:text-white p-2 shadow-md rounded-t-md rounded-b-md shadow-black-500/30 dark:shadow-black-500/20 w-full inline-block z-0'>
                 <span className="font-mono text-sm">{language}</span>
                 <button
                     onClick={() => handleCopyCode(codeString)}
