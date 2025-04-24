@@ -19,7 +19,6 @@ export const useAuth = () => {
 
   const login = useCallback(async (credentials) => {
     try {
-      // Await the dispatch result
       const resultAction = await dispatch(loginUser(credentials));
       
       if (loginUser.fulfilled.match(resultAction)) {

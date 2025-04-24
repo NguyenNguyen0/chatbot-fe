@@ -7,7 +7,6 @@ const ThemeSwitcher = () => {
     const { theme, setTheme } = useContext(ThemeContext);
 
     const handleThemeToggle = () => {
-        // Cycle through themes: light → dark → system → light
         switch (theme) {
             case 'light':
                 setTheme('dark');
@@ -22,7 +21,6 @@ const ThemeSwitcher = () => {
         }
     };
 
-    // Function to determine which icon to show
     const renderThemeIcon = () => {
         switch (theme) {
             case 'light':
@@ -36,7 +34,6 @@ const ThemeSwitcher = () => {
         }
     };
 
-    // Function to determine the tooltip text
     const getTooltipText = () => {
         switch (theme) {
             case 'light':

@@ -14,7 +14,6 @@ function AuthModal({ isLogin, setIsLogin }) {
       const tabRect = activeTab.getBoundingClientRect();
       const containerRect = tabsRef.current.getBoundingClientRect();
 
-      // Set the indicator width and position
       indicatorRef.current.style.width = `${tabRect.width}px`;
       indicatorRef.current.style.transform = `translateX(${tabRect.left - containerRect.left}px)`;
     }

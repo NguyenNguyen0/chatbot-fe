@@ -1,7 +1,7 @@
 import propsTypes from 'prop-types';
 
 function Dialog({ isOpen, onClose, onConfirm, message, title }) {
-    if (!isOpen) return null; // Don't render if not open
+    if (!isOpen) return null;
 
     return (
         <div className="fixed inset-0 z-50 flex items-center justify-center">

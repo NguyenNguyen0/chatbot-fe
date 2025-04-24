@@ -22,8 +22,6 @@ function Chat() {
   const { state } = useLocation();
   const { user, initializeAuth } = useAuth();
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
-
-  // Add delete dialog state to Chat component
   const [deleteDialog, setDeleteDialog] = useState({
     isOpen: false,
     conversationId: null

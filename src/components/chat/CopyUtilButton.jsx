@@ -8,13 +8,12 @@ import UtilButton from './UtilButton';
 function CopyUtilButton({ content, ...props }) {
     const [isCopied, setIsCopied] = useState(false);
 
-    // Reset copy state after timeout
     useEffect(() => {
         let timeout;
         if (isCopied) {
             timeout = setTimeout(() => {
                 setIsCopied(false);
-            }, 4000); // 4 seconds
+            }, 4000);
         }
         return () => clearTimeout(timeout);
     }, [isCopied]);

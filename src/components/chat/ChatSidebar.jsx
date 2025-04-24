@@ -43,7 +43,6 @@ function ChatSidebar({ isOpen, onToggle, onOpenDeleteDialog, className }) {
   const handleNewChat = () => {
     clearConversation();
     navigate('/chat');
-    console.log('New chat button clicked');
   };
 
   const startRenameConversation = (chatId) => {
