@@ -1,13 +1,13 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { getChatList, getChatSection, getChatBotResponse, deleteChat } from '../../services';
+import { getChatList, getChatConversation, getChatBotResponse, deleteChat } from '../../services';
 
 export const fetchChatList = createAsyncThunk('chat/fetchChatList', async () => {
     const data = await getChatList();
     return data.chats;
 });
 
-export const fetchChatSection = createAsyncThunk('chat/fetchChatSection', async (chatId) => {
-    const data = await getChatSection(chatId);
+export const fetchChatConversation = createAsyncThunk('chat/fetchChatConversation', async (chatId) => {
+    const data = await getChatConversation(chatId);
     return { chatId, messages: data.messages };
 });
 
@@ -79,7 +79,7 @@ const chatSlice = createSlice({
             .addCase(fetchChatList.fulfilled, (state, action) => {
                 state.conversations = action.payload;
             })
-            .addCase(fetchChatSection.fulfilled, (state, action) => {
+            .addCase(fetchChatConversation.fulfilled, (state, action) => {
                 state.messages = action.payload.messages;
             })
             .addCase(fetchChatResponse.fulfilled, (state, action) => {

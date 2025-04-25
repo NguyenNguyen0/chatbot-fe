@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useCallback } from 'react';
 import {
     fetchChatList,
-    fetchChatSection,
+    fetchChatConversation,
     fetchChatResponse,
     deleteChatById,
     setModel,
@@ -31,7 +31,7 @@ export const useChat = () => {
             dispatch(handleClearConversation());
         } else {
             dispatch(selectConversation(chatId));
-            dispatch(fetchChatSection(chatId));
+            dispatch(fetchChatConversation(chatId));
         }
     }, [dispatch]);
 

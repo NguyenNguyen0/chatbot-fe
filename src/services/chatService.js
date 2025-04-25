@@ -22,7 +22,7 @@ export const getChatList = async () => {
     }
 }
 
-export const getChatSection = async (chatId) => {
+export const getChatConversation = async (chatId) => {
     try {
         const accessToken = sessionStorage.getItem('accessToken') ?? null;
         
