@@ -1,10 +1,13 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 
 import { useAuth } from '../../hooks/useAuth';
+import { toastSuccess } from '../../utils/toastUtils';
 
 function RegisterForm() {
   const navigate = useNavigate();
+  const { dispatch } = useDispatch();
   const { register } = useAuth();
   const [formData, setFormData] = useState({
     username: '',
@@ -18,13 +21,8 @@ function RegisterForm() {
     try {
       const data = await register(formData);
       if (data) {
-        navigate('/chat', {
-          state: {
-            isNewUser: true,
-            username: formData.username,
-            message: `Welcome ${formData.username} to AI Chat App!`
-          }
-        });
+        dispatch(toastSuccess(`Welcome ${formData.username} to AI Chat App!`));
+        navigate('/chat');
       }
     } catch (err) {
       console.error(err.response);

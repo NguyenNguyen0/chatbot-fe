@@ -1,8 +1,4 @@
 import { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
-
-import "react-toastify/dist/ReactToastify.css";
-import { ToastContainer, toast, Slide } from "react-toastify";
 
 import ChatSidebar from '../components/chat/ChatSidebar';
 import ChatMessages from '../components/chat/ChatMessages';
@@ -19,7 +15,6 @@ import '../assets/styles/Chat.css';
 
 function Chat() {
   const { currentConversation, messages, updateMessages, sendMessage, removeConversation } = useChat();
-  const { state } = useLocation();
   const { user, initializeAuth } = useAuth();
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [deleteDialog, setDeleteDialog] = useState({
@@ -30,28 +25,6 @@ function Chat() {
   useEffect(() => {
     initializeAuth()
   }, [initializeAuth]);
-
-  useEffect(() => {
-    if (state?.isNewUser) {
-      state.isNewUser = false;
-    } else if (state?.isLogin) {
-      state.isLogin = false;
-    }
-
-    if (state?.message) {
-      toast.success(state.message, {
-        position: "top-center",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: false,
-        pauseOnHover: false,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-        transition: Slide,
-      });
-    }
-  }, [state])
 
   const handleDeleteConversation = (conversationId) => {
     removeConversation(conversationId);
@@ -78,20 +51,6 @@ function Chat() {
 
   return (
     <div className="flex h-screen relative bg-slate-100 dark:bg-gradient-to-r dark:from-black-600 dark:via-black-700 dark:to-black-600">
-      <ToastContainer
-        position="top-center"
-        autoClose={3000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick={false}
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover={false}
-        theme="dark"
-        transition={Slide}
-      />
-
       {/* Sidebar */}
       {user && (
         <ChatSidebar

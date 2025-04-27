@@ -40,6 +40,7 @@ const initialState = {
     currentConversation: newChat,
     messages: [],
     model: null,
+    isLoading: false,
 };
 
 const chatSlice = createSlice({
@@ -82,6 +83,9 @@ const chatSlice = createSlice({
             .addCase(fetchChatConversation.fulfilled, (state, action) => {
                 state.messages = action.payload.messages;
             })
+            .addCase(fetchChatResponse.pending, (state) => {
+                state.isLoading = true;
+            })
             .addCase(fetchChatResponse.fulfilled, (state, action) => {
                 const { response, conversation, messages } = action.payload;
                 state.messages = [...messages, { role: 'assistant', content: response.response }];
@@ -105,6 +109,7 @@ const chatSlice = createSlice({
                         );
                     }
                 }
+                state.isLoading = false;
             })
             .addCase(deleteChatById.fulfilled, (state, action) => {
                 const id = action.payload;

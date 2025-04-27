@@ -3,11 +3,14 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FaGithub } from 'react-icons/fa6';
 import { FcGoogle } from 'react-icons/fc';
+import { useDispatch } from 'react-redux';
+import { toastSuccess } from '../../utils/toastUtils.js';
 
 import { useAuth } from '../../hooks/useAuth.js';
 
 function LoginForm() {
   const { login } = useAuth();
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     username: '',
@@ -18,13 +21,8 @@ function LoginForm() {
     e.preventDefault();
     try {
       if (await login(formData)) {
-        navigate('/chat', {
-          state: {
-            isLogin: true,
-            username: formData.username,
-            message: `Welcome back ${formData.username}!`
-          }
-        });
+        dispatch(toastSuccess(`Welcome back ${formData.username}!`));
+        navigate('/chat');
       }
     } catch (err) {
       console.error(err);
