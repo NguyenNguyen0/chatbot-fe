@@ -3,18 +3,7 @@ import api from "../api/api";
 
 export const getChatList = async () => {
     try {
-        const accessToken = sessionStorage.getItem('accessToken') ?? null;
-        
-        if (!accessToken) {
-            throw new Error('JWT token is missing');
-        }
-        
-        const response = await api.get('/chat/', {
-            headers: {
-                Authorization: `Bearer ${accessToken}`,
-            },
-        });
-
+        const response = await api.get('/chat/');
         return response.data;
     } catch (error) {
         console.error('Error fetching chat list:', error);
@@ -24,18 +13,7 @@ export const getChatList = async () => {
 
 export const getChatConversation = async (chatId) => {
     try {
-        const accessToken = sessionStorage.getItem('accessToken') ?? null;
-        
-        if (!accessToken) {
-            throw new Error('JWT token is missing');
-        }
-        
-        const response = await api.get(`/chat/${chatId}/`, {
-            headers: {
-                Authorization: `Bearer ${accessToken}`,
-            },
-        });
-
+        const response = await api.get(`/chat/${chatId}/`);
         return response.data;
     } catch (error) {
         console.error('Error fetching chat:', error);
@@ -45,23 +23,13 @@ export const getChatConversation = async (chatId) => {
 
 export const getChatBotResponse = async (messages, chatId, model) => {
     try {
-        const accessToken = sessionStorage.getItem('accessToken') ?? null;
-        
         const requestBody = {
             chatId: chatId,
             messages: messages,
             model: model
         };
-
-        const headers = accessToken ? {
-            Authorization: `Bearer ${accessToken}`,
-            'Content-Type': 'application/json'
-        } : {
-            'Content-Type': 'application/json'
-        };
-
-        const response = await api.post('/chat/', requestBody, { headers });
-
+        
+        const response = await api.post('/chat/', requestBody);
         return response.data;
     } catch (error) {
         console.error('Error sending chat message:', error);
@@ -71,17 +39,7 @@ export const getChatBotResponse = async (messages, chatId, model) => {
 
 export const deleteChat = async (chatId) => {
     try {
-        const accessToken = sessionStorage.getItem('accessToken') ?? null;
-
-        if (!accessToken) {
-            throw new Error('JWT token is missing');
-        }
-
-        const response = await api.delete(`/chat/${chatId}/`, {
-            headers: {
-                Authorization: `Bearer ${accessToken}`,
-            },
-        });
+        const response = await api.delete(`/chat/${chatId}/`);
 
         return response.data;
     } catch (error) {
@@ -92,17 +50,7 @@ export const deleteChat = async (chatId) => {
 
 export const getModels = async () => {
     try {
-        const accessToken = sessionStorage.getItem('accessToken') ?? null;
-        
-        if (!accessToken) {
-            throw new Error('JWT token is missing');
-        }
-        
-        const response = await api.get('/chat/models/', {
-            headers: {
-                Authorization: `Bearer ${accessToken}`,
-            },
-        });
+        const response = await api.get('/chat/models/');
 
         return response.data;
     } catch (error) {
@@ -114,19 +62,11 @@ export const getModels = async () => {
 
 export const renameChat = async (chatId, chatTitle) => {
     try {
-        const accessToken = sessionStorage.getItem('accessToken') ?? null;
-
-        if (!accessToken) {
-            throw new Error('JWT token is missing');
-        }
-
         const response = await api.patch(`/chat/${chatId}/`, chatTitle, {
             headers: {
-                Authorization: `Bearer ${accessToken}`,
                 'Content-Type': 'text/plain'
             },
         });
-
         return response.data;
     } catch (error) {
         console.error('Error renaming chat:', error);

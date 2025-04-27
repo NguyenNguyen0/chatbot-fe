@@ -51,13 +51,12 @@ export const logoutUser = createAsyncThunk(
             const accessToken = sessionStorage.getItem('accessToken');
             const refreshToken = sessionStorage.getItem('refreshToken');
             await logoutService(accessToken, refreshToken);
-            sessionStorage.removeItem('accessToken');
-            sessionStorage.removeItem('refreshToken');
             return null;
         } catch (error) {
+            return rejectWithValue(error.response?.data);
+        } finally {
             sessionStorage.removeItem('accessToken');
             sessionStorage.removeItem('refreshToken');
-            return rejectWithValue(error.response?.data);
         }
     }
 );
