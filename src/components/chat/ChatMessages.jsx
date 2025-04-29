@@ -11,7 +11,7 @@ import LoadingAnimation from '../common/LoadingAnimation';
 import { useChat } from '../../hooks/useChat';
 
 function ChatMessages() {
-  const { messages, currentConversation, updateMessages, sendMessage, isLoading } = useChat();
+  const { messages, currentConversation, updateMessages, sendMessageStream, isLoading, streaming, streamContent } = useChat();
   const [editingMessageIndex, setEditingMessageIndex] = useState(null);
   const [editContent, setEditContent] = useState('');
   const messagesEndRef = useRef(null);
@@ -24,7 +24,7 @@ function ChatMessages() {
 
   useEffect(() => {
     scrollToBottom();
-  }, [messages]);
+  }, [messages.length, streamContent]);
 
   useEffect(() => {
     if (editingMessageIndex !== null && textareaRef.current) {
@@ -53,17 +53,13 @@ function ChatMessages() {
     setEditContent('');
 
     updateMessages(updatedMessages);
-    sendMessage(currentConversation, updatedMessages);
+    sendMessageStream(currentConversation, updatedMessages);
   };
 
   const handleReloadMessage = async (index) => {
     let updatedMessages = messages.slice(0, index);
     updateMessages(updatedMessages);
-    sendMessage(currentConversation, updatedMessages);
-  };
-
-  const isLoadingAnimation = () => {
-    return isLoading && messages.length > 0 && messages[messages.length - 1].role === 'user';
+    sendMessageStream(currentConversation, updatedMessages);
   };
 
   return (
@@ -136,10 +132,17 @@ function ChatMessages() {
                     </div>
                   )}
                 </div>
+
               </div>
             ))}
 
-            {isLoadingAnimation() && <LoadingAnimation />}
+            {streaming && (
+              <div className="flex items-start gap-5 group">
+                  <div className="flex-1 rounded-lg p-4 relative max-w-4xl bg-transparent text-slate-700 dark:text-gray-100">
+                    {streamContent ? <MarkdownRenderer content={streamContent} /> : <LoadingAnimation />}
+                </div>
+              </div>
+            )}
 
             <div ref={messagesEndRef} />
           </div>

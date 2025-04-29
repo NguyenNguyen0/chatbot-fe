@@ -14,7 +14,7 @@ import '../assets/styles/Chat.css';
 
 
 function Chat() {
-  const { currentConversation, messages, updateMessages, sendMessage, removeConversation, isLoading } = useChat();
+  const { currentConversation, messages, updateMessages, sendMessageStream, removeConversation, isLoading } = useChat();
   const { user, initializeAuth } = useAuth();
   const [isSidebarOpen, setIsSidebarOpen] = useState(localStorage.getItem('isSidebarOpen') === 'true' || false);
   const [deleteDialog, setDeleteDialog] = useState({
@@ -50,7 +50,7 @@ function Chat() {
     if (!message.trim()) return;
     const newMessages = [...messages, { role: 'user', content: message }];
     updateMessages(newMessages);
-    sendMessage(currentConversation, newMessages);
+    sendMessageStream(currentConversation, newMessages);
   };
 
   return (

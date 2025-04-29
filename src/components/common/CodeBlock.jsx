@@ -8,7 +8,7 @@ import { useState, useContext } from 'react';
 import { ThemeContext } from '../../contexts/ThemeContext';
 
 function CodeBlock({ className = '', children, ...props }) {
-    const { theme } = useContext(ThemeContext);
+    const { systemTheme, theme } = useContext(ThemeContext);
     const [copiedCode, setCopiedCode] = useState(null);
     const codeString = String(children).trim();
     const language = className?.replace('language-', '') || 'javascript';
@@ -19,6 +19,13 @@ function CodeBlock({ className = '', children, ...props }) {
         setCopiedCode(code);
         setTimeout(() => setCopiedCode(null), 2000);
     };
+
+    const getCurrentTheme = () => {
+        if (theme === 'system') {
+            return systemTheme === 'dark' ? darcula : materialLight;
+        }
+        return theme === 'dark' ? darcula : materialLight;
+    }
 
     return (
         <span className="relative block my-4 border border-gray-700 rounded-md overflow-hidden shadow-md">
@@ -37,7 +44,7 @@ function CodeBlock({ className = '', children, ...props }) {
             <SyntaxHighlighter
                 className='custom-scrollbar'
                 language={language}
-                style={(theme === 'dark' ? darcula : materialLight)}
+                style={getCurrentTheme()}
                 customStyle={{
                     padding: '1rem',
                     margin: '',

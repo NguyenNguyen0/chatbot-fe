@@ -42,6 +42,7 @@ function ChatBar({ onSend, placeholder, disabled, className, ...props }) {
     >
       <div className='flex-col justify-start items-center mb-1.5'>
         <textarea
+          autoComplete='none'
           ref={textAreaRef}
           rows={1}
           value={message}
