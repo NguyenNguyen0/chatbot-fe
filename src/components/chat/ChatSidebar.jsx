@@ -10,7 +10,7 @@ import { useChat } from '../../hooks/useChat';
 
 function ChatSidebar({ isOpen, onToggle, onOpenDeleteDialog, className }) {
   const navigate = useNavigate();
-  const { conversations, selectChat, loadConversations, renameConversation, clearConversation } = useChat();
+  const { conversations, selectChat, loadConversations, renameConversation, clearConversation, isLoading } = useChat();
   const [openMenuId, setOpenMenuId] = useState(null);
   const [dropdownPosition, setDropdownPosition] = useState({ top: 0, left: 0 });
   const [editingChatId, setEditingChatId] = useState(null);
@@ -123,6 +123,7 @@ function ChatSidebar({ isOpen, onToggle, onOpenDeleteDialog, className }) {
           <button
             onClick={handleNewChat}
             className="flex items-center gap-2 m-4 px-4 py-3 rounded-lg border hover:bg-black-200 border-primary-500/50 dark:hover:bg-black-600 transition-colors cursor-pointer"
+            disabled={isLoading}
           >
             <FaPlus className="text-primary-200" />
             <span className="text-black-600 dark:text-white">New Chat</span>

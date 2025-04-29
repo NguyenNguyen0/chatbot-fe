@@ -19,7 +19,8 @@ export const useChat = () => {
         conversations,
         currentConversation,
         messages,
-        model
+        model,
+        isLoading
     } = useSelector(state => state.chat);
 
     const loadConversations = useCallback(() => {
@@ -66,6 +67,7 @@ export const useChat = () => {
         currentConversation,
         messages,
         model,
+        isLoading,
 
         loadConversations,
         selectChat,

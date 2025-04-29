@@ -14,13 +14,17 @@ import '../assets/styles/Chat.css';
 
 
 function Chat() {
-  const { currentConversation, messages, updateMessages, sendMessage, removeConversation } = useChat();
+  const { currentConversation, messages, updateMessages, sendMessage, removeConversation, isLoading } = useChat();
   const { user, initializeAuth } = useAuth();
-  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(localStorage.getItem('isSidebarOpen') === 'true' || false);
   const [deleteDialog, setDeleteDialog] = useState({
     isOpen: false,
     conversationId: null
   });
+
+  useEffect(() => {
+    localStorage.setItem('isSidebarOpen', isSidebarOpen);
+  }, [isSidebarOpen]);
 
   useEffect(() => {
     initializeAuth()
@@ -89,6 +93,7 @@ function Chat() {
         }
         >
           <ChatBar
+            disabled={isLoading}
             onSend={handleSendMessage}
             placeholder="Send a message..."
             className="w-[100%] max-w-4xl shadow-none z-10"

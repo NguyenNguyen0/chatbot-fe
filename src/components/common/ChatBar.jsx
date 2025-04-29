@@ -4,7 +4,7 @@ import { BsPlusCircle } from "react-icons/bs";
 import { useState, useRef, useEffect } from 'react';
 
 
-function ChatBar({ onSend, placeholder, className, ...props }) {
+function ChatBar({ onSend, placeholder, disabled, className, ...props }) {
   const textAreaRef = useRef(null);
   const [message, setMessage] = useState('');
   
@@ -47,6 +47,7 @@ function ChatBar({ onSend, placeholder, className, ...props }) {
           value={message}
           onInput={autoResize}
           onChange={(e) => setMessage(e.target.value)}
+          disabled={disabled}
           placeholder={placeholder}
           className="custom-scrollbar outline-0 ml-1.5 mb-2 h-8 pr-1 w-full max-h-[240px] resize-none overflow-y-auto bg-transparent text-black-400 dark:text-black-50 text-[1.2rem]"
           onKeyDown={(e) => {
@@ -82,6 +83,7 @@ function ChatBar({ onSend, placeholder, className, ...props }) {
 
 ChatBar.propTypes = {
   onSend: propTypes.func,
+  disabled: propTypes.bool,
   placeholder: propTypes.string,
   className: propTypes.string,
 }

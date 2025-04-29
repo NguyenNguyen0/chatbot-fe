@@ -20,7 +20,7 @@ const MarkdownRenderer = ({ content }) => {
                     ul: ({ node, ...props }) => <ul className="list-disc list-inside my-2" {...props} />,
                     ol: ({ node, ...props }) => <ol className="list-decimal list-inside my-2" {...props} />,
                     li: ({ node, ...props }) => <li className="ml-4" {...props} />,
-                    a: ({ node, ...props }) => <a className="text-blue-600 hover:underline" {...props} />,
+                    a: ({ node, ...props }) => <a className="text-blue-600 hover:underline" target='_blank' {...props} />,
                     table: ({ node, ...props }) => (
                         <div className="my-4 overflow-x-auto">
                             <table className="min-w-full border-collapse border border-gray-300 dark:border-gray-600" {...props} />

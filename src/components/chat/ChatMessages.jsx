@@ -7,10 +7,11 @@ import CopyUtilButton from './CopyUtilButton';
 import UtilButton from './UtilButton';
 import MarkdownRenderer from '../common/MarkdownRenderer';
 import ScrollDownButton from './ScrollDownButton';
+import LoadingAnimation from '../common/LoadingAnimation';
 import { useChat } from '../../hooks/useChat';
 
 function ChatMessages() {
-  const { messages, currentConversation, updateMessages, sendMessage } = useChat();
+  const { messages, currentConversation, updateMessages, sendMessage, isLoading } = useChat();
   const [editingMessageIndex, setEditingMessageIndex] = useState(null);
   const [editContent, setEditContent] = useState('');
   const messagesEndRef = useRef(null);
@@ -59,6 +60,10 @@ function ChatMessages() {
     let updatedMessages = messages.slice(0, index);
     updateMessages(updatedMessages);
     sendMessage(currentConversation, updatedMessages);
+  };
+
+  const isLoadingAnimation = () => {
+    return isLoading && messages.length > 0 && messages[messages.length - 1].role === 'user';
   };
 
   return (
@@ -119,7 +124,7 @@ function ChatMessages() {
                     <div
                       className={`absolute -bottom-7 ${message.role === 'user' ? 'right-1' : 'left-2.5'}
                       opacity-0 group-hover:opacity-100 transition-opacity duration-200
-                      flex gap-2 mt-2`}
+                      flex gap-2 mt-2 ${isLoading ? 'hidden' : ''}`}
                     >
                       <CopyUtilButton content={message.content} />
                       {message.role === 'assistant' && (
@@ -133,6 +138,9 @@ function ChatMessages() {
                 </div>
               </div>
             ))}
+
+            {isLoadingAnimation() && <LoadingAnimation />}
+
             <div ref={messagesEndRef} />
           </div>
         )}
