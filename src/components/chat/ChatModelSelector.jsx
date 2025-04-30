@@ -37,7 +37,7 @@ function ChatModelSelector() {
     }
 
     return (
-        <div className="relative" ref={dropdownRef}>
+        <div className="relative transition-transform duration-300 transform" ref={dropdownRef}>
             {/* Model Selector Button */}
             <button
                 onClick={() => setIsDropdownOpen(!isDropdownOpen)}

@@ -64,7 +64,7 @@ function ChatMessages() {
 
   return (
     <>
-      <div className="flex-1 overflow-y-auto p-4 custom-scrollbar" ref={containerRef}>
+      <div className="h-full overflow-y-auto p-4 custom-scrollbar" ref={containerRef}>
         {messages.length === 0 ? (
           <div className="h-full flex items-center justify-center -mt-30 text-black-500 dark:text-white">
             <h1 className="text-center text-4xl font-bold">How Can I Help You?</h1>

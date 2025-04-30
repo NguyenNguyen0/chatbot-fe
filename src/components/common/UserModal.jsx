@@ -131,7 +131,7 @@ const UserModal = ({ onClose }) => {
   };
 
   return (
-    <div className="fixed inset-0 bg-black/30 dark:bg-black/50 z-50 flex items-center justify-center">
+    <div className="fixed inset-0 bg-black/30 dark:bg-black/50 z-[100] flex items-center justify-center">
       <div
         ref={modalRef}
         className="relative bg-white dark:bg-black-700 rounded-lg shadow-xl w-full max-w-4xl h-[600px] flex animate-scaleIn"

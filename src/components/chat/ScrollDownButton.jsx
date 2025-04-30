@@ -46,7 +46,7 @@ function ScrollDownButton({ containerRef, threshold = 200, className, ...props }
         <button
             onClick={scrollToBottom}
             style={{ left: '50%', transform: 'translateX(-50%)' }}
-            className={`absolute bottom-40 z-10 p-3 bg-slate-400/60 hover:bg-slate-600 dark:bg-black-500/60 dark:hover:bg-black-600 text-white rounded-full shadow-lg transition-all duration-300 transform hover:scale-110 cursor-pointer ${className}`}
+            className={`absolute bottom-40 z-5 p-3 bg-slate-400 hover:bg-slate-600 dark:bg-black-600 dark:hover:bg-black-700 text-white rounded-full shadow-lg transition-all duration-300 transform hover:scale-110 cursor-pointer ${className}`}
             title='Scroll to bottom '
             {...props}
         >

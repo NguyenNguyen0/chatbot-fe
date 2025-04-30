@@ -1,6 +1,6 @@
 import propTypes from 'prop-types';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { darcula, materialLight } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import { darcula, oneLight } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import { GoCopy } from 'react-icons/go';
 import { IoCheckmark } from 'react-icons/io5';
 import { useState, useContext } from 'react';
@@ -22,14 +22,14 @@ function CodeBlock({ className = '', children, ...props }) {
 
     const getCurrentTheme = () => {
         if (theme === 'system') {
-            return systemTheme === 'dark' ? darcula : materialLight;
+            return systemTheme === 'dark' ? darcula : oneLight;
         }
-        return theme === 'dark' ? darcula : materialLight;
+        return theme === 'dark' ? darcula : oneLight;
     }
 
     return (
         <span className="relative block my-4 border border-gray-700 rounded-md overflow-hidden shadow-md">
-            <span className='relative -mb-2 py-2 bg-slate-300 text-black-700 dark:bg-gray-800 dark:text-white p-2 shadow-md rounded-t-md rounded-b-md shadow-black-500/30 dark:shadow-black-500/20 w-full inline-block z-0'>
+            <span className='relative -mb-2 py-2 bg-slate-300 text-black-700 dark:bg-gray-800 dark:text-white p-2 shadow-md rounded-t-md rounded-b-md shadow-black-500/30 dark:shadow-black-500/20 border border-t-0 border-x-0 border-b-slate-700 w-full inline-block z-0'>
                 <span className="font-mono text-sm">{language}</span>
                 <button
                     onClick={() => handleCopyCode(codeString)}
