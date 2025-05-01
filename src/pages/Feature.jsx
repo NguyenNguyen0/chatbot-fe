@@ -4,6 +4,8 @@ import { IoBulbOutline } from "react-icons/io5";
 import Background from '../components/layout/Background';
 import Nav from '../components/layout/Nav';
 import Footer from '../components/layout/Footer';
+import demoGif1 from '../assets/images/N.aidemo1.gif';
+import demoGif2 from '../assets/images/N.aidemo2.gif';
 import '../assets/styles/Feature.css';
 
 const Feature = () => {
@@ -91,8 +93,8 @@ const Feature = () => {
               <div className="flex-1 feature-image-container">
                 <div className="bg-gradient-to-r from-primary-300 to-primary-600 rounded-lg p-1">
                   <div className="bg-white dark:bg-black-800/60 rounded-lg p-4">
-                    <div className="h-64 bg-gray-100 dark:bg-gray-700 rounded-lg animate-pulse">
-                      {/* image here */}
+                    <div className="h-64 bg-gray-100 dark:bg-gray-700 rounded-lg">
+                      <img src={demoGif1} alt="Demo" className="w-full h-full object-cover rounded-lg" />
                     </div>
                   </div>
                 </div>
@@ -126,8 +128,8 @@ const Feature = () => {
               <div className="flex-1 feature-image-container">
                 <div className="bg-gradient-to-r from-primary-600 to-primary-300 rounded-lg p-1">
                   <div className="bg-white dark:bg-black-800/60 rounded-lg p-4">
-                    <div className="h-64 bg-gray-100 dark:bg-gray-700 rounded-lg animate-pulse">
-                      {/* image here */}
+                    <div className="h-64 bg-gray-100 dark:bg-gray-700 rounded-lg">
+                      <img src={demoGif2} alt="Demo" className="w-full h-full object-cover rounded-lg" />
                     </div>
                   </div>
                 </div>

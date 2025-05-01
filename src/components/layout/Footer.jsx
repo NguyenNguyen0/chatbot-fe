@@ -3,6 +3,7 @@ import { ThemeContext } from '../../contexts/ThemeContext'
 import { FaGithub, FaTwitter, FaLinkedin } from "react-icons/fa6";
 import { Link } from 'react-router-dom';
 import FooterWave from '../ui/FooterWave';
+import Logo from '../common/Logo';
 
 import '../../assets/styles/Footer.css';
 
@@ -26,9 +27,7 @@ function Footer() {
                 <div className="max-w-7xl mx-auto px-6 md:px-12">
                     <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
                         <div className="col-span-1">
-                            <h2 className="md:text-left text-center text-2xl font-bold bg-gradient-to-r from-primary-500 to-primary-800 dark:from-primary-300 dark:to-primary-500 text-transparent bg-clip-text mb-4">
-                                Chat AI
-                            </h2>
+                            <Logo className="mb-2 h-18" />
                             <p className="md:text-left text-center text-slate-100 dark:text-white">
                                 Your intelligent companion for smarter conversations and creative solutions.
                             </p>
