@@ -5,6 +5,7 @@ import { FaPlus } from 'react-icons/fa6';
 import { BsThreeDots } from "react-icons/bs";
 import { IoDiamondOutline } from "react-icons/io5";
 
+import PricingModal from '../ui/PricingModal';
 import DropdownMenu from './DropDownMenu';
 import SidebarButton from './SidebarButton';
 import { renameChat } from '../../services';
@@ -15,6 +16,7 @@ function ChatSidebar({ isOpen, onToggle, onOpenDeleteDialog, className }) {
   const navigate = useNavigate();
   const { conversations, selectChat, loadConversations, renameConversation, clearConversation, isLoading } = useChat();
   const [openMenuId, setOpenMenuId] = useState(null);
+  const [isOpenPricingModal, setIsOpenPricingModal] = useState(false);
   const [dropdownPosition, setDropdownPosition] = useState({ top: 0, left: 0 });
   const [editingChatId, setEditingChatId] = useState(null);
   const [editValue, setEditValue] = useState('');
@@ -169,16 +171,21 @@ function ChatSidebar({ isOpen, onToggle, onOpenDeleteDialog, className }) {
           ))}
         </ul>
 
-        <button className='flex items-center justify-start gap-3 py-4 px-6 cursor-pointer hover:bg-black-200 dark:hover:bg-black-600' onClick={() => navigate('/pro')}>
-          <span className='flex items-center justify-center w-10 h-10 rounded-full text-black-500 bg-slate-200 dark:text-slate-300 dark:bg-black-500 transition-colors'>
-            <IoDiamondOutline className='h-5 w-5' />
-          </span>
-          <div className='flex flex-col text-left text-black-600 dark:text-white'>
-            <span className='text-sm font-semibold'>Upgrade to Pro</span>
-            <p className='text-sm'>More advance features are wating...</p>
-          </div>
-        </button>
+        <div className='py-2 px-3'>
+          <button className='flex items-center p-3 justify-start gap-3 cursor-pointer hover:bg-black-200 dark:hover:bg-black-600' onClick={() => setIsOpenPricingModal(true)}>
+            <span className='flex items-center justify-center w-10 h-10 rounded-full text-black-500 bg-slate-200 dark:text-slate-300 dark:bg-black-500 transition-colors'>
+              <IoDiamondOutline className='h-5 w-5' />
+            </span>
+            <div className='flex flex-col text-left text-black-600 dark:text-white'>
+              <span className='text-sm font-semibold'>Upgrade to Pro</span>
+              <p className='text-sm'>More advance features are wating...</p>
+            </div>
+          </button>
+        </div>
       </aside>
+
+      {/* Pricing Modal */}
+      <PricingModal isOpen={isOpenPricingModal} onClose={() => setIsOpenPricingModal(false)} />
 
       {/* Overlay */}
       {isOpen && (

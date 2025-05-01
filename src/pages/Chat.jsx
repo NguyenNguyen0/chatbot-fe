@@ -94,20 +94,22 @@ function Chat() {
         </header>
 
         {/* Messages */}
-        <ChatMessages messages={messages} />
+        <div className='flex-1 overflow-y-auto custom-scrollbar'>
+          <ChatMessages messages={messages} />
+        </div>
 
         {/* Chat Input */}
         <div
           className={
-            "max-w-[500px] w-[100%] rounded-4xl mb-5 shadow-[2px_2px_4px_black] shadow-black-700/30  bg-transparent absolute left-[50%] -translate-x-[50%] " +
-            (messages?.length !== 0 ? "bottom-0" : "bottom-[40%] -translate-y-50%")
+            "md:w-1/2 w-full rounded-4xl mb-5 shadow-[2px_2px_4px_black] shadow-black-700/30 bg-transparent absolute left-1/2 -translate-x-1/2 " +
+            (messages?.length !== 0 ? "bottom-0" : "bottom-[40%] -translate-y-1/6")
           }
         >
           <ChatBar
             disabled={isLoading}
             onSend={handleSendMessage}
             placeholder="Send a message..."
-            className="shadow-none z-10"
+            className="shadow-none z-10 w-full"
           />
         </div>
 
