@@ -26,16 +26,16 @@ function Footer() {
                 <div className="max-w-7xl mx-auto px-6 md:px-12">
                     <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
                         <div className="col-span-1">
-                            <h2 className="text-2xl font-bold bg-gradient-to-r from-primary-500 to-primary-800 dark:from-primary-300 dark:to-primary-500 text-transparent bg-clip-text mb-4">
+                            <h2 className="md:text-left text-center text-2xl font-bold bg-gradient-to-r from-primary-500 to-primary-800 dark:from-primary-300 dark:to-primary-500 text-transparent bg-clip-text mb-4">
                                 Chat AI
                             </h2>
-                            <p className="text-slate-100 dark:text-white">
+                            <p className="md:text-left text-center text-slate-100 dark:text-white">
                                 Your intelligent companion for smarter conversations and creative solutions.
                             </p>
                         </div>
                         <div className="col-span-1">
-                            <h3 className="text-primary-600 dark:text-primary-300 font-semibold mb-4">Quick Links</h3>
-                            <ul className="space-y-2">
+                            <h3 className="md:text-left text-center text-primary-600 dark:text-primary-300 font-semibold mb-4">Quick Links</h3>
+                            <ul className="md:text-left text-center space-y-2">
                                 <li>
                                     <Link to="/" className="text-slate-100 dark:text-white hover:text-primary-500 transition-colors">
                                         Home
@@ -55,8 +55,8 @@ function Footer() {
                         </div>
 
                         <div className="col-span-1">
-                            <h3 className="text-primary-600 dark:text-primary-300 font-semibold mb-4">Resources</h3>
-                            <ul className="space-y-2">
+                            <h3 className="md:text-left text-center text-primary-600 dark:text-primary-300 font-semibold mb-4">Resources</h3>
+                            <ul className="md:text-left text-center space-y-2">
                                 <li>
                                     <Link to="#" className="text-slate-100 dark:text-white hover:text-primary-500 transition-colors">
                                         Documentation
@@ -76,8 +76,8 @@ function Footer() {
                         </div>
 
                         <div className="col-span-1">
-                            <h3 className="text-primary-600 dark:text-primary-300 font-semibold mb-4">Connect With Us</h3>
-                            <div className="flex space-x-4">
+                            <h3 className="md:text-left text-center text-primary-600 dark:text-primary-300 font-semibold mb-4">Connect With Us</h3>
+                            <div className="md:justify-start justify-center flex space-x-4">
                                 <a 
                                     href="https://github.com/NguyenNguyen0" 
                                     target="_blank" 

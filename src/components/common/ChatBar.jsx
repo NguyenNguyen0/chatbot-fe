@@ -36,7 +36,7 @@ function ChatBar({ onSend, placeholder, disabled, className, ...props }) {
 
   return (
     <form
-      className={`py-4 px-5 min-w-[600px] flex-col justify-center items-center rounded-4xl bg-slate-100 dark:bg-black-600 shadow shadow-primary-200 ${className}`}
+      className={`py-4 px-5 lg:min-w-[600px] flex-col justify-center items-center rounded-4xl bg-slate-100 dark:bg-black-600 shadow shadow-primary-200 ${className}`}
       onSubmit={handleSubmit}
       {...props}
     >

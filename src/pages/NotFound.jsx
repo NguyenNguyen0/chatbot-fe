@@ -15,7 +15,7 @@ function NotFound() {
       </header>
 
       <div className="min-h-screen flex flex-col items-center justify-center text-center p-4 relative overflow-hidden">
-        <div className="relative z-10 w-[50%] h-[600px] flex flex-col items-center justify-between bg-white dark:bg-black-700 rounded-lg shadow-lg p-8 border border-primary-400/20">
+        <div className="relative z-10 w-[100%] md:w-[80%] lg:w-[50%] h-[600px] flex flex-col items-center justify-between bg-white dark:bg-black-700 rounded-lg shadow-lg p-8 border border-primary-400/20">
           <h1 className="text-9xl font-bold text-primary-500 mb-4">404</h1>
 
           <div className="mb-6">

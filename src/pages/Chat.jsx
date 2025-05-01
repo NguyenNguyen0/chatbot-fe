@@ -99,7 +99,7 @@ function Chat() {
         {/* Chat Input */}
         <div
           className={
-            "rounded-4xl mb-5 shadow-[2px_2px_4px_black] shadow-black-700/30  bg-transparent absolute left-[50%] -translate-x-[50%] " +
+            "max-w-[500px] w-[100%] rounded-4xl mb-5 shadow-[2px_2px_4px_black] shadow-black-700/30  bg-transparent absolute left-[50%] -translate-x-[50%] " +
             (messages?.length !== 0 ? "bottom-0" : "bottom-[40%] -translate-y-50%")
           }
         >
@@ -107,7 +107,7 @@ function Chat() {
             disabled={isLoading}
             onSend={handleSendMessage}
             placeholder="Send a message..."
-            className="w-[100%] max-w-4xl shadow-none z-10"
+            className="shadow-none z-10"
           />
         </div>
 

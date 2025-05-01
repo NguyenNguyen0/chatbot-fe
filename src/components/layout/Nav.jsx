@@ -25,7 +25,7 @@ function Nav({ showNavigationLink = true, showLoginButton = true, className }) {
             )}
 
             {/* Button Group */}
-            <span className="hidden md:flex items-center gap-2">
+            <span className="flex items-center gap-2">
                 <ThemeSwitcher />
 
                 {showLoginButton && (

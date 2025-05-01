@@ -137,6 +137,7 @@ function Home() {
               placeholder="Type a message to try..."
               value={demoMessage}
               onChange={(e) => setDemoMessage(e.target.value)}
+              className='mx-auto'
             />
           </div>
         </div>
