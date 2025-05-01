@@ -33,7 +33,7 @@
     }
 
     body {
-        @apply bg-slate-100 dark:bg-gradient-to-r dark:from-black-600 dark:via-black-700 dark:to-black-600
+        @apply bg-slate-100 dark:bg-black-600;
     }
 }
 
