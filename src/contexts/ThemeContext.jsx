@@ -56,11 +56,19 @@ const ThemeProvider = ({ children }) => {
         setTheme(newTheme)
     }
 
+    const getCurrentTheme = () => {
+        if (theme === 'system') {
+            return systemTheme
+        }
+        return theme
+    }
+
     return (
         <ThemeContext.Provider value={{
             theme,
             setTheme: handleSetTheme,
-            systemTheme
+            systemTheme,
+            getCurrentTheme
         }}>
             {children}
         </ThemeContext.Provider>

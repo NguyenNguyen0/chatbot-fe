@@ -7,7 +7,8 @@ import FooterWave from '../ui/FooterWave';
 import '../../assets/styles/Footer.css';
 
 function Footer() {
-    const { systemTheme } = useContext(ThemeContext)
+    const { getCurrentTheme } = useContext(ThemeContext)
+    const theme = getCurrentTheme()
 
     return (
         <footer className='position-relative'>
@@ -15,8 +16,8 @@ function Footer() {
             <div className="waves">
                 {[1, 2, 3, 4].map((waveId) => (
                     <div className="wave" id={`wave${waveId}`} key={waveId}>
-                        <FooterWave theme={systemTheme} />
-                        <FooterWave theme={systemTheme} />
+                        <FooterWave theme={theme} />
+                        <FooterWave theme={theme} />
                     </div>
                 ))}
             </div>
