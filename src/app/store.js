@@ -4,17 +4,16 @@ import chatReducer from '../features/chat/chatSlice';
 import authReducer from '../features/auth/authSlice';
 import toastReducer from '../features/toast/toastSlice';
 
-const middlewares = []
+const middlewares = [];
 if (import.meta.env.VITE_MODE === 'development') {
-    middlewares.push(logger)
+	middlewares.push(logger);
 }
 
 export const store = configureStore({
-    reducer: {
-        chat: chatReducer,
-        auth: authReducer,
-        toast: toastReducer,
-    },
-    middleware: (getDefaultMiddleware) =>
-        getDefaultMiddleware().concat(middlewares)
+	reducer: {
+		chat: chatReducer,
+		auth: authReducer,
+		toast: toastReducer,
+	},
+	middleware: getDefaultMiddleware => getDefaultMiddleware().concat(middlewares),
 });
