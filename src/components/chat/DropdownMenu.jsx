@@ -29,7 +29,7 @@ function DropdownMenu({ position, onClose, onRename, onDelete, dropdownRef }) {
 					onDelete();
 					onClose();
 				}}
-				className="flex items-center w-full px-4 py-2 text-left text-white hover:bg-black-600"
+				className="flex items-center w-full px-4 py-2 text-left text-red-500 hover:bg-black-600"
 			>
 				<MdDelete className="w-4 h-4 mr-2" />
 				Delete
